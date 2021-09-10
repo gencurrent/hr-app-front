@@ -1,24 +1,61 @@
-import logo from './logo.svg';
+// import logo from './logo.svg';
 import './App.css';
+import { Provider } from 'react-redux';
+import { ApolloProvider } from '@apollo/client';
+import { Switch, Router, Route } from 'react-router';
+
+import {
+  AuthenticationPage,
+  LandingPage,
+  VacancyList,
+  VacancyCU,
+  VacancySubmission,
+} from 'appPage';
+import { Template } from 'component';
+import { store, history } from 'utils/redux';
+import client from 'utils';
+
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <ApolloProvider client={client}>
+
+      
+      <Provider store={store}>
+        <Router history={history}>
+          <Template>
+            <Switch>
+              <Route exact path='/'>
+                <LandingPage />
+              </Route>
+
+              <Route path='/auth'>
+                <AuthenticationPage />
+              </Route>
+
+              {/* Vacancy create page */}
+              <Route exact path='/vacancy/create'>
+                <VacancyCU />
+              </Route>
+              
+              <Route path='/vacancy/:id([a-f,0-9]+)/submit'>
+                <VacancySubmission />
+                {/* <VacancyCU edit={true} /> */}
+              </Route>
+
+              <Route exact path='/vacancy/:id([a-f,0-9]+)/edit'>
+                <VacancyCU edit={true} />
+              </Route>
+
+              <Route exact path='/vacancy'>
+                <VacancyList />
+              </Route>
+            </Switch>
+                
+          </Template>
+        </Router>
+      </Provider>
+    </ApolloProvider>
   );
 }
 

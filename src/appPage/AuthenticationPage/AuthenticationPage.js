@@ -12,8 +12,10 @@ import {
     Tabs,
     Tab
 } from '@material-ui/core';
-
 import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
+import { gql } from '@apollo/client';
+
+import client from 'utils';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -137,6 +139,7 @@ const SignIn = () => {
         
     });
     const classes = useStyles();
+    const history = useHistory();
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -145,9 +148,40 @@ const SignIn = () => {
     const hanldeSubmit = e => {
         console.log('Submitted Sign In');
         e.preventDefault();
+        const data = {
+            username: email,
+            password: password
+        }
+        client.query({
+            query: gql`
+                query TokenAuth($username: String!, $password: String!){
+                    tokenAuth(username: $username, password: $password){
+                        token
+                        refreshToken
+                    }
+                }
+            `,
+            variables: {...data}
+        })
+        .then(({loading, data}) => {
+            console.log(`Received data`, data);
+            const {refreshToken, token} = {...data.tokenAuth};
+            console.log(refreshToken, token);
+            console.log('Client headers = ', client.headers);
+            
+            localStorage.setItem('token', token);
+            localStorage.setItem('refresh', refreshToken);
+            history.push('/');
+        })
+        .catch(error => {
+            if (error.message === 'Please enter valid credentials'){
+                console.warn('Invalid credentials');
+            }
+        })
     };
     const onEditEmail = e => {setEmail(e.target.value);};
     const onEditPassword = e => {setPassword(e.target.value);};
+
 
     return (
             <div className={classes.paper}>

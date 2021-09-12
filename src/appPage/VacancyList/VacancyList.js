@@ -1,21 +1,17 @@
-import React, { useState } from 'react';
+import React, { useEffect } from 'react';
 import { useQuery, gql } from '@apollo/client';
 import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
+import { QUERIES } from 'utils/apollo';
 
 const VacancyList = () => {
-    const VACANCY_LIST = gql`
-    query vacancyList{
-       vacancyList{
-           id
-           company
-           position
-           text
-       } 
-    }
-    `;
-    const { loading, error, data } = useQuery(VACANCY_LIST);
+    let { loading, error, data } = useQuery(QUERIES.VACANCY_LIST);
+    // const { loading, error, data } = 
+    useEffect(() => {
+    });
+    
+    console.log({loading, error, data});
     
     if (loading) return 'Loading';
     if (error) return 'Error';

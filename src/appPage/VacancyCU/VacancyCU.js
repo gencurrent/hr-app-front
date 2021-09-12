@@ -10,6 +10,7 @@ import {
 } from '@material-ui/core';
 
 import { VacancyCUFieldList } from 'component';
+import { MUTATIONS } from 'utils/apollo';
 
 const VacancyCU = (props) => {    
     let [position, setPosition] = useState('');
@@ -18,15 +19,7 @@ const VacancyCU = (props) => {
     let [fields, setFields] = useState([{q: '', 't': 'text'}]);
 
     
-    let [createVacancy, {data, loading, error }] = useMutation(gql`
-        mutation CreateVacancy($company: String!, $position: String!, $text: String!, $fields: JSONString!){
-            createVacancy(company: $company, position: $position, text: $text, fields: $fields){
-                company
-                position
-                fields
-            }
-        }
-    `);
+    let [createVacancy, {data, loading, error }] = useMutation(MUTATIONS.CREATE_VACANCY);
 
     const save = (e) => {
         let data = {

@@ -13,12 +13,12 @@ import {
 } from 'appPage';
 import { Template } from 'component';
 import { store, history } from 'utils/redux';
-import client from 'utils';
+import { appApolloClient } from 'utils/apollo';
 
 
 function App() {
   return (
-    <ApolloProvider client={client}>
+    <ApolloProvider client={appApolloClient}>
 
       
       <Provider store={store}>

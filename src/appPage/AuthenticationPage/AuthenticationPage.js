@@ -234,7 +234,7 @@ const SignIn = () => {
 
 
 const AuthenticationPage = () => {
-    let { path, url } = useRouteMatch();
+    let { path } = useRouteMatch();
     let history = useHistory();
     let urlMap = [
         '/signin',

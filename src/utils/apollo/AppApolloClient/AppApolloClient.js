@@ -1,45 +1,34 @@
 import {
   ApolloClient,
-  ApolloLink,
-  concat,
   HttpLink,
   InMemoryCache,
-  from,
-  gql,
+  from
 } from '@apollo/client';
 import { setContext } from "@apollo/client/link/context";
-import { onError } from "@apollo/client/link/error";
-// import { setContext } from '@apollo/client/link/context';
-import { useHistory } from 'react-router-dom';
+
 import QUERIES from '../queries';
 
+
 const httpLink = new HttpLink({uri: 'http://localhost:8080/graphql'});
-
-
 
 const AsyncTokenLookup = (refresh) => new Promise((resolve, reject) => {
     /**
      * return: data from token refresh result
      */
-    console.log('AsyncTokenLookup // start')
     const client = new ApolloClient({link: httpLink, cache: new InMemoryCache()});
     client.query({query:QUERIES.REFRESH,
         variables: {refreshToken: refresh},
         headers: {},
     }).then(response => {
         const gqlData = response.data;
-        let newToken = gqlData.refreshToken.token;
-        console.log('AsyncTokenLookup // data', gqlData);
         resolve(gqlData);
     }).catch(error => {
-        console.error('AsyncTokenLookup // error', error);
         reject(error);
     });
 });
 
 const ExtractTokenToLS = (gqlData) => new Promise((resolve, reject) => {
     // Extract token data to LocalStorage
-    console.log('ExtractTokenToLS // start // gqlData', gqlData);
     let {token, payload} = {...gqlData.refreshToken};
     let tokenExp = payload.exp;
     localStorage.setItem('token', token);
@@ -57,11 +46,8 @@ const TokenDataToContext = (tokenData) => new Promise((resolve, reject) => {
     /**
      * Token Data to a context
      */ 
-    console.log(`TokenDataToContext // start`);
-    const {token, tokenExpiresIn} = {...tokenData};
-    console.log(`TokenDataToContext // tokenData`, tokenData);
+    const { token } = {...tokenData};
     const context = {headers: {Authorization: `Bearer ${token}`}};
-    console.log(`TokenDataToContext // context`, context);
     resolve(context);
 });
 
@@ -77,7 +63,6 @@ const CheckTokenData = (tokenData) => new Promise((resolve, reject) => {
     try{
         tokenExpiresIn = parseInt(tokenExpiresIn);
         const tokenExpTimestamp = new Date(tokenExpiresIn * 1000);
-            console.log('CheckTokenData // ', tokenExpTimestamp);
             const now = new Date();
             if (now >= tokenExpTimestamp){
                 reject(new Error('Token has expired'));
@@ -85,7 +70,6 @@ const CheckTokenData = (tokenData) => new Promise((resolve, reject) => {
             resolve(tokenData);
     }
     catch (error){
-        console.error('CheckTokenData // ', error);
         reject(error);
     }
 });
@@ -95,8 +79,6 @@ const CheckTokenData = (tokenData) => new Promise((resolve, reject) => {
 const asyncAuthLink = setContext(
     request =>
         new Promise((success, fail) => {
-        console.log('asyncAuthLink // start');
-        console.log('asyncAuthLink // request', request);
         // do some async lookup here
         // #1 Check token
         let token = localStorage.getItem('token');

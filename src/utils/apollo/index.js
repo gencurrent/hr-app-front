@@ -1,5 +1,5 @@
 import QUERIES from './queries';
 import MUTATIONS from './mutations';
-import appApolloClient from './AppApolloClient'
+import {pureApolloClient, authApolloClient} from './AppApolloClient'
 
-export {QUERIES, MUTATIONS, appApolloClient};
+export {QUERIES, MUTATIONS, authApolloClient, pureApolloClient};

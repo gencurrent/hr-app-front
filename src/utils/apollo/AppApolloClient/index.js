@@ -1,2 +1,2 @@
-import appApolloClient from './AppApolloClient';
-export default appApolloClient;
+import {pureApolloClient, authApolloClient} from './AppApolloClient';
+export {pureApolloClient, authApolloClient};

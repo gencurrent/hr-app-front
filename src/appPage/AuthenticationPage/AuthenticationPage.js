@@ -15,7 +15,7 @@ import {
 import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
 import { gql } from '@apollo/client';
 
-import client from 'utils';
+import { pureApolloClient } from 'utils/apollo';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -152,7 +152,7 @@ const SignIn = () => {
             username: email,
             password: password
         }
-        client.query({
+        pureApolloClient.query({
             query: gql`
                 query TokenAuth($username: String!, $password: String!){
                     tokenAuth(username: $username, password: $password){
@@ -167,7 +167,7 @@ const SignIn = () => {
             console.log(`Received data`, data);
             const {refreshToken, token} = {...data.tokenAuth};
             console.log(refreshToken, token);
-            console.log('Client headers = ', client.headers);
+            console.log('Client headers = ', pureApolloClient.headers);
             
             localStorage.setItem('token', token);
             localStorage.setItem('refresh', refreshToken);

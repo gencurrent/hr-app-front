@@ -23,7 +23,19 @@ const QUERIES = {
            position
            text
        } 
-    }`
+    }`,
+    VACANCY: gql`query vacancy($id: ID!){
+        vacancy(id: $id){
+            position
+            company
+            description
+            fields
+            
+        }
+    }
+
+    `,
+    
 };
 
 export default QUERIES;

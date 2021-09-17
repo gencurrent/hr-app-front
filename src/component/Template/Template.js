@@ -2,7 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import {
     Container,
-    Box
+    Box,
+    CssBaseline
 } from '@material-ui/core';
 import { Mainbar } from 'component';
 
@@ -12,8 +13,9 @@ class Template extends React.Component {
     render() {
         return (
                 <>
+                <CssBaseline/>
                 <Mainbar></Mainbar>
-                <Container component='main' style={{marginTop: '60px'}} maxWidth='md'>
+                <Container component='main' style={{marginTop: '60px'}} color='palette.background.default' maxWidth='md'>
                     <Box my={4}>
                         {this.props.children}
                         

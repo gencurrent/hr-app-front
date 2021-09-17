@@ -251,7 +251,6 @@ const AuthenticationPage = () => {
     return (
         
         <Container component='main' maxWidth='xs'>
-            <CssBaseline />
             <Paper square>
                 <Tabs
                   value={currentTab}

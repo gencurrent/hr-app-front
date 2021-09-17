@@ -12,6 +12,7 @@ import {
 import { VacancyCUFieldList } from 'component';
 import { MUTATIONS } from 'utils/apollo';
 
+
 const VacancyCU = (props) => {    
     let [position, setPosition] = useState('');
     let [company, setCompany] = useState('');
@@ -40,9 +41,6 @@ const VacancyCU = (props) => {
             console.log(`Fetched data`, data);
         });
     }
-    
-
-    console.log('VacancyCU()');
     return (
         <>
             <Typography align='center' variant='h5'>Create a vacancy</Typography>

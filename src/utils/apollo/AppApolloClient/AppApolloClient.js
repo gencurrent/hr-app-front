@@ -13,7 +13,8 @@ const httpLink = new HttpLink({uri: 'http://localhost:8080/graphql'});
 
 const AsyncTokenLookup = (refresh) => new Promise((resolve, reject) => {
     /**
-     * return: data from token refresh result
+     * @param {String} refresh a Refresh token to lookup an Access token with
+     * @return {Promise} resolves the data got from GQ query; rejects an error after the request
      */
     const client = new ApolloClient({link: httpLink, cache: new InMemoryCache()});
     client.query({query:QUERIES.REFRESH,
@@ -28,7 +29,10 @@ const AsyncTokenLookup = (refresh) => new Promise((resolve, reject) => {
 });
 
 const ExtractTokenToLS = (gqlData) => new Promise((resolve, reject) => {
-    // Extract token data to LocalStorage
+    /**
+     * Extract token data to LocalStorage
+     * @param {Object} gqlData the data received from AsyncTokenLookup promise function
+     */ 
     let {token, payload} = {...gqlData.refreshToken};
     let tokenExp = payload.exp;
     localStorage.setItem('token', token);
@@ -44,7 +48,8 @@ const GQLDataToTokenData = (gqlData) => new Promise((succeess, reject) => {
 
 const TokenDataToContext = (tokenData) => new Promise((resolve, reject) => {
     /**
-     * Token Data to a context
+     * Transforma GQL Object data to an Authentication HTTP Header format
+     * @param {Object} tokenData An object containing 'token' key with Access token value
      */ 
     const { token } = {...tokenData};
     const context = {headers: {Authorization: `Bearer ${token}`}};
@@ -56,7 +61,6 @@ const CheckTokenData = (tokenData) => new Promise((resolve, reject) => {
     /**
      * Check the AccessToken Expiration
      * return: resolve — tokenData
-     * return: reject — Error
      */
     let {token, tokenExpiresIn} = {...tokenData};
     if (!(token && tokenExpiresIn)) reject();
@@ -88,9 +92,9 @@ const asyncAuthLink = setContext(
         return CheckTokenData({token: token, tokenExpiresIn: tokenExpiresIn})
             .catch((error) => 
                 AsyncTokenLookup(refresh)
-                .catch(error => window.location.replace('/auth/signin'))
                 .then(ExtractTokenToLS)
                 .then(GQLDataToTokenData)
+                .catch(error => window.location.replace('/auth/signin'))
             )
             .then(data => (TokenDataToContext(data)))
             .then(success);

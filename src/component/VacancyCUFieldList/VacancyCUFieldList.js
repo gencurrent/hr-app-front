@@ -10,7 +10,6 @@ import {
     FormHelperText
 } from '@material-ui/core';
 
-// Field format
 /**
  * {'q': string, 't': string}
  */
@@ -33,7 +32,7 @@ const VacancyCUFieldList = (props) => {
         setFields(fieldsUpdated);
     }
     const addField = () => {
-        let newField = {q: '', t: ''};
+        let newField = {q: '', t: 'text'};
         setFields([...fields, newField]);
     }
     return (

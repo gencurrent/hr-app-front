@@ -4,9 +4,10 @@ import { Button } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import { QUERIES } from 'utils/apollo';
+import { VacancyListItem } from 'component';
 
 const VacancyList = () => {
-    let { loading, error, data } = useQuery(QUERIES.VACANCY_LIST);
+    let { loading, error, data } = useQuery(QUERIES.VACANCY_LIST, { fetchPolicy: "no-cache"});
     
     if (loading) return 'Loading';
     if (error) return 'Error';
@@ -18,9 +19,9 @@ const VacancyList = () => {
             <Button >New vacancy</Button>
         </Link>
 
-            {data.vacancyList.map((el, idx) => 
+            {data.vacancyList.map((vacancy, idx) => 
                 <div key={idx}>
-                    {JSON.stringify(el)}
+                    <VacancyListItem vacancy={vacancy}/>
                     
                 </div>)
             }

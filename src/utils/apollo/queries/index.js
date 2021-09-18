@@ -28,9 +28,8 @@ const QUERIES = {
         vacancy(id: $id){
             position
             company
-            description
+            text
             fields
-            
         }
     }
 

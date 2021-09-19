@@ -3,6 +3,11 @@
 ## Briefing
 
 
+## Structure
+src/ — source code  
+    utils — utilities for the whole application 
+    
+
 
 # Getting Started with Create React App
 

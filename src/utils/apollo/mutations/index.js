@@ -12,7 +12,15 @@ const MUTATIONS = {
           position
           fields
       }
-  }`
+  }`,
+  CREATE_SUBMISSION: gql`
+  mutation CreateSubmission($vacancyId: ID!, $answers: JSONString!){
+    createSubmission(vacancyId: $vacancyId, answers: $answers){
+      answers
+      ts
+    }
+  }
+  `
 };
 
 export default MUTATIONS;

@@ -21,10 +21,11 @@ const TopRoutes = () => {
         <AuthenticationPage />
       </Route>
 
-      {/* Vacancy create page */}
+      {/* Vacancy create */}
       <Route exact path='/vacancy/create'>
         <VacancyCU />
       </Route>
+
       
       <Route path='/vacancy/:id([a-f,0-9]+)/submit'>
         <VacancySubmission />
@@ -33,6 +34,10 @@ const TopRoutes = () => {
 
       <Route exact path='/vacancy/:id([a-f,0-9]+)/edit'>
         <VacancyCU edit={true} />
+      </Route>
+
+      {/* Vacancy statistics view */}
+      <Route exact path='/vacancy/:id([a-f,0-9]+)'>
       </Route>
 
       <Route exact path='/vacancy'>

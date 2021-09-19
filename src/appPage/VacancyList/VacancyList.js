@@ -1,6 +1,10 @@
 import { React } from 'react';
 import { useQuery } from '@apollo/client';
-import { Button } from '@material-ui/core';
+import {
+  Button,
+  Container,
+  Box
+} from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
 import { QUERIES } from 'utils/apollo';
@@ -14,18 +18,19 @@ const VacancyList = () => {
     
     return (
         
-        <>
-        <Link to='/vacancy/create'>
-            <Button >New vacancy</Button>
-        </Link>
+        <Box sx={{py: 4}}>
+            <Link to='/vacancy/create'>
+                <Button >New vacancy</Button>
+            </Link>
 
-            {data.vacancyList.map((vacancy, idx) => 
-                <div key={idx}>
-                    <VacancyListItem vacancy={vacancy}/>
-                    
-                </div>)
-            }
-        </>
+                {data.vacancyList.map((vacancy, idx) => 
+                    <div key={idx}>
+                        <VacancyListItem vacancy={vacancy}/>
+                        
+                    </div>)
+                }
+
+        </Box>
     )
 };
 

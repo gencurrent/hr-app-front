@@ -15,7 +15,7 @@ class Template extends React.Component {
                 <>
                 <CssBaseline/>
                 <Mainbar></Mainbar>
-                <Container component='main' style={{marginTop: '60px'}} color='palette.background.default' maxWidth='md'>
+                <Container component='main' style={{marginTop: '64px'}} color='palette.background.default' maxWidth='md'>
                     <Box my={4}>
                         {this.props.children}
                         

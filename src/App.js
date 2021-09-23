@@ -7,18 +7,20 @@ import { ThemeProvider, createTheme } from '@material-ui/core';
 import { purple, deepOrange } from '@material-ui/core/colors';
 
 import { store, history } from 'utils/redux';
-import { authApolloClient } from 'utils/apollo';
+import { authApolloClient, pureApolloClient } from 'utils/apollo';
 import { Template } from 'component';
 import { TopRoutes } from 'router';
 
 const theme = createTheme({
   palette: {
     type: 'dark',
-    background: {
-      default: 'dark'
-    },
+    // background: {
+    //   default: 'dark'
+    // },
     primary: {
-      main: deepOrange[500]
+      light: deepOrange[500],
+      main: deepOrange[500],
+      dark: deepOrange[500]
     },
     secondary: {
       main: deepOrange[200]
@@ -30,23 +32,38 @@ const theme = createTheme({
 })
 
 function App() {
-  return (
-    <ApolloProvider client={authApolloClient}>
-      <ThemeProvider theme={theme}>
+  const userIsAuthenticated = localStorage.getItem('refresh', false);
+  
+  if (userIsAuthenticated){
+    return (
       
-        <Provider store={store}>
-          <Router history={history}>
-            <Template>
-              <Switch>
-                <TopRoutes />
-              </Switch>
-                  
-            </Template>
-          </Router>
-        </Provider>
-      </ThemeProvider>
-    </ApolloProvider>
-  );
+      <ApolloProvider client={authApolloClient}>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            <Router history={history}>
+              <Template>
+                <Switch>
+                  <TopRoutes />
+                </Switch>
+              </Template>
+            </Router>
+          </Provider>
+        </ThemeProvider>
+      </ApolloProvider>
+    );
+  }
+  else{
+    return (
+      <ApolloProvider client={pureApolloClient}>
+        <ThemeProvider theme={theme}>
+          <Provider store={store}>
+            Hello world
+            </Provider>
+        </ThemeProvider>
+      </ApolloProvider>
+    )
+
+  }
 }
 
 export default App;

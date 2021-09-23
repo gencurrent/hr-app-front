@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { 
+    makeStyles,
     TextField,
     Grid,
     Button,
@@ -8,6 +9,7 @@ import {
     MenuItem,
     NativeSelect,
     FormHelperText,
+    Card,
     FormControl,
     FormControlLabel,
     Dialog,
@@ -15,7 +17,10 @@ import {
     DialogContent,
     DialogActions,
     Typography,
-    Checkbox
+    Checkbox,
+    CardHeader,
+    CardContent,
+    CardActions
 } from '@material-ui/core';
 
 
@@ -34,9 +39,10 @@ const VacancyCUFieldListItemDialog = (props) => {
   const {onClose, open} = props;
 
   const updateQuestion = e => {
-      let desc = {...fieldDescription, q: e.target.value};
-      setFieldDescription(desc);
-      props.updateNewFieldState && props.updateNewFieldState(desc);
+    // TODO: Add a question length validation (length > 3 symbols)
+    let desc = {...fieldDescription, q: e.target.value};
+    setFieldDescription(desc);
+    props.updateNewFieldState && props.updateNewFieldState(desc);
   }
   const updateType = e => {
     let desc = {...fieldDescription, t: e.target.value};
@@ -98,8 +104,22 @@ VacancyCUFieldListItemDialog.propTypes = {
     onSave: PropTypes.func.isRequired  // New field submitted (saved)
 };
 
+const useVacancyCUFieldListStyles = makeStyles(theme => ({
+  fieldItemCard: {
+    padding: theme.spacing(1),
+    marginTop: theme.spacing(1),
+    marginBottom: theme.spacing(1)
+  },
+  fieldRequiredSymbol: {
+    color: theme.palette.secondary.dark
+  }
+}));
+
+
+
 const VacancyCUFieldList = (props) => {
     console.log('VAcancyCUFieldList()', props);
+    const classes = useVacancyCUFieldListStyles();
     
     let [fields, setFields] = useState(props.fields || []);
     
@@ -113,17 +133,27 @@ const VacancyCUFieldList = (props) => {
         setDialogOpen(!dialogOpen);
     }
 
-    const addField = () => {
-        let newField = {q: '', t: 'text'};
-        setFields([...fields, newField]);
-    }
-
     const saveField = fieldProps => {
         console.log('VacancyCUFieldList // saveField() // fieldProps = ', fieldProps);
         let newFields = [...fields];
         newFields.push(fieldProps);
         setFields(newFields);
     }
+
+    const removeField = fieldIdx => {
+      let newFields = [...fields];
+      newFields.splice(fieldIdx, 1);
+      setFields(newFields);
+    }
+    
+    const fieldTypeMap = {
+      'text': 'Text',
+      'number': 'Number',
+      'line': 'Short text',
+      'date': 'Date'
+    }
+
+    console.log('VAcancyCUFieldList // fields = ', fields);
 
     return (
         <>
@@ -135,13 +165,22 @@ const VacancyCUFieldList = (props) => {
             />
             {fields.map((el, idx) =>
                 <Grid key={idx} container spacing={2}>
-                    <Grid item xs={6} sm={12}>
-                        {JSON.stringify(el)}
+                    <Grid item xs={12}>
+                        <Card variant='outlined'>
+                          <CardContent>
+                            <Typography component='h6' variant='h6'>{idx+1}: {el.q}</Typography>
+                            <Typography component='span' variant='span'>{fieldTypeMap[el.t]} field</Typography> | <Typography component='span' color='text.secondary' variant='span'>Required</Typography>
+                          </CardContent>
+                          <CardActions disableSpacing>
+                            <Button>Edit</Button>
+                            <Button onClick={e => removeField(idx)}>Delete</Button>
+                          </CardActions>
+                        </Card>
                     </Grid>
                 </Grid>
             )}
             <Grid >
-                <Button onClick={openAddFieldDialog}>Add field</Button>
+                <Button variant='contained' onClick={openAddFieldDialog}>Add field</Button>
             </Grid>
         </>
     )

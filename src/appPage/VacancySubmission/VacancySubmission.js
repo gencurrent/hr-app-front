@@ -74,8 +74,8 @@ const FieldItem = (props) => {
               type='date' key={`field-${field.q}`} 
             />}
             </Grid>
-            </Grid>
-            </>
+          </Grid>
+        </>
     )
 }
 FieldItem.propTypes = {

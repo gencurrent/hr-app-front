@@ -17,7 +17,7 @@ const VacancyCU = (props) => {
     let [position, setPosition] = useState('');
     let [company, setCompany] = useState('');
     let [text, setText] = useState('');
-    let [fields, setFields] = useState([{q: '', 't': 'text'}]);
+    let [fields, setFields] = useState();
 
     
     let [createVacancy, {data, loading, error }] = useMutation(MUTATIONS.CREATE_VACANCY);
@@ -29,7 +29,7 @@ const VacancyCU = (props) => {
             text: text,
             fields: fields,
         }
-        console.log(data);
+        console.log('VacancyCU // data // ',data);
         createVacancy({
             variables: {
                 company: company,

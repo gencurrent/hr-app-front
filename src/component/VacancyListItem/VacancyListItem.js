@@ -11,6 +11,7 @@ import {
   CardContent,
   CardActions
 } from '@material-ui/core';
+import {FileCopy} from '@material-ui/icons';
 
 const useStyles = makeStyles((theme) => ({
   vacancyListItem: {
@@ -38,7 +39,6 @@ const VacancyListItem = (props) => {
         </Box>
         <Box>
           <Typography component='h5' variant='h5'>
-            // Scoring info
           </Typography>
           <div>Link shared: {vacancy.linkSharesNumber}</div>
           <div>Submissions: {vacancy.linkSubmissionsNumber}</div>
@@ -47,11 +47,12 @@ const VacancyListItem = (props) => {
 
       <CardActions>
         <Link to={`/vacancy/${vacancy.id}/submit`}>
-          <Button variant='textPrimary' size='small'>Test Submission</Button>
+          <Button variant='outlined' size='small'>Submit</Button>
         </Link>
         <Link to={`/vacancy/create`}>
-          <Button variant='textPrimary' size='small' >Duplicate</Button>
+          <Button variant='outlined' size='small' >Duplicate</Button>
         </Link>
+        <Button variant='outlined' size='small' ><FileCopy/>Form URL</Button>
       </CardActions>
 
     </Card>

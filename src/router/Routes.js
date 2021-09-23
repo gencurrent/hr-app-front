@@ -43,6 +43,11 @@ const TopRoutes = () => {
       <Route exact path='/vacancy'>
         <VacancyList />
       </Route>
+
+      <Route exact path='/submissions'>
+        {/* TODO: Create a Submissions page */}
+        <VacancyList />
+      </Route>
     </>
   )
 };

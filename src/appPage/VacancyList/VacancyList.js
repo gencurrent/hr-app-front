@@ -20,7 +20,7 @@ const VacancyList = () => {
         
         <Box sx={{py: 4}}>
             <Link to='/vacancy/create'>
-                <Button >New vacancy</Button>
+                <Button color='primary.main' variant='contained'>New vacancy</Button>
             </Link>
 
                 {data.vacancyList.map((vacancy, idx) => 

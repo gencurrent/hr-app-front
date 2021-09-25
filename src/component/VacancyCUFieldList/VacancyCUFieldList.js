@@ -1,3 +1,9 @@
+/**
+ * Contains two classes:
+ *  1) VacancyCUFieldListItemDialog for adding a field in the Add Field Dialog
+ *  2) VacancyCUFieldList for working with all the fields below main line
+ */
+
 import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
 import { 
@@ -18,11 +24,14 @@ import {
     DialogActions,
     Typography,
     Checkbox,
-    CardHeader,
     CardContent,
     CardActions
 } from '@material-ui/core';
 
+import {
+  FIELD_TYPE_VALUE_TO_HELPER_TEXT_MAP,
+  FIELD_TYPE_VALUE_TO_NAME_MAP
+} from './constans';
 
 /**
  * A dialog to edit field's parameters
@@ -32,11 +41,15 @@ import {
 const VacancyCUFieldListItemDialog = (props) => {
   const [fieldDescription, setFieldDescription] = useState({
     q: '',          // Question
-    t: undefined,   // Type
+    t: new String('line'),   // Type
     r: undefined,   // Required
     s: undefined,   // Default Score
   });
   const {onClose, open} = props;
+
+  let [typeFieldHelperText, setTypeFieldHelperText] = useState(
+    FIELD_TYPE_VALUE_TO_HELPER_TEXT_MAP['line']
+  );
 
   const updateQuestion = e => {
     // TODO: Add a question length validation (length > 3 symbols)
@@ -44,9 +57,11 @@ const VacancyCUFieldListItemDialog = (props) => {
     setFieldDescription(desc);
     props.updateNewFieldState && props.updateNewFieldState(desc);
   }
+
   const updateType = e => {
     let desc = {...fieldDescription, t: e.target.value};
     setFieldDescription(desc);
+    setTypeFieldHelperText(FIELD_TYPE_VALUE_TO_HELPER_TEXT_MAP[e.target.value]);
     props.updateNewFieldState && props.updateNewFieldState(desc);
   }
 
@@ -71,14 +86,23 @@ const VacancyCUFieldListItemDialog = (props) => {
           <FormControl>
             <Grid container spacing={1}>
               <Grid item xs={12} sm={12}>
-                <TextField label='Field' id='field-name' onChange={updateQuestion} value={fieldDescription.q} fullWidth={true}/>
+                <TextField label='Field (question)' id='field-name' onChange={updateQuestion} value={fieldDescription.q} fullWidth={true}/>
+                <FormHelperText>A question to your candidate</FormHelperText>
               </Grid>
               <Grid item xs={12} sm={12}>
-                <Select label='Type' id='Type' onChange={updateType} fullWidth={true} >
-                    <MenuItem value='text'>Text</MenuItem>
-                    <MenuItem value='number'>Number</MenuItem>
-                    <MenuItem value='date'>Date</MenuItem>
+                <Select
+                  label='Type'
+                  variant='standard'
+                  onChange={updateType}
+                  fullWidth
+                  defaultValue='line'
+                >
+                    <MenuItem key='line' value='line'>Line</MenuItem>
+                    <MenuItem key='text' value='text'>Text</MenuItem>
+                    <MenuItem key='number' value='number'>Number</MenuItem>
+                    <MenuItem key='date' value='date'>Date</MenuItem>
                 </Select>
+                <FormHelperText>{typeFieldHelperText}</FormHelperText>
               </Grid>
 
               <Grid item xs={12} sm={12}>
@@ -169,7 +193,7 @@ const VacancyCUFieldList = (props) => {
                         <Card variant='outlined'>
                           <CardContent>
                             <Typography component='h6' variant='h6'>{idx+1}: {el.q}</Typography>
-                            <Typography component='span' variant='span'>{fieldTypeMap[el.t]} field</Typography> | <Typography component='span' color='text.secondary' variant='span'>Required</Typography>
+                            <Typography component='span' variant='span'>{fieldTypeMap[el.t]}</Typography> | <Typography component='span' color='text.secondary' variant='span'>Required</Typography>
                           </CardContent>
                           <CardActions disableSpacing>
                             <Button>Edit</Button>
@@ -180,7 +204,7 @@ const VacancyCUFieldList = (props) => {
                 </Grid>
             )}
             <Grid >
-                <Button variant='contained' onClick={openAddFieldDialog}>Add field</Button>
+                <Button variant='outlined' onClick={openAddFieldDialog}>Add field</Button>
             </Grid>
         </>
     )

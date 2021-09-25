@@ -13,7 +13,6 @@ import {
     Button,
     Select,
     MenuItem,
-    NativeSelect,
     FormHelperText,
     Card,
     FormControl,
@@ -41,8 +40,8 @@ import {
 const VacancyCUFieldListItemDialog = (props) => {
   const [fieldDescription, setFieldDescription] = useState({
     q: '',          // Question
-    t: new String('line'),   // Type
-    r: undefined,   // Required
+    t: 'line',   // Type
+    r: false,   // Required
     s: undefined,   // Default Score
   });
   const {onClose, open} = props;
@@ -55,20 +54,17 @@ const VacancyCUFieldListItemDialog = (props) => {
     // TODO: Add a question length validation (length > 3 symbols)
     let desc = {...fieldDescription, q: e.target.value};
     setFieldDescription(desc);
-    props.updateNewFieldState && props.updateNewFieldState(desc);
   }
 
   const updateType = e => {
     let desc = {...fieldDescription, t: e.target.value};
     setFieldDescription(desc);
     setTypeFieldHelperText(FIELD_TYPE_VALUE_TO_HELPER_TEXT_MAP[e.target.value]);
-    props.updateNewFieldState && props.updateNewFieldState(desc);
   }
 
   const updateRequired = e => {
     let desc = {...fieldDescription, r: e.target.checked};
     setFieldDescription(desc);
-    props.updateNewFieldState && props.updateNewFieldState(desc);
   }
   
   const handleClose = (e) => {
@@ -124,7 +120,6 @@ const VacancyCUFieldListItemDialog = (props) => {
 VacancyCUFieldListItemDialog.propTypes = {
     onClose: PropTypes.func.isRequired,     // Dialog got closed callback function
     open: PropTypes.bool.isRequired,    // Dialog got opened callback
-    updateNewFieldState: PropTypes.func,    // Dialog updated new fiedl state
     onSave: PropTypes.func.isRequired  // New field submitted (saved)
 };
 
@@ -142,7 +137,6 @@ const useVacancyCUFieldListStyles = makeStyles(theme => ({
 
 
 const VacancyCUFieldList = (props) => {
-    console.log('VAcancyCUFieldList()', props);
     const classes = useVacancyCUFieldListStyles();
     
     let [fields, setFields] = useState(props.fields || []);
@@ -158,10 +152,10 @@ const VacancyCUFieldList = (props) => {
     }
 
     const saveField = fieldProps => {
-        console.log('VacancyCUFieldList // saveField() // fieldProps = ', fieldProps);
         let newFields = [...fields];
         newFields.push(fieldProps);
         setFields(newFields);
+        props.setFields && props.setFields(newFields);  // Update parent component fields
     }
 
     const removeField = fieldIdx => {
@@ -169,23 +163,13 @@ const VacancyCUFieldList = (props) => {
       newFields.splice(fieldIdx, 1);
       setFields(newFields);
     }
-    
-    const fieldTypeMap = {
-      'text': 'Text',
-      'number': 'Number',
-      'line': 'Short text',
-      'date': 'Date'
-    }
-
-    console.log('VAcancyCUFieldList // fields = ', fields);
 
     return (
         <>
             <VacancyCUFieldListItemDialog
               open={dialogOpen}
               onClose={closeAddFieldDialog}
-              onSave={saveField} 
-              updateNewFieldState={(data) => console.log(data)}
+              onSave={saveField}
             />
             {fields.map((el, idx) =>
                 <Grid key={idx} container spacing={2}>
@@ -193,7 +177,7 @@ const VacancyCUFieldList = (props) => {
                         <Card variant='outlined'>
                           <CardContent>
                             <Typography component='h6' variant='h6'>{idx+1}: {el.q}</Typography>
-                            <Typography component='span' variant='span'>{fieldTypeMap[el.t]}</Typography> | <Typography component='span' color='text.secondary' variant='span'>Required</Typography>
+                            <Typography component='span' variant='span'>{FIELD_TYPE_VALUE_TO_NAME_MAP[el.t]}</Typography> | <Typography component='span' color='text.secondary' variant='span'>Required</Typography>
                           </CardContent>
                           <CardActions disableSpacing>
                             <Button>Edit</Button>
@@ -212,5 +196,6 @@ const VacancyCUFieldList = (props) => {
 
 VacancyCUFieldList.propTypes = {
     fields: PropTypes.arrayOf(Object).isRequired,
+    setFields: PropTypes.func
 };
 export default VacancyCUFieldList;

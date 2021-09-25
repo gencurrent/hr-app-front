@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types';
 import { React, useState } from 'react';
 import { useMutation, gql } from '@apollo/client';
+import { useHistory } from 'react-router-dom';
 import { 
     TextField,
     FormControl,
@@ -14,12 +15,18 @@ import {
 import ReactMarkdown from 'react-markdown';
 
 import { VacancyCUFieldList } from 'component';
+import {
+  FIELD_VACANCY_HELPER_TEXT_DEFAULT,
+  FIELD_VACANCY_HELPER_TEXT_DEFAULT_LENGTH_ERROR
+} from './constants';
 import { MUTATIONS } from 'utils/apollo';
+
 
 
 const TEXT_FIELD_ROWS_NUMBER_DEFAULT = 3;
 
 const VacancyCU = (props) => {    
+    let history = useHistory();
     let [position, setPosition] = useState('');
     let [company, setCompany] = useState('');
     let [text, setText] = useState('');
@@ -27,10 +34,17 @@ const VacancyCU = (props) => {
 
     let [rowsNumber, setRowsNumber] = useState(5);
     
-    const [positionHelperText, setPositionHelperText] = useState('');
+    const [positionFieldHelperProps, setPositionFieldHelperProps] = useState({'error': false, 'text': FIELD_VACANCY_HELPER_TEXT_DEFAULT});
 
     const updateFormPosition = e => {
-        
+        let value = e.currentTarget.value;
+        if (value.length < 10){
+            setPositionFieldHelperProps({'error': true, 'text': FIELD_VACANCY_HELPER_TEXT_DEFAULT_LENGTH_ERROR});
+        }
+        else {
+            setPositionFieldHelperProps({'error': false, 'text': FIELD_VACANCY_HELPER_TEXT_DEFAULT});
+        }
+        setPosition(value);
     }
 
     const updateFormText = e => {
@@ -47,34 +61,34 @@ const VacancyCU = (props) => {
     let [createVacancy, {data, loading, error }] = useMutation(MUTATIONS.CREATE_VACANCY);
 
     const save = (e) => {
-        let data = {
-            position: position,
-            company: company,
-            text: text,
-            fields: fields,
+      let data = {
+        position: position,
+        company: company,
+        text: text,
+        fields: fields,
+      }
+      createVacancy({
+        variables: {
+          company: company,
+          position: position,
+          text: text,
+          fields: JSON.stringify(fields)
         }
-        console.log('VacancyCU // data // ',data);
-        createVacancy({
-            variables: {
-                company: company,
-                position: position,
-                text: text,
-                fields: JSON.stringify(fields)
-            }
-        }).then(data => {
-            console.log(`Fetched data`, data);
-        });
+      }).then(data => {
+          // Success only
+          history.push('/vacancy');
+      });
     }
     return (
       <Card>
         <CardContent>
           <Typography align='center' variant='h5'>New vacancy</Typography>
           <FormControl className='' noValidate autoComplete='off' fullWidth={true} >
-            <TextField label='Position' autoComplete='position' id='position' value={position} onChange={(e) => setPosition(e.currentTarget.value)} required={true} />
-            <FormHelperText>Vacancy position</FormHelperText>
-            <TextField label='Company' autoComplete='company' id='company' value={company} onChange={(e) => setCompany(e.currentTarget.value)} required={true} />
+            <TextField label='Position' error={positionFieldHelperProps['error']} autoComplete='position' id='position' value={position} onChange={updateFormPosition} required />
+            <FormHelperText error={positionFieldHelperProps['error']}>{positionFieldHelperProps['text']}</FormHelperText>
+            <TextField label='Company' autoComplete='company' id='company' value={company} onChange={(e) => setCompany(e.currentTarget.value)} required />
             <FormHelperText>An organization to show to a candidate</FormHelperText>
-            <TextField multiline rows={rowsNumber} label='Description' id='text' value={text} onChange={updateFormText} required={true} />
+            <TextField multiline rows={rowsNumber} label='Description' id='text' value={text} onChange={updateFormText} required />
             <FormHelperText>The description of vacancy a candidate will see</FormHelperText>
             <VacancyCUFieldList fields={fields} setFields={setFields} />
           </FormControl>

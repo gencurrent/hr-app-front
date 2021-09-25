@@ -11,27 +11,25 @@ import { QUERIES } from 'utils/apollo';
 import { VacancyListItem } from 'component';
 
 const VacancyList = () => {
-    let { loading, error, data } = useQuery(QUERIES.VACANCY_LIST, { fetchPolicy: "no-cache"});
-    
-    if (loading) return 'Loading';
-    if (error) return 'Error';
-    
-    return (
-        
-        <Box sx={{py: 4}}>
-            <Link to='/vacancy/create'>
-                <Button color='primary.main' variant='contained'>New vacancy</Button>
-            </Link>
+  let { loading, error, data, refetch } = useQuery(QUERIES.VACANCY_LIST, { fetchPolicy: "no-cache"});
+  if (loading) return 'Loading';
+  if (error) return 'Error';
 
-                {data.vacancyList.map((vacancy, idx) => 
-                    <div key={idx}>
-                        <VacancyListItem vacancy={vacancy}/>
-                        
-                    </div>)
-                }
-
-        </Box>
-    )
+  const onVacancyDelete = vacancyId => {
+    refetch();
+  }
+  return (
+    <Box sx={{py: 4}}>
+      <Link to='/vacancy/create'>
+          <Button color='primary.main' variant='contained'>New vacancy</Button>
+      </Link>  
+      {data.vacancyList.map((vacancy, idx) => 
+        <div key={idx}>
+          <VacancyListItem onDelete={onVacancyDelete} vacancy={vacancy}/>
+        </div>)
+      }
+    </Box>
+  )
 };
 
 export default VacancyList;

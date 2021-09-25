@@ -58,20 +58,35 @@ const FieldItem = (props) => {
             <Grid item spacing={6} sm={12} xs={6}>
                 <Typography variant='p'>{field.q}</Typography>
             {field.t === 'text' && <TextField
-              onChange={setKey}
-              margin='normal' fullWidth={true} multiline key={`field-${field.q}`}
+                onChange={setKey}
+                required={field.r}
+                margin='normal'
+                fullWidth={true}
+                multiline
+                rows={4}
+                key={`field-${field.q}`}
             />}
             {field.t === 'line' && <TextField
-              onChange={setKey}
-              margin='normal' fullWidth type='text' key={`field-${field.q}`}
+                onChange={setKey}
+                required={field.r}
+                margin='normal'
+                fullWidth
+                type='text'
+                key={`field-${field.q}`}
             />}
             {field.t === 'number' && <TextField 
                 onChange={setKey}
-              margin='normal' fullWidth type='number' key={`field-${field.q}`} 
+                required={field.r}
+                margin='normal'
+                fullWidth
+                type='number'
+                key={`field-${field.q}`}
             />}
             {field.t === 'date' && <TextField 
                 onChange={setKey}
-              type='date' key={`field-${field.q}`} 
+                required={field.r}
+                type='date'
+                key={`field-${field.q}`} 
             />}
             </Grid>
           </Grid>

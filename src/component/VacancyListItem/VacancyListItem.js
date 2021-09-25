@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 import {
   makeStyles,
+  Dialog,
   Box,
   Button,
   Typography,
@@ -11,7 +12,12 @@ import {
   CardContent,
   CardActions
 } from '@material-ui/core';
-import {FileCopy} from '@material-ui/icons';
+import {
+  FileCopy,
+  Delete
+} from '@material-ui/icons';
+
+import { authApolloClient, MUTATIONS } from 'utils/apollo';
 
 const useStyles = makeStyles((theme) => ({
   vacancyListItem: {
@@ -19,12 +25,20 @@ const useStyles = makeStyles((theme) => ({
     // borderRadius: '4px',
     margin: theme.spacing(3, 0, 2)
   }
-}))
+}));
 
 const VacancyListItem = (props) => {
   const classes = useStyles();
 
   const { vacancy } = props;
+
+
+  const onDelete = e => {
+    authApolloClient.mutate({mutation: MUTATIONS.DELETE_VACANCY, variables: {vacancyId: vacancy.id}})
+      .then(response => {
+        props.onDelete && props.onDelete(vacancy.id);
+      });
+  }
   return (
     <Card className={classes.vacancyListItem} variant='outlined'>
 
@@ -52,7 +66,8 @@ const VacancyListItem = (props) => {
         <Link to={`/vacancy/create`}>
           <Button variant='outlined' size='small' >Duplicate</Button>
         </Link>
-        <Button variant='outlined' size='small' ><FileCopy/>Form URL</Button>
+        <Button variant='outlined' size='small'><FileCopy/>URL</Button>
+        <Button variant='outlined' color='error' onClick={onDelete} size='small' ><Delete/>Delete</Button>
       </CardActions>
 
     </Card>
@@ -60,7 +75,8 @@ const VacancyListItem = (props) => {
 };
 
 VacancyListItem.propTypes = {
-  vacancy: PropTypes.object.isRequired
+  vacancy: PropTypes.object.isRequired,
+  onDelete: PropTypes.func
 };
 
 export default VacancyListItem;

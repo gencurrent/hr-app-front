@@ -51,7 +51,7 @@ const VacancyCUFieldListItemDialog = (props) => {
   );
 
   const updateQuestion = e => {
-    // TODO: Add a question length validation (length > 3 symbols)
+    // TODO: Add a question length validation (length > 10 symbols)
     let desc = {...fieldDescription, q: e.target.value};
     setFieldDescription(desc);
   }

@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import {
   makeStyles,
   Dialog,
+  
   Box,
   Button,
   Typography,
@@ -16,8 +17,6 @@ import {
   FileCopy,
   Delete
 } from '@material-ui/icons';
-
-import { authApolloClient, MUTATIONS } from 'utils/apollo';
 
 const useStyles = makeStyles((theme) => ({
   vacancyListItem: {
@@ -34,10 +33,7 @@ const VacancyListItem = (props) => {
 
 
   const onDelete = e => {
-    authApolloClient.mutate({mutation: MUTATIONS.DELETE_VACANCY, variables: {vacancyId: vacancy.id}})
-      .then(response => {
-        props.onDelete && props.onDelete(vacancy.id);
-      });
+    props.onDelete && props.onDelete(vacancy.id);
   }
   return (
     <Card className={classes.vacancyListItem} variant='outlined'>

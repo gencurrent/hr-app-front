@@ -51,7 +51,7 @@ const VacancyList = () => {
       >Are you sure you want to delete the vacancy "{currentVacancy.position}" in "{currentVacancy.company}"
       </DeleteConfirmationDialog>
       <Link to='/vacancy/create'>
-          <Button color='primary.main' variant='contained'>New vacancy</Button>
+          <Button color='primary.main' variant='contained' color='primary'>New vacancy</Button>
       </Link>  
       {data.vacancyList.map((vacancy, idx) => 
         <div key={idx}>

@@ -22,18 +22,34 @@ const QUERIES = {
            company
            position
            text
+           submissionCountTotal
        } 
     }`,
     VACANCY: gql`query vacancy($id: ID!){
         vacancy(id: $id){
+            uuid
+            submissionUUID
             position
             company
             text
             fields
         }
-    }
-
-    `,
+    }`,
+    VACANCY_WITH_SUBMISSION_LIST: gql`query vacancy($id: ID!){
+        vacancy(id: $id){
+            uuid
+            submissionUUID
+            position
+            company
+            text
+            fields
+            submissionList {
+                uuid
+                answers
+                ts
+            }
+        }
+    }`,
     
 };
 

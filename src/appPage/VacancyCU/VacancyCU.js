@@ -94,7 +94,7 @@ const VacancyCU = (props) => {
           </FormControl>
         </CardContent>
         <CardActions>
-            <Button variant='contained' onClick={save}>Save</Button>
+            <Button variant='contained' color='primary' onClick={save}>Save</Button>
         </CardActions>
           
       </Card>

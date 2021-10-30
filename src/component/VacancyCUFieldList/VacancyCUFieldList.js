@@ -41,8 +41,7 @@ const VacancyCUFieldListItemDialog = (props) => {
   const [fieldDescription, setFieldDescription] = useState({
     q: '',          // Question
     t: 'line',   // Type
-    r: false,   // Required
-    s: undefined,   // Default Score
+    r: true,   // Required
   });
   const {onClose, open} = props;
 
@@ -96,13 +95,14 @@ const VacancyCUFieldListItemDialog = (props) => {
                     <MenuItem key='line' value='line'>Line</MenuItem>
                     <MenuItem key='text' value='text'>Text</MenuItem>
                     <MenuItem key='number' value='number'>Number</MenuItem>
+                    <MenuItem key='file' value='file'>File</MenuItem>
                     <MenuItem key='date' value='date'>Date</MenuItem>
                 </Select>
                 <FormHelperText>{typeFieldHelperText}</FormHelperText>
               </Grid>
 
               <Grid item xs={12} sm={12}>
-                <FormControlLabel control={<Checkbox defaultChecked onChange={updateRequired} />} label="Field is required" />
+                <FormControlLabel control={<Checkbox defaultChecked={true} onChange={updateRequired} />} label="Field is required" />
               </Grid>
             </Grid>
             
@@ -110,7 +110,7 @@ const VacancyCUFieldListItemDialog = (props) => {
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Discard</Button>
-          <Button autoFocus onClick={handleSave}>Save</Button>
+          <Button autoFocus onClick={handleSave}>Add</Button>
         </DialogActions>
         
       </Dialog>
@@ -177,7 +177,7 @@ const VacancyCUFieldList = (props) => {
                         <Card variant='outlined'>
                           <CardContent>
                             <Typography component='h6' variant='h6'>{idx+1}: {el.q}</Typography>
-                            <Typography component='span' variant='span'>{FIELD_TYPE_VALUE_TO_NAME_MAP[el.t]}</Typography> | <Typography component='span' color='text.secondary' variant='span'>Required</Typography>
+                            <Typography component='span' variant='span'>{FIELD_TYPE_VALUE_TO_NAME_MAP[el.t]}</Typography> | <Typography component='span' color='text.secondary' variant='span'>{el.r ? "Required" : "Not required"}</Typography>
                           </CardContent>
                           <CardActions disableSpacing>
                             <Button>Edit</Button>
@@ -188,7 +188,7 @@ const VacancyCUFieldList = (props) => {
                 </Grid>
             )}
             <Grid >
-                <Button variant='outlined' onClick={openAddFieldDialog}>Add field</Button>
+                <Button variant='contained' color='secondary' onClick={openAddFieldDialog}>Add field</Button>
             </Grid>
         </>
     )

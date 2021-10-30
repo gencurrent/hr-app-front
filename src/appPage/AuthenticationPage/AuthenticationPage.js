@@ -146,7 +146,6 @@ const SignIn = () => {
 
 
     const hanldeSubmit = e => {
-        console.log('Submitted Sign In');
         e.preventDefault();
         const data = {
             username: email,
@@ -164,10 +163,7 @@ const SignIn = () => {
             variables: {...data}
         })
         .then(({loading, data}) => {
-            console.log(`Received data`, data);
             const {refreshToken, token} = {...data.tokenAuth};
-            console.log(refreshToken, token);
-            console.log('Client headers = ', pureApolloClient.headers);
             
             localStorage.setItem('token', token);
             localStorage.setItem('refresh', refreshToken);

@@ -20,8 +20,6 @@ import {
 
 const useStyles = makeStyles((theme) => ({
   vacancyListItem: {
-    // border: '1px solid black',
-    // borderRadius: '4px',
     margin: theme.spacing(3, 0, 2)
   }
 }));
@@ -50,8 +48,12 @@ const VacancyListItem = (props) => {
         <Box>
           <Typography component='h5' variant='h5'>
           </Typography>
-          <div>Link shared: {vacancy.linkSharesNumber}</div>
-          <div>Submissions: {vacancy.linkSubmissionsNumber}</div>
+          <Link to={{
+            pathname: `/vacancy/${vacancy.id}/submission`,
+            vacancy: vacancy
+          }}>
+            <div>Submissions: {vacancy.submissionCountTotal}</div>
+          </Link>
         </Box>
       </CardContent>
 

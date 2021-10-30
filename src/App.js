@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
 import { Switch, Router } from 'react-router';
 import { ThemeProvider, createTheme } from '@material-ui/core';
-import { purple, deepOrange } from '@material-ui/core/colors';
+import { deepOrange } from '@material-ui/core/colors';
 
 import { store, history } from 'utils/redux';
 import { authApolloClient, pureApolloClient } from 'utils/apollo';
@@ -54,13 +54,27 @@ function App() {
   }
   else{
     return (
-      <ApolloProvider client={pureApolloClient}>
+
+      <ApolloProvider client={authApolloClient}>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            Hello world
-            </Provider>
+            <Router history={history}>
+              <Template>
+                <Switch>
+                  <TopRoutes />
+                </Switch>
+              </Template>
+            </Router>
+          </Provider>
         </ThemeProvider>
       </ApolloProvider>
+      // <ApolloProvider client={pureApolloClient}>
+      //   <ThemeProvider theme={theme}>
+      //     <Provider store={store}>
+      //       Hello world
+      //       </Provider>
+      //   </ThemeProvider>
+      // </ApolloProvider>
     )
 
   }

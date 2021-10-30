@@ -7,6 +7,7 @@ import {
   VacancyList,
   VacancyCU,
   VacancySubmission,
+  SubmissionList
 } from 'appPage';
 
 
@@ -44,9 +45,8 @@ const TopRoutes = () => {
         <VacancyList />
       </Route>
 
-      <Route exact path='/submissions'>
-        {/* TODO: Create a Submissions page */}
-        <VacancyList />
+      <Route exact path='/vacancy/:vacancyId([a-f,0-9]+)/submission'>
+        <SubmissionList />
       </Route>
     </>
   )

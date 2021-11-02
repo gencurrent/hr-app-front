@@ -1,15 +1,15 @@
-import LandingPage from './LandingPage';
-import VacancySubmission from './VacancySubmission';
-import VacancyList from './VacancyList';
-import VacancyCU from './VacancyCU';
+import MainStatsPage from './MainStatsPage';
+import VacancySubmissionPage from './VacancySubmissionPage';
+import VacancyListPage from './VacancyListPage';
+import VacancyCreateEditPage from './VacancyCreateEditPage';
 import AuthenticationPage from './AuthenticationPage';
-import SubmissionList from './SubmissionList';
+import SubmissionListPage from './SubmissionListPage';
 
 export {
   AuthenticationPage,
-  LandingPage,
-  VacancySubmission,
-  VacancyCU,
-  VacancyList,
-  SubmissionList
+  MainStatsPage,
+  VacancySubmissionPage,
+  VacancyCreateEditPage,
+  VacancyListPage,
+  SubmissionListPage
 };

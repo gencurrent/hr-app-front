@@ -25,7 +25,7 @@ import { MUTATIONS } from 'utils/apollo';
 
 const TEXT_FIELD_ROWS_NUMBER_DEFAULT = 3;
 
-const VacancyCU = (props) => {    
+const VacancyCreateEditPage = (props) => {    
     let history = useHistory();
     let [position, setPosition] = useState('');
     let [company, setCompany] = useState('');
@@ -101,8 +101,8 @@ const VacancyCU = (props) => {
     )
 };
 
-VacancyCU.propTypes = {
+VacancyCreateEditPage.propTypes = {
     vacancyId: PropTypes.number
 }
 
-export default VacancyCU;
+export default VacancyCreateEditPage;

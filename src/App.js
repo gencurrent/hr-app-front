@@ -3,6 +3,7 @@ import './App.css';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
 import { Switch, Router } from 'react-router';
+import { Redirect } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { deepOrange } from '@material-ui/core/colors';
 
@@ -36,10 +37,13 @@ function App() {
   
   if (userIsAuthenticated){
     return (
-      
+      // Apollo
       <ApolloProvider client={authApolloClient}>
+        {/* Material UI */}
         <ThemeProvider theme={theme}>
+          {/* Redux */}
           <Provider store={store}>
+            {/* React-Router */}
             <Router history={history}>
               <Template>
                 <Switch>
@@ -54,27 +58,13 @@ function App() {
   }
   else{
     return (
-
-      <ApolloProvider client={authApolloClient}>
+      <ApolloProvider client={pureApolloClient}>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            <Router history={history}>
-              <Template>
-                <Switch>
-                  <TopRoutes />
-                </Switch>
-              </Template>
-            </Router>
-          </Provider>
+            Hello world
+            </Provider>
         </ThemeProvider>
       </ApolloProvider>
-      // <ApolloProvider client={pureApolloClient}>
-      //   <ThemeProvider theme={theme}>
-      //     <Provider store={store}>
-      //       Hello world
-      //       </Provider>
-      //   </ThemeProvider>
-      // </ApolloProvider>
     )
 
   }

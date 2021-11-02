@@ -51,7 +51,7 @@ const TokenDataToContext = (tokenData) => new Promise((resolve, reject) => {
      * Transforma GQL Object data to an Authentication HTTP Header format
      * @param {Object} tokenData An object containing 'token' key with Access token value
      */ 
-    const { token } = {...tokenData};
+    const { token } = tokenData;
     const context = {headers: {Authorization: `Bearer ${token}`}};
     resolve(context);
 });

@@ -4,6 +4,7 @@ import VacancyListItem from './VacancyListItem';
 import Template from './Template';
 import DeleteConfirmationDialog from './DeleteConfirmationDialog';
 import SubmissionListItemAnswer from './SubmissionListItemAnswer';
+import GeneralContainer from './GeneralContainer';
 
 export {
   Template,
@@ -11,5 +12,6 @@ export {
   VacancyCUFieldList,
   VacancyListItem,
   DeleteConfirmationDialog,
-  SubmissionListItemAnswer
+  SubmissionListItemAnswer,
+  GeneralContainer
 };

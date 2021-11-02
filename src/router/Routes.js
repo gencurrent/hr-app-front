@@ -3,11 +3,11 @@ import { Route } from 'react-router';
 
 import {
   AuthenticationPage,
-  LandingPage,
-  VacancyList,
-  VacancyCU,
-  VacancySubmission,
-  SubmissionList
+  MainStatsPage,
+  VacancyListPage,
+  VacancyCreateEditPage,
+  VacancySubmissionPage,
+  SubmissionListPage
 } from 'appPage';
 
 
@@ -15,7 +15,7 @@ const TopRoutes = () => {
   return (
     <>
       <Route exact path='/'>
-        <LandingPage />
+        <MainStatsPage />
       </Route>
 
       <Route path='/auth'>
@@ -24,29 +24,29 @@ const TopRoutes = () => {
 
       {/* Vacancy create */}
       <Route exact path='/vacancy/create'>
-        <VacancyCU />
-      </Route>
-
-      
-      <Route path='/vacancy/:id([a-f,0-9]+)/submit'>
-        <VacancySubmission />
-        {/* <VacancyCU edit={true} /> */}
+        <VacancyCreateEditPage />
       </Route>
 
       <Route exact path='/vacancy/:id([a-f,0-9]+)/edit'>
-        <VacancyCU edit={true} />
+        <VacancyCreateEditPage edit={true} />
       </Route>
+      
+      <Route path='/vacancy/:id([a-f,0-9]+)/submit'>
+        <VacancySubmissionPage />
+        {/* <VacancyCU edit={true} /> */}
+      </Route>
+
 
       {/* Vacancy statistics view */}
       <Route exact path='/vacancy/:id([a-f,0-9]+)'>
       </Route>
 
       <Route exact path='/vacancy'>
-        <VacancyList />
+        <VacancyListPage />
       </Route>
 
       <Route exact path='/vacancy/:vacancyId([a-f,0-9]+)/submission'>
-        <SubmissionList />
+        <SubmissionListPage />
       </Route>
     </>
   )

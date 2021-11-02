@@ -14,7 +14,7 @@ import {
 } from 'utils/apollo';
 import { VacancyListItem } from 'component';
 
-const VacancyList = () => {
+const VacancyListPage = () => {
   // DeleteConfirmationDialog is open
   let [confirmDialogOpen, setConfirmDialogOpen] = useState();
   // Current Vacancy this component is working with
@@ -62,4 +62,4 @@ const VacancyList = () => {
   )
 };
 
-export default VacancyList;
+export default VacancyListPage;

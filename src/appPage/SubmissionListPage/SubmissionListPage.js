@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
-function SubmissionList(props) {
+function SubmissionListPage(props) {
   const classes = useStyles();
   const { vacancyId } = useParams();
   
@@ -55,4 +55,4 @@ function SubmissionList(props) {
   )
 };
 
-export default SubmissionList;
+export default SubmissionListPage;

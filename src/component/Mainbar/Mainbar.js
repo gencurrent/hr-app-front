@@ -33,6 +33,12 @@ const Mainbar = () => {
   const handleClose = () => {
       setAnchorEl(null);
   }
+  
+  const onLogOutClick = () => {
+    handleClose();
+    let keys = ['refresh', 'token', 'tokenExpiresIn'];
+    keys.forEach(key => localStorage.removeItem(key));
+  }
 
   return (
     <AppBar>
@@ -67,7 +73,7 @@ const Mainbar = () => {
               onClose={handleClose}
             >
                 <MenuItem onClick={handleClose}>Profile</MenuItem>
-                <MenuItem onClick={handleClose}>Log Out</MenuItem>
+                <MenuItem onClick={onLogOutClick}>Log Out</MenuItem>
             </Menu>
         </div>
       </Toolbar>

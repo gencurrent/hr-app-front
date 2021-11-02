@@ -1,3 +1,7 @@
+/**
+ * Page with main statistics and navigation through HR-Eco.
+ * For authorized users only.
+ */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import {
@@ -14,12 +18,10 @@ const useStyles = makeStyles(theme => ({
   }  
 }));
 
-const LandingPage = () =>  {
+const MainStatsPage = () =>  {
   const classes = useStyles();
   return (
-    // <Paper>
     <>
-      
       <Card className={classes.cardStyle}>
         <CardContent>
           <Typography component='h6' variant='h6'>Recent Submissions</Typography>
@@ -37,8 +39,7 @@ const LandingPage = () =>  {
         </CardContent>
       </Card>
     </>
-    // </Paper>
   )
 };
 
-export default LandingPage;
+export default MainStatsPage;

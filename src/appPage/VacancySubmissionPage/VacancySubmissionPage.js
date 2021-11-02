@@ -172,12 +172,11 @@ FieldItem.propTypes = {
 }
 
 
-const VacancySubmission = () => {
+const VacancySubmissionPage = () => {
     const params = useParams();
     const vacancyId = params.id;
     const classes = useStyles();
     let [answers, setAnswers] = useState({});
-    console.log('Params', params)
     const { loading, error, data } = useQuery(QUERIES.VACANCY, {variables: {id: vacancyId}});
 
     // Data can not be empty
@@ -260,4 +259,4 @@ const VacancySubmission = () => {
 };
 
 
-export default VacancySubmission;
+export default VacancySubmissionPage;

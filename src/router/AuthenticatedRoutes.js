@@ -1,5 +1,6 @@
 import { React } from 'react';
-import { Route } from 'react-router';
+import { Route } from 'react-router-dom';
+import { Router } from 'react-router';
 
 import {
   AuthenticationPage,
@@ -9,11 +10,12 @@ import {
   VacancySubmissionPage,
   SubmissionListPage
 } from 'appPage';
+import { store, history } from 'utils/redux';
 
 
-const TopRoutes = () => {
+const AuthenticatedRoutes = () => {
   return (
-    <>
+    <Router history={history}>
       <Route exact path='/'>
         <MainStatsPage />
       </Route>
@@ -48,8 +50,8 @@ const TopRoutes = () => {
       <Route exact path='/vacancy/:vacancyId([a-f,0-9]+)/submission'>
         <SubmissionListPage />
       </Route>
-    </>
+    </Router>
   )
 };
 
-export default TopRoutes;
+export default AuthenticatedRoutes;

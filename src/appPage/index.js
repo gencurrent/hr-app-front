@@ -5,11 +5,15 @@ import VacancyCreateEditPage from './VacancyCreateEditPage';
 import AuthenticationPage from './AuthenticationPage';
 import SubmissionListPage from './SubmissionListPage';
 
+import AnonymousLandingPage from './AnonymousLandingPage';
+
 export {
   AuthenticationPage,
   MainStatsPage,
   VacancySubmissionPage,
   VacancyCreateEditPage,
   VacancyListPage,
-  SubmissionListPage
+  SubmissionListPage,
+
+  AnonymousLandingPage
 };

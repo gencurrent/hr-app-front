@@ -48,7 +48,7 @@ const VacancyListPage = () => {
         vacancyId={currentVacancy.id}
         onClose={closeDeleteConfirmationDialog}
         onConfirm={onVacandyDeleteDialogConfirmed}
-      >Are you sure you want to delete the vacancy "{currentVacancy.position}" in "{currentVacancy.company}"
+      >Are you sure you want to delete the vacancy "{currentVacancy.position}" in "{currentVacancy.company}"?
       </DeleteConfirmationDialog>
       <Link to='/vacancy/create'>
           <Button color='primary.main' variant='contained' color='primary'>New vacancy</Button>

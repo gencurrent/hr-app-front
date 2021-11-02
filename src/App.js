@@ -2,15 +2,16 @@
 import './App.css';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
-import { Switch, Router } from 'react-router';
-import { Redirect } from 'react-router-dom';
 import { ThemeProvider, createTheme } from '@material-ui/core';
 import { deepOrange } from '@material-ui/core/colors';
 
-import { store, history } from 'utils/redux';
 import { authApolloClient, pureApolloClient } from 'utils/apollo';
 import { Template } from 'component';
-import { TopRoutes } from 'router';
+import {
+  AuthenticatedRoutes,
+  AnonymousRoutes
+} from 'router';
+import { store, history } from 'utils/redux';
 
 const theme = createTheme({
   palette: {
@@ -33,7 +34,8 @@ const theme = createTheme({
 })
 
 function App() {
-  const userIsAuthenticated = localStorage.getItem('refresh', false);
+  const userIsAuthenticated = localStorage.getItem('refresh', false) &&
+    localStorage.getItem('token', false);
   
   if (userIsAuthenticated){
     return (
@@ -44,13 +46,9 @@ function App() {
           {/* Redux */}
           <Provider store={store}>
             {/* React-Router */}
-            <Router history={history}>
-              <Template>
-                <Switch>
-                  <TopRoutes />
-                </Switch>
-              </Template>
-            </Router>
+            <Template>
+              <AuthenticatedRoutes />
+            </Template>
           </Provider>
         </ThemeProvider>
       </ApolloProvider>
@@ -61,8 +59,8 @@ function App() {
       <ApolloProvider client={pureApolloClient}>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-            Hello world
-            </Provider>
+              <AnonymousRoutes />
+          </Provider>
         </ThemeProvider>
       </ApolloProvider>
     )

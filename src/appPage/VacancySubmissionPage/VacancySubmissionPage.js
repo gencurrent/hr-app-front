@@ -12,6 +12,7 @@ import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import {
     FormControl,
+    Card,
     Box,
     Grid,
     Paper,
@@ -22,6 +23,9 @@ import {
     makeStyles,
     InputLabel
 } from '@material-ui/core';
+import {
+    DeleteForever
+} from '@material-ui/icons';
 import { useDropzone } from 'react-dropzone';
 
 import { pureApolloClient, MUTATIONS, QUERIES } from 'utils/apollo';
@@ -51,9 +55,16 @@ const FieldItem = (props) => {
         validator: fileValidator
     });
 
+
+    const onFileRemove = e => {
+        e.stopPropagation();
+        removeFile(acceptedFiles[0]);
+    }
+
     const acceptedFileItems = stateFiles.map(file => (
         <li key={file.path}>
-            {file.path} — {file.size} bytes
+            {reduceFileName(file.path)} — {file.size} bytes
+            <Button color='error' variant='outlined' size='small' onClick={onFileRemove}><DeleteForever/>Remove</Button>
         </li>
     ))
 
@@ -67,26 +78,29 @@ const FieldItem = (props) => {
 
     const setValue = (value) => {
         const key = field.q;
-        console.log('setValue() // key', key);
-        console.log('setValue() // value', value);
         props.valueUpdateCallback(key, value);
     }
 
     function removeFile(file){
-        console.log('removeFile() // ', file);
         setStateFiles([]);
         setValue(undefined);
     }
+    function reduceFileName(filename) {
+        let re = /^(?<name>.*?)\.?(?<ext>\w*)$/g;
+        const match = re.exec(filename);
+        const name  = match.groups['name'];
+        const ext = match.groups['ext'];
+        const newName = filename < 70 ? filename : `${name.slice(0, 50)}..._.${ext.slice(0,10)}`;
+        return newName;
+    }
 
     function fileValidator(file) {
-        console.log('fileValidator() // ', file);
-        console.log('fileValidator() // ', typeof(file));
-        console.log('fileValidator() // ', vacancy);
         // Request a submission from the Back End
+        const filename = reduceFileName(file.path);
         pureApolloClient.mutate({
             mutation: MUTATIONS.CREATE_S3_UPLOAD_REQUEST,
             variables: {
-                filename: file.name,
+                filename: filename,
                 vacancyUUID: vacancy.uuid,
                 submissionUUID: vacancy.uuid
             }
@@ -95,7 +109,7 @@ const FieldItem = (props) => {
                 let signature = JSON.parse(response.data.createS3UploadRequest.signature);
                 let {url, key} = signature;
                 let formData = new FormData();
-                formData.append('files', file, file.filename);
+                formData.append('files', file, filename);
                 // Push the validated file to the Cloud Storage
                 fetch(url, {
                     method: 'POST',
@@ -103,17 +117,16 @@ const FieldItem = (props) => {
                     body: formData
                 })
                     .then(e => setValue(key))
-                    .then(() => setStateFiles([...stateFiles, file]));
+                    .then(() => setStateFiles([file]));
             }
         );
         return null;
     }
 
-    console.log('FieldItem() // stateFiles', stateFiles);
     return (
           <Grid container spacing={3} xs={12}>
             <Grid item spacing={6} sm={12} xs={6}>
-                <Typography variant='p'>{field.q}</Typography>
+                <Typography variant='h6' gutterBottom>{field.q}</Typography>
             {field.t === 'text' && <TextField
                 onChange={setKey}
                 required={field.r}
@@ -141,20 +154,19 @@ const FieldItem = (props) => {
             />}
             {field.t === 'file' && <>
             {/* <input onChange={onFileChange} type='file' max={1} /> */}
-            <div>
-                <button onClick={() => removeFile(acceptedFiles[0])}>Remove file</button>
+            {/* <Card variant={'outlined'}> */}
+            <div className='drag-n-drop background-stripes'>
                 <div
                     {...getRootProps({className: 'dropzone'})}
                     >
                         <input {...getInputProps()} />
-                        <p>Attach file here</p>
-                        <em>Only files with size less than 2MB are allowed</em>
-                        <Typography component='h4'>Accepted files</Typography>
+                        <p style={{'textAlign': 'center'}}>Click here or drop a file here</p>
+                        {/* <em>Only files with size less than 2MB are allowed</em> */}
+                        <Typography align='center' component='h4'>Accepted files</Typography>
                         <p>{acceptedFileItems}</p>
-                
                 </div>
-
             </div>
+            {/* </Card> */}
             </>}
             {field.t === 'date' && <TextField 
                 onChange={setKey}
@@ -195,7 +207,6 @@ const VacancySubmissionPage = () => {
             vacancyId: vacancyId,
             answers: JSON.stringify(answersArray)
         };
-        console.log('VacancySubmission // Data to be sent', submissionData);
         // const {subLoading, subError, subData} = pureApolloClient.mutate({
         pureApolloClient.mutate({
             mutation: MUTATIONS.CREATE_SUBMISSION,
@@ -206,7 +217,6 @@ const VacancySubmissionPage = () => {
     const editData = (key, value) => {
         const answersData = {...answers};
         answersData[key] = value;
-        console.log('VacancySubmission // editData() // answersData', answersData);
         setAnswers(answersData);
     }
     
@@ -217,19 +227,13 @@ const VacancySubmissionPage = () => {
             {data && <>
               <Container component='main' sx={{ my: 4 }}>
                 <Paper variant='elevation' className={classes.mainCard} >
-                    <Typography variant='h1' variant='h4' align='center' gutterBottom>Apply to the {data.vacancy.position}</Typography>
+                    <Typography variant='h1' variant='h4' align='center' gutterBottom>{data.vacancy.position}</Typography>
                     {/* Should we use Stepper ? */}
                     
                     <Grid container spacing={3} sx={{p: 4}} xs={12}>
 
                         <Grid item spacing={6} xs={12}>
-                            <Typography variant="h5" gutterBottom>
-                                {data.vacancy.position}
-                            </Typography>
-                        </Grid>
-
-                        <Grid item spacing={6} xs={12}>
-                            <Typography variant="h6" gutterBottom>
+                            <Typography variant="h5" align={'right'} gutterBottom>
                                 {data.vacancy.company}
                             </Typography>
                         </Grid>

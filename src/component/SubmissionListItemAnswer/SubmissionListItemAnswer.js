@@ -8,7 +8,7 @@ import {
 
 function SubmissionListItemAnswer(props) {
   const {answer, vacancy} = props;
-  const answerFull = {...JSON.parse(vacancy.fields).find(el => el.q == answer.q), ...answer};
+  const answerFull = {...JSON.parse(vacancy.fields).find(el => el.q === answer.q), ...answer};
   const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
   return (
     <>

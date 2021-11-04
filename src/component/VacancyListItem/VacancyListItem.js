@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 
 import {
   makeStyles,
-  Dialog,
-  
   Box,
   Button,
   Typography,
@@ -17,12 +15,15 @@ import {
   FileCopy,
   Delete
 } from '@material-ui/icons';
+import copy from 'copy-to-clipboard';
 
 const useStyles = makeStyles((theme) => ({
   vacancyListItem: {
     margin: theme.spacing(3, 0, 2)
   }
 }));
+
+
 
 const VacancyListItem = (props) => {
   const classes = useStyles();
@@ -32,7 +33,16 @@ const VacancyListItem = (props) => {
 
   const onDelete = e => {
     props.onDelete && props.onDelete(vacancy.id);
+  };
+  function onCopyLink(e) {
+    const loc = window.location;
+    const url = `${loc.protocol}//${loc.host}/vacancy/${vacancy.id}/submit`;
+    copy(url);
+
   }
+  const onAnother = e => {
+    
+  };
   return (
     <Card className={classes.vacancyListItem} variant='outlined'>
 
@@ -64,7 +74,7 @@ const VacancyListItem = (props) => {
         <Link to={`/vacancy/create`}>
           <Button variant='outlined' size='small' >Duplicate</Button>
         </Link>
-        <Button variant='outlined' size='small'><FileCopy/>URL</Button>
+        <Button variant='outlined' size='small' onClick={onCopyLink}><FileCopy/>URL</Button>
         <Button variant='outlined' color='error' onClick={onDelete} size='small' ><Delete/>Delete</Button>
       </CardActions>
 

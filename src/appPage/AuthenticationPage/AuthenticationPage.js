@@ -168,6 +168,7 @@ const SignIn = () => {
             localStorage.setItem('token', token);
             localStorage.setItem('refresh', refreshToken);
             history.push('/');
+            history.go(0);
         })
         .catch(error => {
             if (error.message === 'Please enter valid credentials'){

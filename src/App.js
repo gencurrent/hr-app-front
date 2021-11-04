@@ -3,7 +3,7 @@ import './App.css';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
 import { ThemeProvider, createTheme } from '@material-ui/core';
-import { deepOrange } from '@material-ui/core/colors';
+import { deepOrange, red } from '@material-ui/core/colors';
 
 import { authApolloClient, pureApolloClient } from 'utils/apollo';
 import { Template } from 'component';
@@ -23,6 +23,11 @@ const theme = createTheme({
       light: deepOrange[500],
       main: deepOrange[500],
       dark: deepOrange[500]
+    },
+    error: {
+      light: red[500],
+      main: red[500],
+      dark: red[500]
     },
     secondary: {
       main: deepOrange[200]
@@ -46,9 +51,7 @@ function App() {
           {/* Redux */}
           <Provider store={store}>
             {/* React-Router */}
-            <Template>
-              <AuthenticatedRoutes />
-            </Template>
+            <AuthenticatedRoutes />
           </Provider>
         </ThemeProvider>
       </ApolloProvider>
@@ -59,7 +62,7 @@ function App() {
       <ApolloProvider client={pureApolloClient}>
         <ThemeProvider theme={theme}>
           <Provider store={store}>
-              <AnonymousRoutes />
+            <AnonymousRoutes />
           </Provider>
         </ThemeProvider>
       </ApolloProvider>

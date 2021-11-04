@@ -26,7 +26,7 @@ function DeleteConfirmationDialog(props) {
       <DialogActions>
         <Button
           onClick={handleClose}
-        >Return</Button>
+        >Cancel</Button>
         <Button
           onClick={props.onConfirm}
         >Delete</Button>

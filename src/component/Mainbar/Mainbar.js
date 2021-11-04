@@ -9,7 +9,7 @@ import {
     IconButton
 } from '@material-ui/core';
 import { AccountCircle } from '@material-ui/icons';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -23,6 +23,7 @@ const useStyles = makeStyles(theme => ({
 const Mainbar = () => {
 
   const classes = useStyles();
+  const history = useHistory();
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
@@ -38,6 +39,9 @@ const Mainbar = () => {
     handleClose();
     let keys = ['refresh', 'token', 'tokenExpiresIn'];
     keys.forEach(key => localStorage.removeItem(key));
+    
+    history.push('/');
+    history.go(0);
   }
 
   return (

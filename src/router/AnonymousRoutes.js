@@ -4,25 +4,28 @@
 
 import { React } from 'react';
 import { Router, Route, Switch } from 'react-router';
-import { AnonymousLandingPage, VacancySubmissionPage } from 'appPage';
-import { store, history } from 'utils/redux';
+import { AnonymousLandingPage, VacancySubmissionPage, AuthenticationPage } from 'appPage';
+import { history } from 'utils/redux';
+import { Template } from 'component';
 
 const AnonymousRoutes = () => {
   return (
     <Router history={history}>
-      <Switch>
-        <Route exact path='/'>
-          <AnonymousLandingPage />
-        </Route>
+      <Template>
+        <Switch>
+          <Route path='/auth'>
+            <AuthenticationPage />
+          </Route>
 
-        <Route exact path='/vacancy/:vacancyId([a-f,0-9]+)/submission'>
-          <VacancySubmissionPage />
-        </Route>
-        
-        <Route>
+          <Route path='/vacancy/:id([a-f,0-9]+)/submit'>
+            <VacancySubmissionPage />
+          </Route>
           
-        </Route>
-      </Switch>
+          <Route>
+            <AnonymousLandingPage />
+          </Route>
+        </Switch>
+      </Template>
     </Router>
   )
 };

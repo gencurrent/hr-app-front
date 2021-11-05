@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
     },
     mainCard: {
         padding: theme.spacing(2),
-        margin: theme.spacing(4)
+        margin: theme.spacing(0)
     }
 }));
 
@@ -124,11 +124,11 @@ const FieldItem = (props) => {
     }
 
     return (
-          <Grid container spacing={3} xs={12}>
-            <Grid item spacing={6} sm={12} xs={6}>
-                <Typography variant='h6' gutterBottom>{field.q}</Typography>
+          <Grid container spacing={0} xs={12}>
+            <Grid item spacing={6} sm={12} xs={12}>
             {field.t === 'text' && <TextField
                 onChange={setKey}
+                label={field.q}
                 required={field.r}
                 margin='normal'
                 fullWidth={true}
@@ -138,6 +138,7 @@ const FieldItem = (props) => {
             />}
             {field.t === 'line' && <TextField
                 onChange={setKey}
+                label={field.q}
                 required={field.r}
                 margin='normal'
                 fullWidth
@@ -146,8 +147,10 @@ const FieldItem = (props) => {
             />}
             {field.t === 'number' && <TextField 
                 onChange={setKey}
+                label={field.q}
                 required={field.r}
                 margin='normal'
+                variant='outlined'
                 fullWidth
                 type='number'
                 key={`field-${field.q}`}
@@ -170,6 +173,7 @@ const FieldItem = (props) => {
             </>}
             {field.t === 'date' && <TextField 
                 onChange={setKey}
+                label={field.q}
                 required={field.r}
                 type='date'
                 key={`field-${field.q}`} 
@@ -191,10 +195,10 @@ const VacancySubmissionPage = () => {
     let [answers, setAnswers] = useState({});
     const { loading, error, data } = useQuery(QUERIES.VACANCY, {variables: {id: vacancyId}});
 
-    // Data can not be empty
-    if (data){
-        
-    }
+    
+    const [fullname, setFullname] = useState("");
+    const [email, setEmail] = useState("");
+    const [phone, setPhone] = useState("");
 
 
     const submitAnswers = (e) => {
@@ -202,16 +206,18 @@ const VacancySubmissionPage = () => {
             let a = answers[key];
             return {q: key, a: a};
         });
-        
+
         const submissionData = {
+            fullname: fullname,
+            email: email,
+            phone: phone,
             vacancyId: vacancyId,
             answers: JSON.stringify(answersArray)
         };
-        // const {subLoading, subError, subData} = pureApolloClient.mutate({
         pureApolloClient.mutate({
             mutation: MUTATIONS.CREATE_SUBMISSION,
             variables: {...submissionData}
-        }).then(response => console.log(response));
+        });
     }
 
     const editData = (key, value) => {
@@ -225,21 +231,45 @@ const VacancySubmissionPage = () => {
             {loading && <div>Loading</div>}
             {error && <div>Error</div>}
             {data && <>
-              <Container component='main' sx={{ my: 4 }}>
+                <Box sx={{py: 4}}>
                 <Paper variant='elevation' className={classes.mainCard} >
                     <Typography variant='h1' variant='h4' align='center' gutterBottom>{data.vacancy.position}</Typography>
                     {/* Should we use Stepper ? */}
                     
-                    <Grid container spacing={3} sx={{p: 4}} xs={12}>
+                    <Grid container>
 
-                        <Grid item spacing={6} xs={12}>
-                            <Typography variant="h5" align={'right'} gutterBottom>
+                        <Grid item xs={12}>
+                            <Typography variant="h5" align={'center'} gutterBottom>
                                 {data.vacancy.company}
                             </Typography>
                         </Grid>
 
 
                         <Grid item spacing={6} xs={12}>
+                        <FormControl fullWidth={false} className={classes.formControl} variant='outlined' >
+                            <TextField
+                                onChange={e => setFullname(e.target.value)}
+                                label={'Full name'}
+                                required
+                                helperText={'Required'}
+                                margin='normal'
+                                fullWidth
+                            />
+                            <TextField
+                                onChange={e => setEmail(e.target.value)}
+                                label={'Email'}
+                                required
+                                helperText={'Required'}
+                                margin='normal'
+                                fullWidth
+                            />
+                            <TextField
+                                label={'Phone'}
+                                onChange={e => setPhone(e.target.value)}
+                                margin='normal'
+                                fullWidth
+                            />
+                        </FormControl>
                             <FormControl fullWidth={true} className={classes.formControl} variant='outlined' >
                                 {JSON.parse(data.vacancy.fields).map((field, idx) => <FieldItem valueUpdateCallback={editData} field={field} vacancy={data.vacancy} />)
                                 }
@@ -255,7 +285,7 @@ const VacancySubmissionPage = () => {
 
                     </Grid>
                 </Paper>
-              </Container>
+              </Box>
             </>
             }
         </>

@@ -7,7 +7,7 @@
  */
 
 import { React, useCallback, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import {
@@ -64,7 +64,7 @@ const FieldItem = (props) => {
     const acceptedFileItems = stateFiles.map(file => (
         <li key={file.path}>
             {reduceFileName(file.path)} — {file.size} bytes
-            <Button color='error' variant='outlined' size='small' onClick={onFileRemove}><DeleteForever/>Remove</Button>
+            <Button variant='outlined' size='small' onClick={onFileRemove}><DeleteForever/>Remove</Button>
         </li>
     ))
 
@@ -192,6 +192,7 @@ const VacancySubmissionPage = () => {
     const params = useParams();
     const vacancyId = params.id;
     const classes = useStyles();
+    const history = useHistory();
     let [answers, setAnswers] = useState({});
     const { loading, error, data } = useQuery(QUERIES.VACANCY, {variables: {id: vacancyId}});
 
@@ -217,6 +218,10 @@ const VacancySubmissionPage = () => {
         pureApolloClient.mutate({
             mutation: MUTATIONS.CREATE_SUBMISSION,
             variables: {...submissionData}
+        }).then(result => {
+            if (result && result.data && result.data.createSubmission){
+                history.push(`/vacancy/${vacancyId}/applied`);
+            }
         });
     }
 
@@ -250,23 +255,32 @@ const VacancySubmissionPage = () => {
                             <TextField
                                 onChange={e => setFullname(e.target.value)}
                                 label={'Full name'}
+                                name='name'
+                                id='name'
                                 required
                                 helperText={'Required'}
                                 margin='normal'
+                                autoComplete='name'
                                 fullWidth
                             />
                             <TextField
                                 onChange={e => setEmail(e.target.value)}
                                 label={'Email'}
+                                name='email'
+                                id='email'
                                 required
                                 helperText={'Required'}
                                 margin='normal'
+                                autoComplete='email'
                                 fullWidth
                             />
                             <TextField
                                 label={'Phone'}
+                                name='phone'
+                                id='phone'
                                 onChange={e => setPhone(e.target.value)}
                                 margin='normal'
+                                autoComplete='phone'
                                 fullWidth
                             />
                         </FormControl>

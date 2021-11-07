@@ -6,7 +6,8 @@ import {
   VacancyListPage,
   VacancyCreateEditPage,
   VacancySubmissionPage,
-  SubmissionListPage
+  SubmissionListPage,
+  SubmissionSalutationPage
 } from 'appPage';
 import { history } from 'utils/redux';
 import { Template } from 'component';
@@ -34,9 +35,12 @@ const AuthenticatedRoutes = () => {
             <VacancyCreateEditPage edit={true} />
           </Route>
           
-          <Route path='/vacancy/:id([a-f,0-9]+)/submit'>
+          <Route path='/vacancy/:id([a-f,0-9]+)/apply'>
             <VacancySubmissionPage />
-            {/* <VacancyCU edit={true} /> */}
+          </Route>
+
+          <Route path='/vacancy/:id([a-f,0-9]+)/applied'>
+            <SubmissionSalutationPage />
           </Route>
 
 

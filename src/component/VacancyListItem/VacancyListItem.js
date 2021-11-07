@@ -36,7 +36,7 @@ const VacancyListItem = (props) => {
   };
   function onCopyLink(e) {
     const loc = window.location;
-    const url = `${loc.protocol}//${loc.host}/vacancy/${vacancy.id}/submit`;
+    const url = `${loc.protocol}//${loc.host}/vacancy/${vacancy.id}/apply`;
     copy(url);
 
   }
@@ -68,8 +68,8 @@ const VacancyListItem = (props) => {
       </CardContent>
 
       <CardActions>
-        <Link to={`/vacancy/${vacancy.id}/submit`}>
-          <Button variant='outlined' size='small'>Submit</Button>
+        <Link to={`/vacancy/${vacancy.id}/apply`}>
+          <Button variant='outlined' size='small'>Apply</Button>
         </Link>
         <Link to={`/vacancy/create`}>
           <Button variant='outlined' size='small' >Duplicate</Button>

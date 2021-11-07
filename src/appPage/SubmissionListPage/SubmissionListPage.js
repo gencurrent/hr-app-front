@@ -1,13 +1,11 @@
 import {React} from 'react';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import {
   makeStyles,
   Box,
   Card,
-  Container,
-  Paper,
   Typography
 } from '@material-ui/core';
 
@@ -32,23 +30,28 @@ function SubmissionListPage(props) {
   });
   return (
     
-    <Box>
+    <Box sx={{py: 4}}>
         {loading ? 
         (<div>Loading...</div>)
         :
-        data.vacancy.submissionList.map(
-          (submission) => (
-            <Container>
+        <>
+          <Typography component='h6' variant='h6'>
+            Vacancy <Link to={`/vacancy/${vacancyId}`}>{data.vacancy.position}</Link> submissions
+          </Typography>
+          {data.vacancy.submissionList.map(
+            submission => (
               <Card variant='outlined' className={classes.submissionListItem}>
-                <Typography>{submission.uuid}</Typography>
+                <Typography>{submission.fullname}</Typography>
+                <Typography>Email: {submission.email}</Typography>
+                <Typography>Phone: {submission.phone}</Typography>
                 {JSON.parse(submission.answers).map(answer => (
                     <SubmissionListItemAnswer answer={answer} vacancy={data.vacancy} />
                   )
                 )}
               </Card>
-            </Container>
-          )
-        )
+            )
+          )}
+        </>
         }
         
     </Box>

@@ -4,6 +4,7 @@ import VacancyListPage from './VacancyListPage';
 import VacancyCreateEditPage from './VacancyCreateEditPage';
 import AuthenticationPage from './AuthenticationPage';
 import SubmissionListPage from './SubmissionListPage';
+import SubmissionSalutationPage from './SubmissionSalutationPage';
 
 import AnonymousLandingPage from './AnonymousLandingPage';
 
@@ -14,6 +15,7 @@ export {
   VacancyCreateEditPage,
   VacancyListPage,
   SubmissionListPage,
+  SubmissionSalutationPage,
 
   AnonymousLandingPage
 };

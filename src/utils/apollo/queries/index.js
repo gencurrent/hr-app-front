@@ -45,6 +45,9 @@ const QUERIES = {
             fields
             submissionList {
                 uuid
+                fullname
+                email
+                phone
                 answers
                 ts
             }

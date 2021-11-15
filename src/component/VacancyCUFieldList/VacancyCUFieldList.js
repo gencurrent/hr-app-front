@@ -96,7 +96,7 @@ const VacancyCUFieldListItemDialog = (props) => {
                     <MenuItem key='text' value='text'>Text</MenuItem>
                     <MenuItem key='number' value='number'>Number</MenuItem>
                     <MenuItem key='file' value='file'>File</MenuItem>
-                    <MenuItem key='date' value='date'>Date</MenuItem>
+                    {/* <MenuItem key='date' value='date'>Date</MenuItem> */}
                 </Select>
                 <FormHelperText>{typeFieldHelperText}</FormHelperText>
               </Grid>

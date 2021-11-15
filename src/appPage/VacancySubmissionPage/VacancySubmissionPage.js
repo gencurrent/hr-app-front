@@ -44,7 +44,10 @@ const useStyles = makeStyles((theme) => ({
 const FieldItem = (props) => {
     const {field, vacancy} = props;
     
+    // File fields
     const [stateFiles, setStateFiles] = useState([]);
+    // Field-specific errors
+    const [fieldError, setFieldError] = useState(field.r ? 'The field is required' : '');
     const {
         acceptedFiles,
         fileRejections,
@@ -69,16 +72,26 @@ const FieldItem = (props) => {
     ))
 
     const setKey = (e) => {
-        const key = field.q;
         const value = e.target.value;
-        
-        props.valueUpdateCallback(key, value);
+        setValue(value);
     }
 
 
     const setValue = (value) => {
         const key = field.q;
-        props.valueUpdateCallback(key, value);
+        if (field.r === true){
+            if(value === undefined || value === ''){
+                setFieldError('The field is required');
+            }
+            else {
+                props.valueUpdateCallback(key, value);
+                setFieldError(undefined);
+            }
+        }
+        else {
+            props.valueUpdateCallback(key, value);
+            setFieldError(undefined);
+        }
     }
 
     function removeFile(file){
@@ -124,12 +137,14 @@ const FieldItem = (props) => {
     }
 
     return (
-          <Grid container spacing={0} xs={12}>
+          <Grid container>
             <Grid item spacing={6} sm={12} xs={12}>
             {field.t === 'text' && <TextField
                 onChange={setKey}
                 label={field.q}
+                helperText={fieldError}
                 required={field.r}
+                error={fieldError !== undefined}
                 margin='normal'
                 fullWidth={true}
                 multiline
@@ -139,16 +154,19 @@ const FieldItem = (props) => {
             {field.t === 'line' && <TextField
                 onChange={setKey}
                 label={field.q}
+                helperText={fieldError}
                 required={field.r}
+                error={fieldError !== undefined}
                 margin='normal'
                 fullWidth
-                type='text'
                 key={`field-${field.q}`}
             />}
             {field.t === 'number' && <TextField 
                 onChange={setKey}
                 label={field.q}
+                helperText={fieldError}
                 required={field.r}
+                error={fieldError !== undefined}
                 margin='normal'
                 variant='outlined'
                 fullWidth
@@ -165,26 +183,33 @@ const FieldItem = (props) => {
                         <input {...getInputProps()} />
                         <p style={{'textAlign': 'center'}}>Click here or drop a file here</p>
                         {/* <em>Only files with size less than 2MB are allowed</em> */}
-                        <Typography align='center' component='h4'>Accepted files</Typography>
+                        <Typography align='center' component='h4'>Accepted file</Typography>
                         <p>{acceptedFileItems}</p>
                 </div>
             </div>
+            {field.r && <p class="MuiFormHelperText-root Mui-required">Required</p>}
             {/* </Card> */}
             </>}
-            {field.t === 'date' && <TextField 
-                onChange={setKey}
-                label={field.q}
-                required={field.r}
-                type='date'
-                key={`field-${field.q}`} 
-            />}
+            {/* {field.t === 'date' && <TextField
+                    onChange={setKey}
+                    label="Birthday"
+                    helperText={fieldError}
+                    type="date"
+                    defaultValue=''
+                    sx={{ width: 220 }}
+                    InputLabelProps={{
+                    shrink: true
+                    }}
+                />} */}
             </Grid>
           </Grid>
     )
 }
 FieldItem.propTypes = {
     valueUpdateCallback: PropTypes.func.isRequired,
-    vacancy: PropTypes.object.isRequired
+    vacancy: PropTypes.object.isRequired,
+    setErrorsCallback: PropTypes.func.isRequired,
+    errors: PropTypes.object.isRequired
 }
 
 
@@ -193,21 +218,41 @@ const VacancySubmissionPage = () => {
     const vacancyId = params.id;
     const classes = useStyles();
     const history = useHistory();
-    let [answers, setAnswers] = useState({});
-    const { loading, error, data } = useQuery(QUERIES.VACANCY, {variables: {id: vacancyId}});
+    const { loading, error, data: vacancyData } = useQuery(QUERIES.VACANCY, {variables: {id: vacancyId}});
+    const vacancyFields = vacancyData && vacancyData.vacancy ? JSON.parse(vacancyData.vacancy.fields) : [];
+    const [answers, setAnswers] = useState({});
+    const [formError, setFormError] = useState('');
 
     
     const [fullname, setFullname] = useState("");
     const [email, setEmail] = useState("");
     const [phone, setPhone] = useState("");
 
-
+    /**
+     * Submit answers from the Submission form
+     * @param {Event} e An event object
+     * @return {null}
+     */
     const submitAnswers = (e) => {
-        let answersArray = Object.keys(answers).map((key) => {
-            let a = answers[key];
-            return {q: key, a: a};
+        let answersDict = {}
+        vacancyFields.forEach(
+            (field) => {answersDict[field.q] = null}
+        );
+        answersDict = {...answersDict, ...answers};
+        
+        let answersArray = Object.keys(answersDict).map((key) => {
+            return {q: key, a: answersDict[key]};
         });
 
+        // Step 1: Check validity on the front end side
+        console.log('submitAnswers() // ', answersArray);
+        let errorsFound = {resume: 'Wring resume'};
+        for(let el of Object.keys(answers)) {
+            console.log(el);
+        }
+        
+        
+        // Step 2: Collect the data
         const submissionData = {
             fullname: fullname,
             email: email,
@@ -218,9 +263,24 @@ const VacancySubmissionPage = () => {
         pureApolloClient.mutate({
             mutation: MUTATIONS.CREATE_SUBMISSION,
             variables: {...submissionData}
-        }).then(result => {
+        })
+        .then(result => {
             if (result && result.data && result.data.createSubmission){
                 history.push(`/vacancy/${vacancyId}/applied`);
+            }
+        }).catch(error => {
+            const message = error.message;
+            console.log('The message is', error.message);
+            console.log('The message is', typeof(error.message));
+            console.log('The message is', message === 'The email is invalid');
+            if (message === 'The email is invalid'){
+                setFormError('*The email is invalid');
+            }
+            else if (message === 'The phone number is invalid'){
+                setFormError('*The phone number is invalid');
+            }
+            else {
+                setFormError('*Please, check all the fields');
             }
         });
     }
@@ -228,6 +288,7 @@ const VacancySubmissionPage = () => {
     const editData = (key, value) => {
         const answersData = {...answers};
         answersData[key] = value;
+        console.log(answersData);
         setAnswers(answersData);
     }
     
@@ -235,17 +296,17 @@ const VacancySubmissionPage = () => {
         <>
             {loading && <div>Loading</div>}
             {error && <div>Error</div>}
-            {data && <>
+            {vacancyData && <>
                 <Box sx={{py: 4}}>
                 <Paper variant='elevation' className={classes.mainCard} >
-                    <Typography variant='h1' variant='h4' align='center' gutterBottom>{data.vacancy.position}</Typography>
+                    <Typography variant='h1' variant='h4' align='center' gutterBottom>{vacancyData.vacancy.position}</Typography>
                     {/* Should we use Stepper ? */}
                     
                     <Grid container>
 
                         <Grid item xs={12}>
                             <Typography variant="h5" align={'center'} gutterBottom>
-                                {data.vacancy.company}
+                                {vacancyData.vacancy.company}
                             </Typography>
                         </Grid>
 
@@ -275,7 +336,7 @@ const VacancySubmissionPage = () => {
                                 fullWidth
                             />
                             <TextField
-                                label={'Phone'}
+                                label={'Phone in format +(country code)(number)'}
                                 name='phone'
                                 id='phone'
                                 onChange={e => setPhone(e.target.value)}
@@ -285,9 +346,18 @@ const VacancySubmissionPage = () => {
                             />
                         </FormControl>
                             <FormControl fullWidth={true} className={classes.formControl} variant='outlined' >
-                                {JSON.parse(data.vacancy.fields).map((field, idx) => <FieldItem valueUpdateCallback={editData} field={field} vacancy={data.vacancy} />)
+                                {
+                                  vacancyFields.map(
+                                      (field, idx) => <FieldItem
+                                        valueUpdateCallback={editData}
+                                        field={field}
+                                        vacancy={vacancyData.vacancy} 
+                                    />)
                                 }
                             </FormControl>
+                        </Grid>
+                        <Grid item spacing={6} xs={12}>
+                            <Typography color='error'>{formError}</Typography>
                         </Grid>
                         <Grid item spacing={6} xs={12}>
                             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

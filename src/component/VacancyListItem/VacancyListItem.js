@@ -40,9 +40,7 @@ const VacancyListItem = (props) => {
     copy(url);
 
   }
-  const onAnother = e => {
-    
-  };
+  
   return (
     <Card className={classes.vacancyListItem} variant='outlined'>
 

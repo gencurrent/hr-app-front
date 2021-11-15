@@ -25,9 +25,9 @@ function SubmissionListItemAnswer(props) {
         {answerFull.t === 'number' && <>
           <p>{answer.a}</p>
         </>}
-        {answerFull.t === 'date' && <>
+        {/* {answerFull.t === 'date' && <>
           <p>{answer.a}</p>
-        </>}
+        </>} */}
     </>
   );
 };

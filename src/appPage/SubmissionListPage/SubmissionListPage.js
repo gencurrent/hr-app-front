@@ -41,7 +41,7 @@ function SubmissionListPage(props) {
           {data.vacancy.submissionList.map(
             submission => (
               <Card variant='outlined' className={classes.submissionListItem}>
-                <Typography>{submission.fullname}</Typography>
+                <Typography>Name: {submission.fullname}</Typography>
                 <Typography>Email: {submission.email}</Typography>
                 <Typography>Phone: {submission.phone}</Typography>
                 {JSON.parse(submission.answers).map(answer => (

@@ -1,3 +1,9 @@
+:root {
+  --lp-bg-color: linear-gradient(180deg, rgba(1,0,36,1) 0%, rgba(2,5,106,1) 100%);
+  --lp-mainbar-bg-color: linear-gradient(180deg, rgba(2,5,106,1) 0%, #ff5722 100%);
+}
+
+
 .App {
   text-align: center;
 }
@@ -11,6 +17,20 @@
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
   }
+}
+
+.unselectable {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.speedometer {
+  display: block;
+  margin: auto;
 }
 
 .App-header {
@@ -53,4 +73,41 @@ a:visited {
     #46529880 10px,
     #46529880 20px
   );
+}
+
+.answer-block:nth-child(2n) {
+  background: #ff572236 !important;
+}
+
+
+/* Landing page */
+.lp-background {
+  background: var(--lp-bg-color);
+}
+
+.lp-benefits-block {
+  color: black;
+  background: linear-gradient(180deg, #D4E1F5 0%, white 100%);
+}
+
+.lp-image {
+  display: block;
+  margin: auto;
+  height: 300px;
+  width: 300px;
+}
+
+.anonymous-lp-mainbar {
+  display: block;
+  background: var(--lp-bg-color);
+}
+
+.footer {
+  display: flex;
+  width: 100%;
+  padding: 8px 0;
+  background: white;
+  color: black;
+  position: static;
+  bottom: 0;
 }

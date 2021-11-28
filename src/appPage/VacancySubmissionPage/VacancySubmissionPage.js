@@ -73,30 +73,29 @@ const FieldItem = (props) => {
 
     const setKey = (e) => {
         const value = e.target.value;
-        setValue(value);
+        drillValue(value);
     }
 
-
-    const setValue = (value) => {
+    /**
+     * Drill the value onto the upper level (Parent Component's callback)
+     * @param {Object} value The value to pass on
+     */
+    const drillValue = (value) => {
         const key = field.q;
         if (field.r === true){
             if(value === undefined || value === ''){
                 setFieldError('The field is required');
             }
-            else {
-                props.valueUpdateCallback(key, value);
-                setFieldError(undefined);
-            }
         }
         else {
-            props.valueUpdateCallback(key, value);
             setFieldError(undefined);
         }
+        props.valueUpdateCallback(key, value);
     }
 
     function removeFile(file){
         setStateFiles([]);
-        setValue(undefined);
+        drillValue(undefined);
     }
     function reduceFileName(filename) {
         let re = /^(?<name>.*?)\.?(?<ext>\w*)$/g;
@@ -129,8 +128,11 @@ const FieldItem = (props) => {
                     cache: 'no-cache',
                     body: formData
                 })
-                    .then(e => setValue(key))
-                    .then(() => setStateFiles([file]));
+                    .then(e => drillValue(key))
+                    .then(() => {
+                        setStateFiles([file]);
+                        setFieldError(undefined);
+                    });
             }
         );
         return null;
@@ -163,6 +165,11 @@ const FieldItem = (props) => {
             />}
             {field.t === 'number' && <TextField 
                 onChange={setKey}
+                onKeyPress={(event) => {
+                    if (!/[0-9]/.test(event.key)) {
+                      event.preventDefault();
+                    }
+                  }}
                 label={field.q}
                 helperText={fieldError}
                 required={field.r}
@@ -176,6 +183,7 @@ const FieldItem = (props) => {
             {field.t === 'file' && <>
             {/* <input onChange={onFileChange} type='file' max={1} /> */}
             {/* <Card variant={'outlined'}> */}
+            <p className="MuiInputBase-input MuiInput-input">{field.q}</p>
             <div className='drag-n-drop background-stripes'>
                 <div
                     {...getRootProps({className: 'dropzone'})}
@@ -187,7 +195,7 @@ const FieldItem = (props) => {
                         <p>{acceptedFileItems}</p>
                 </div>
             </div>
-            {field.r && <p class="MuiFormHelperText-root Mui-required">Required</p>}
+            {field.r && <p class="MuiFormHelperText-root Mui-error Mui-required">{fieldError}</p>}
             {/* </Card> */}
             </>}
             {/* {field.t === 'date' && <TextField

@@ -12,9 +12,14 @@ function SubmissionListItemAnswer(props) {
   const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
   return (
     <>
+      <div className='answer-block'>
+        
         <Typography>{answer.q}</Typography>
-        {answerFull.t === 'file' && <>
-          <Link target="_blank" download href={`${fileUrlBase}/${answer.a}`}>Download</Link>
+        {
+        answer.a === null ? <Typography component='p' variant='p'>Empty</Typography>
+        :
+        answerFull.t === 'file' && <>
+         <Link target="_blank" download href={`${fileUrlBase}/${answer.a}`}>Download</Link>
         </>}
         {answerFull.t === 'line' && <>
           <p>{answer.a}</p>
@@ -28,6 +33,7 @@ function SubmissionListItemAnswer(props) {
         {/* {answerFull.t === 'date' && <>
           <p>{answer.a}</p>
         </>} */}
+      </div>
     </>
   );
 };

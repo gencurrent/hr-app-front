@@ -12,13 +12,14 @@ import {
   AuthenticationPage,
   SubmissionSalutationPage
 } from 'appPage';
+import { CssBaseline } from '@material-ui/core';
 import { history } from 'utils/redux';
 import { Template } from 'component';
 
 const AnonymousRoutes = () => {
   return (
     <Router history={history}>
-      <Template>
+        <CssBaseline/>
         <Switch>
           <Route path='/auth'>
             <AuthenticationPage />
@@ -36,7 +37,6 @@ const AnonymousRoutes = () => {
             <AnonymousLandingPage />
           </Route>
         </Switch>
-      </Template>
     </Router>
   )
 };

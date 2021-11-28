@@ -1,42 +1,17 @@
-// import logo from './logo.svg';
 import './App.css';
 import { Provider } from 'react-redux';
 import { ApolloProvider } from '@apollo/client';
-import { ThemeProvider, createTheme } from '@material-ui/core';
-import { deepOrange, red } from '@material-ui/core/colors';
+import { ThemeProvider } from '@material-ui/core';
 
 import { authApolloClient, pureApolloClient } from 'utils/apollo';
-import { Template } from 'component';
+import { store } from 'utils/redux';
+
 import {
   AuthenticatedRoutes,
   AnonymousRoutes
 } from 'router';
-import { store, history } from 'utils/redux';
 
-const theme = createTheme({
-  palette: {
-    type: 'dark',
-    // background: {
-    //   default: 'dark'
-    // },
-    primary: {
-      light: deepOrange[500],
-      main: deepOrange[500],
-      dark: deepOrange[500]
-    },
-    error: {
-      light: red[500],
-      main: red[500],
-      dark: red[500]
-    },
-    secondary: {
-      main: deepOrange[200]
-    },
-    background: {
-      main: '#202020'
-    }
-  }
-})
+import { lightTheme, darkTheme } from 'utils/material';
 
 function App() {
   const userIsAuthenticated = localStorage.getItem('refresh', false) &&
@@ -47,7 +22,7 @@ function App() {
       // Apollo
       <ApolloProvider client={authApolloClient}>
         {/* Material UI */}
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={darkTheme}>
           {/* Redux */}
           <Provider store={store}>
             {/* React-Router */}
@@ -60,7 +35,7 @@ function App() {
   else{
     return (
       <ApolloProvider client={pureApolloClient}>
-        <ThemeProvider theme={theme}>
+        <ThemeProvider theme={lightTheme}>
           <Provider store={store}>
             <AnonymousRoutes />
           </Provider>

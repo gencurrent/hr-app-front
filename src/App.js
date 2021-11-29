@@ -35,7 +35,7 @@ function App() {
   else{
     return (
       <ApolloProvider client={pureApolloClient}>
-        <ThemeProvider theme={lightTheme}>
+        <ThemeProvider theme={darkTheme}>
           <Provider store={store}>
             <AnonymousRoutes />
           </Provider>

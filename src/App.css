@@ -90,11 +90,21 @@ a:visited {
   background: linear-gradient(180deg, #D4E1F5 0%, white 100%);
 }
 
+
 .lp-image {
   display: block;
   margin: auto;
-  height: 300px;
-  width: 300px;
+  height: 100px;
+  width: 100px;
+}
+
+@media screen and (min-width: 600px) {
+  .lp-image {
+    display: block;
+    margin: auto;
+    height: 300px;
+    width: 300px;
+  }
 }
 
 .anonymous-lp-mainbar {

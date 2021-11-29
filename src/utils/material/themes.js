@@ -2,7 +2,7 @@ import { createTheme } from '@material-ui/core';
 import { deepOrange, red } from '@material-ui/core/colors';
 
 
-const lightTheme = createTheme({
+const darkTheme = createTheme({
   palette: {
     type: 'dark',
     primary: {
@@ -24,7 +24,7 @@ const lightTheme = createTheme({
   }
 });
 
-const darkTheme = createTheme({
+const lightTheme = createTheme({
   palette: {
     type: 'light',
     primary: {

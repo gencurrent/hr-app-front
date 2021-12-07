@@ -270,7 +270,7 @@ const VacancySubmissionPage = () => {
         };
         pureApolloClient.mutate({
             mutation: MUTATIONS.CREATE_SUBMISSION,
-            variables: {...submissionData}
+            variables: submissionData
         })
         .then(result => {
             if (result && result.data && result.data.createSubmission){
@@ -278,9 +278,6 @@ const VacancySubmissionPage = () => {
             }
         }).catch(error => {
             const message = error.message;
-            console.log('The message is', error.message);
-            console.log('The message is', typeof(error.message));
-            console.log('The message is', message === 'The email is invalid');
             if (message === 'The email is invalid'){
                 setFormError('*The email is invalid');
             }

@@ -42,6 +42,20 @@ const MUTATIONS = {
       answers
       ts
     }
+  }`,
+
+  CREATE_DEMO_REQUEST: gql`
+  mutation CreateDemoRequest(
+    $name: String!,
+    $email: String!,
+    $phone: String!
+  ){
+    createDemoRequest(name: $name, email: $email, phone: $phone){
+      name
+      email
+      phone
+      ts
+    }
   }`
 };
 

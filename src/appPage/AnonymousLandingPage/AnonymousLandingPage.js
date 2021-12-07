@@ -212,7 +212,7 @@ function AnonymousLandingPage() {
             <Typography component='h1' variant='h2' align='center' style={{fontWeight: 400}}>The essence</Typography>
 
             <Grid container justifyContent='center'><Grid item sm={12} md={8}>
-                <Grid container justifyContent='center' spacing={2}>
+                <Grid container justifyContent='flex-start' spacing={2}>
                   <Grid item sm={12}>
                     <Typography variant='h4' component='h3'>1. Create a vacancy</Typography>
                   </Grid>

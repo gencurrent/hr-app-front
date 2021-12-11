@@ -73,7 +73,7 @@ const VacancyListItem = (props) => {
           <Button variant='outlined' size='small' >Duplicate</Button>
         </Link>
         <Button variant='outlined' size='small' onClick={onCopyLink}><FileCopy/>URL</Button>
-        <Button variant='outlined' color='error' onClick={onDelete} size='small' ><Delete/>Delete</Button>
+        <Button variant='outlined' onClick={onDelete} size='small' ><Delete/>Delete</Button>
       </CardActions>
 
     </Card>

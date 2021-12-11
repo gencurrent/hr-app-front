@@ -22,7 +22,7 @@ import {
   DownBar
 } from 'component';
 import { lightTheme, darkTheme } from 'utils/material';
-import { Box, minWidth } from "@mui/system";
+import { Box } from "@mui/system";
 
 
 const useStyles = makeStyles(theme => ({
@@ -188,7 +188,6 @@ function AnonymousLandingPage() {
               // fluidWidth={true}
               height={300}
               width={windowWidth < 500 ? windowWidth * 0.8 : 500}
-              segments={4}
               minValue={0}
               maxValue={100}
               value={speedometerValue}

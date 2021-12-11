@@ -16,7 +16,7 @@ import { VacancyListItem } from 'component';
 
 const VacancyListPage = () => {
   // DeleteConfirmationDialog is open
-  let [confirmDialogOpen, setConfirmDialogOpen] = useState();
+  let [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   // Current Vacancy this component is working with
   let [currentVacancy, setCurrentVacancy] = useState({});
   let { loading, error, data, refetch } = useQuery(QUERIES.VACANCY_LIST, { fetchPolicy: "no-cache"});
@@ -44,14 +44,15 @@ const VacancyListPage = () => {
   return (
     <Box sx={{py: 4}}>
       <DeleteConfirmationDialog
+        title={`Delete vacancy "${currentVacancy.position}"`}
         open={confirmDialogOpen}
         vacancyId={currentVacancy.id}
         onClose={closeDeleteConfirmationDialog}
         onConfirm={onVacandyDeleteDialogConfirmed}
-      >Are you sure you want to delete the vacancy "{currentVacancy.position}" in "{currentVacancy.company}"?
+      >Do you want to delete the vacancy "{currentVacancy.position}" in "{currentVacancy.company}"?
       </DeleteConfirmationDialog>
       <Link to='/vacancy/create'>
-          <Button color='primary.main' variant='contained' color='primary'>New vacancy</Button>
+          <Button variant='contained' color='primary'>New vacancy</Button>
       </Link>  
       {data.vacancyList.map((vacancy, idx) => 
         <div key={idx}>

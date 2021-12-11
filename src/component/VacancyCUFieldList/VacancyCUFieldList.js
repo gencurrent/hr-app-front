@@ -7,7 +7,6 @@
 import PropTypes from 'prop-types';
 import { useState } from 'react';
 import { 
-    makeStyles,
     TextField,
     Grid,
     Button,
@@ -123,21 +122,20 @@ VacancyCUFieldListItemDialog.propTypes = {
     onSave: PropTypes.func.isRequired  // New field submitted (saved)
 };
 
-const useVacancyCUFieldListStyles = makeStyles(theme => ({
-  fieldItemCard: {
-    padding: theme.spacing(1),
-    marginTop: theme.spacing(1),
-    marginBottom: theme.spacing(1)
-  },
-  fieldRequiredSymbol: {
-    color: theme.palette.secondary.dark
-  }
-}));
+// const useVacancyCUFieldListStyles = makeStyles(theme => ({
+//   fieldItemCard: {
+//     padding: theme.spacing(1),
+//     marginTop: theme.spacing(1),
+//     marginBottom: theme.spacing(1)
+//   },
+//   fieldRequiredSymbol: {
+//     color: theme.palette.secondary.dark
+//   }
+// }));
 
 
 
 const VacancyCUFieldList = (props) => {
-    const classes = useVacancyCUFieldListStyles();
     
     let [fields, setFields] = useState(props.fields || []);
     

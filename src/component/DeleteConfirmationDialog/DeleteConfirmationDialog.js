@@ -36,12 +36,11 @@ function DeleteConfirmationDialog(props) {
 };
 
 DeleteConfirmationDialog.propTypes = {
-  open: PropTypes.isRequired,
+  open: PropTypes.bool.isRequired,
   onConfirm: PropTypes.func,
   onReject: PropTypes.func,
   onClose: PropTypes.func.isRequired,
-  title: PropTypes.string.isRequired,
-  text: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired
 };
 
 export default DeleteConfirmationDialog;

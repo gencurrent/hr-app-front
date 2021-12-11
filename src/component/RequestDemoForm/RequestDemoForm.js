@@ -86,7 +86,7 @@ export default function RequestDemoForm() {
               />
             </Grid>
             <Grid item xs={12}>
-              <Typography component='p'>We will contact you in order to try the service</Typography>
+              <Typography>We will contact you in order to try the service</Typography>
             </Grid>
 
             <Grid item xs={12}>

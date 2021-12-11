@@ -6,22 +6,19 @@
  * 4. Send the submission
  */
 
-import { React, useCallback, useState } from 'react';
+import { React, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
 import PropTypes from 'prop-types';
 import {
     FormControl,
-    Card,
     Box,
     Grid,
     Paper,
     Typography,
     TextField,
-    Container,
     Button,
-    makeStyles,
-    InputLabel
+    makeStyles
 } from '@material-ui/core';
 import {
     DeleteForever
@@ -50,7 +47,6 @@ const FieldItem = (props) => {
     const [fieldError, setFieldError] = useState(field.r ? 'The field is required' : '');
     const {
         acceptedFiles,
-        fileRejections,
         getRootProps,
         getInputProps
     } = useDropzone({
@@ -248,19 +244,8 @@ const VacancySubmissionPage = () => {
         );
         answersDict = {...answersDict, ...answers};
         
-        let answersArray = Object.keys(answersDict).map((key) => {
-            return {q: key, a: answersDict[key]};
-        });
+        let answersArray = Object.keys(answersDict).map((key) => ({q: key, a: answersDict[key]}));
 
-        // Step 1: Check validity on the front end side
-        console.log('submitAnswers() // ', answersArray);
-        let errorsFound = {resume: 'Wring resume'};
-        for(let el of Object.keys(answers)) {
-            console.log(el);
-        }
-        
-        
-        // Step 2: Collect the data
         const submissionData = {
             fullname: fullname,
             email: email,
@@ -304,7 +289,7 @@ const VacancySubmissionPage = () => {
             {vacancyData && <>
                 <Box sx={{py: 4}}>
                 <Paper variant='elevation' className={classes.mainCard} >
-                    <Typography variant='h1' variant='h4' align='center' gutterBottom>{vacancyData.vacancy.position}</Typography>
+                    <Typography variant='h4' align='center' gutterBottom>{vacancyData.vacancy.position}</Typography>
                     {/* Should we use Stepper ? */}
                     
                     <Grid container>
@@ -362,7 +347,7 @@ const VacancySubmissionPage = () => {
                             </FormControl>
                         </Grid>
                         <Grid item spacing={6} xs={12}>
-                            <Typography color='error'>{formError}</Typography>
+                            <Typography>{formError}</Typography>
                         </Grid>
                         <Grid item spacing={6} xs={12}>
                             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>

@@ -16,7 +16,7 @@ function SubmissionListItemAnswer(props) {
         
         <Typography>{answer.q}</Typography>
         {
-        answer.a === null ? <Typography component='p' variant='p'>Empty</Typography>
+        answer.a === null ? <Typography component='p'>Empty</Typography>
         :
         answerFull.t === 'file' && <>
          <Link target="_blank" download href={`${fileUrlBase}/${answer.a}`}>Download</Link>

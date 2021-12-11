@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import { React, useState } from 'react';
-import { useMutation, gql } from '@apollo/client';
+import { useMutation } from '@apollo/client';
 import { useHistory } from 'react-router-dom';
 import { 
     TextField,
@@ -12,7 +12,6 @@ import {
     CardContent,
     CardActions
 } from '@material-ui/core';
-import ReactMarkdown from 'react-markdown';
 
 import { VacancyCUFieldList } from 'component';
 import {

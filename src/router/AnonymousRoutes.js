@@ -26,11 +26,15 @@ const AnonymousRoutes = () => {
           </Route>
 
           <Route path='/vacancy/:id([a-f,0-9]+)/apply'>
-            <VacancySubmissionPage />
+            <Template>
+              <VacancySubmissionPage />
+            </Template>
           </Route>
 
           <Route path='/vacancy/:id([a-f,0-9]+)/applied'>
-            <SubmissionSalutationPage />
+            <Template>
+              <SubmissionSalutationPage />
+            </Template>
           </Route>
           
           <Route>

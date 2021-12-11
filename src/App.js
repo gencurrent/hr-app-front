@@ -11,7 +11,7 @@ import {
   AnonymousRoutes
 } from 'router';
 
-import { lightTheme, darkTheme } from 'utils/material';
+import { darkTheme } from 'utils/material';
 
 function App() {
   const userIsAuthenticated = localStorage.getItem('refresh', false) &&

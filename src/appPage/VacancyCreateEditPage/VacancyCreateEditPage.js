@@ -10,7 +10,9 @@ import {
     Button,
     Card,
     CardContent,
-    CardActions
+    CardActions,
+    Container,
+    Grid
 } from '@material-ui/core';
 
 import { VacancyCUFieldList } from 'component';
@@ -19,6 +21,7 @@ import {
   FIELD_VACANCY_HELPER_TEXT_DEFAULT_LENGTH_ERROR
 } from './constants';
 import { MUTATIONS } from 'utils/apollo';
+import { Box } from '@mui/system';
 
 
 
@@ -79,9 +82,9 @@ const VacancyCreateEditPage = (props) => {
       });
     }
     return (
-      <Card>
-        <CardContent>
-          <Typography align='center' variant='h5'>New vacancy</Typography>
+      <Grid container direction='column' spacing={2}>
+        <Grid item sm={12}>
+          <Typography variant='h4' component='h3'>New vacancy</Typography>
           <FormControl className='' noValidate autoComplete='off' fullWidth={true} >
             <TextField label='Position' error={positionFieldHelperProps['error']} autoComplete='position' id='position' value={position} onChange={updateFormPosition} required />
             <FormHelperText error={positionFieldHelperProps['error']}>{positionFieldHelperProps['text']}</FormHelperText>
@@ -91,12 +94,16 @@ const VacancyCreateEditPage = (props) => {
             <FormHelperText>The description of vacancy a candidate will see</FormHelperText>
             <VacancyCUFieldList fields={fields} setFields={setFields} />
           </FormControl>
-        </CardContent>
-        <CardActions>
-            <Button variant='contained' color='primary' onClick={save}>Save</Button>
-        </CardActions>
+          </Grid>
+          <Grid item xs={12}>
+          <Button variant='contained' color='primary' onClick={save}>Save</Button>
+          </Grid>
+        </Grid>
+        // </CardContent>
+        // <CardActions>
+        // </CardActions>
           
-      </Card>
+      // </Card>
     )
 };
 

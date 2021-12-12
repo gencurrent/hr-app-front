@@ -45,7 +45,7 @@ const VacancyListItem = (props) => {
     <Card className={classes.vacancyListItem} variant='outlined'>
 
       <CardContent>
-        <Typography sx={{ fontSize: 14 }}>
+        <Typography component='h4' variant='h5'>
           {vacancy.position}
         </Typography>
         <Box>

@@ -37,8 +37,8 @@ function SubmissionListPage() {
           (<div>Error loading submissions</div>)}
         {data &&
         <>
-          <Typography component='h6' variant='h6'>
-            Vacancy <Link to={`/vacancy/${vacancyId}`}>{data.vacancy.position}</Link> submissions
+          <Typography component='h3' variant='h4'>
+            <Link to={`/vacancy/${vacancyId}`}>{data.vacancy.position}</Link> submissions
           </Typography>
           {data.vacancy.submissionList.map(
             submission => (

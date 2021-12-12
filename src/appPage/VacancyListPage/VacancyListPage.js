@@ -2,7 +2,8 @@ import { React, useState } from 'react';
 import { useQuery } from '@apollo/client';
 import {
   Button,
-  Box
+  Box,
+  Typography
 } from '@material-ui/core';
 import { Link } from 'react-router-dom';
 
@@ -42,7 +43,7 @@ const VacancyListPage = () => {
   }
   
   return (
-    <Box sx={{py: 4}}>
+    <Box>
       <DeleteConfirmationDialog
         title={`Delete vacancy "${currentVacancy.position}"`}
         open={confirmDialogOpen}
@@ -51,6 +52,7 @@ const VacancyListPage = () => {
         onConfirm={onVacandyDeleteDialogConfirmed}
       >Do you want to delete the vacancy "{currentVacancy.position}" in "{currentVacancy.company}"?
       </DeleteConfirmationDialog>
+      <Typography component='h3' variant='h4'>Vacancies</Typography>
       <Link to='/vacancy/create'>
           <Button variant='contained' color='primary'>New vacancy</Button>
       </Link>  

@@ -20,7 +20,7 @@ const VacancyListPage = () => {
   let [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
   // Current Vacancy this component is working with
   let [currentVacancy, setCurrentVacancy] = useState({});
-  let { loading, error, data, refetch } = useQuery(QUERIES.VACANCY_LIST, { fetchPolicy: "no-cache"});
+  let { loading, error, data, refetch } = useQuery(QUERIES.VACANCY_LIST, { fetchPolicy: 'no-cache'});
   if (loading) return 'Loading';
   if (error) return 'Error';
 

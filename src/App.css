@@ -57,10 +57,11 @@
   }
 }
 
-a:visited {
+a:visited, .link-undecorated {
   text-decoration: none;
   color: inherit;
 }
+
 
 .drag-n-drop {
   border: 1px dashed white;

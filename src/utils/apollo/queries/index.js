@@ -53,6 +53,19 @@ const QUERIES = {
             }
         }
     }`,
+    USER_MAIN_STATS:  gql`query userMainStats{
+        userMainStats{
+            submissionCountTotal
+            submissionCountNew
+            vacancyStatsList{
+                id
+                position
+                company
+                submissionCountTotal
+                submissionCountNew
+            }
+        }
+     }`,
     
 };
 

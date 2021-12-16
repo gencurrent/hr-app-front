@@ -75,15 +75,11 @@ const MainStatsPage = () =>  {
                 {vacancyStatsList.map(vacancyStatsItem => (
                   
                 <Grid item>
-                  <Link className='link-undecorated' to={`/vacancy/${vacancyStatsItem.id}`}>
+                  <Link className='link-undecorated' to={`/vacancy/${vacancyStatsItem.id}/submission`}>
                     <Typography variant='h5' component='h4'>{vacancyStatsItem.position}</Typography>
                     <Typography>New: +{vacancyStatsItem.submissionCountNew}</Typography>
                     <Typography variant='body1'>Total: {vacancyStatsItem.submissionCountTotal}</Typography>
                   </Link>
-                  
-                  {/* <Link to={`/vacancy/${vacancyStatsItem.id}`}>
-                    <Button variant='outlined' color='primary'>{vacancyStatsItem.position}: {vacancyStatsItem.submissionCountTotal}</Button>
-                  </Link> */}
                 </Grid>
                 ))}
               </Grid>

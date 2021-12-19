@@ -53,7 +53,7 @@ const AuthenticatedRoutes = () => {
           </Route>
 
           <Route exact path='/vacancy/:vacancyId([a-f,0-9]+)/submission'>
-            <SubmissionListPage />
+            <SubmissionListPage singleVacancySusbmissions={true} />
           </Route>
         </Switch>
       </Template>

@@ -9,9 +9,16 @@ import {
   Button
 } from '@material-ui/core';
 
+import {
+  FileCopy,
+  Delete,
+  HighlightOff
+} from '@material-ui/icons';
+
 const useStyles = makeStyles(theme => ({
   answerContainer: {
-    margin: theme.spacing(1, 0, 1, 3)
+    margin: theme.spacing(1, 0, 1, 3),
+    padding: theme.spacing(.5)
   }
 }));
 function SubmissionListItemAnswer(props) {
@@ -26,21 +33,14 @@ function SubmissionListItemAnswer(props) {
         <Typography variant='subtitle1' style={{fontWeight: 600}}>{answer.q}</Typography>
         <Box className={classes.answerContainer}>
           {
-            answer.a === null ? <Typography component='p'>Empty</Typography>
+            answer.a === null || answer.a === '' ? <Typography component='p'>--- No answer ---</Typography>
             :
             answerFull.t === 'file' && <>
             <Link target="_blank" download href={`${fileUrlBase}/${answer.a}`}><Button variant='outlined' color='primary'>Download</Button></Link>
             </>}
-            {answerFull.t === 'line' && <>
-              <p>{answer.a}</p>
+            {(answerFull.t === 'line' || answerFull.t === 'text' || answerFull.t === 'number') && <>
+              <Typography component='p'>{answer.a}</Typography>
             </>}
-            {answerFull.t === 'text' && <>
-              <p>{answer.a}</p>
-            </>}
-            {answerFull.t === 'number' && <>
-              <p>{answer.a}</p>
-            </>
-          }
         </Box>
         {/* {answerFull.t === 'date' && <>
           <p>{answer.a}</p>

@@ -16,6 +16,7 @@ const AsyncTokenLookup = (refresh) => new Promise((resolve, reject) => {
      * @param {String} refresh a Refresh token to lookup an Access token with
      * @return {Promise} resolves the data got from GQ query; rejects an error after the request
      */
+    console.log(`AsyncTokenLookup`);
     const client = new ApolloClient({link: httpLink, cache: new InMemoryCache()});
     client.query({query:QUERIES.REFRESH,
         variables: {refreshToken: refresh},
@@ -51,6 +52,7 @@ const TokenDataToContext = (tokenData) => new Promise((resolve, reject) => {
      * Transforma GQL Object data to an Authentication HTTP Header format
      * @param {Object} tokenData An object containing 'token' key with Access token value
      */ 
+    console.log(`TokenDataToContext `, tokenData);
     const { token } = tokenData;
     const context = {headers: {Authorization: `Bearer ${token}`}};
     resolve(context);
@@ -59,11 +61,14 @@ const TokenDataToContext = (tokenData) => new Promise((resolve, reject) => {
 
 const CheckTokenData = (tokenData) => new Promise((resolve, reject) => {
     /**
-     * Check the AccessToken Expiration
+     * Check the AccessToken being on its place and its Expiration
      * return: resolve — tokenData
      */
     let {token, tokenExpiresIn} = {...tokenData};
-    if (!(token && tokenExpiresIn)) reject();
+    if (!(token && tokenExpiresIn)) {
+        console.log('Error here');
+        reject(new Error('The token and its expiration are off'));
+    }
     try{
         tokenExpiresIn = parseInt(tokenExpiresIn);
         const tokenExpTimestamp = new Date(tokenExpiresIn * 1000);
@@ -82,13 +87,16 @@ const CheckTokenData = (tokenData) => new Promise((resolve, reject) => {
 
 const asyncAuthLink = setContext(
     request =>
-        new Promise((success, fail) => {
+        new Promise((resolve, reject) => {
         // do some async lookup here
         // #1 Check token
         let token = localStorage.getItem('token');
         let tokenExpiresIn = localStorage.getItem('tokenExpiresIn');
         tokenExpiresIn = tokenExpiresIn ? parseInt(tokenExpiresIn) : undefined;
         let refresh = localStorage.getItem('refresh');
+        /**
+         * TODO: Refactor the error about 
+         */
         return CheckTokenData({token: token, tokenExpiresIn: tokenExpiresIn})
             .catch((error) => 
                 AsyncTokenLookup(refresh)
@@ -96,8 +104,8 @@ const asyncAuthLink = setContext(
                 .then(GQLDataToTokenData)
                 .catch(error => window.location.replace('/auth/signin'))
             )
-            .then(data => (TokenDataToContext(data)))
-            .then(success);
+            .then(TokenDataToContext)
+            .then(resolve);
         })
 );
 

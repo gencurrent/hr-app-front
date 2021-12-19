@@ -76,10 +76,14 @@ a:visited, .link-undecorated {
   );
 }
 
+
 .answer-block:nth-child(2n) {
   background: #ff572236 !important;
 }
 
+.answer-block p {
+  margin: 0;
+}
 
 /* Landing page */
 .lp-background {

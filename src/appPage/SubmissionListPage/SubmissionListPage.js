@@ -5,19 +5,29 @@ import {
   makeStyles,
   Box,
   Card,
+  Grid,
   Typography
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 import { SubmissionListItemAnswer } from 'component';
 import { QUERIES } from 'utils/apollo';
 
 const useStyles = makeStyles((theme) => ({
   submissionListItem: {
-    margin: theme.spacing(3, 0, 2)
+    margin: theme.spacing(3, 0, 2),
+    padding: theme.spacing(2)
+  },
+  inline: {
+    display: 'inline'
+  },
+  bold: {
+    fontWeight: 600
   }
 }));
 
-function SubmissionListPage() {
+function SubmissionListPage(props) {
+  const { singleVacancySusbmissions } = props;
   const classes = useStyles();
   const { vacancyId } = useParams();
   
@@ -29,7 +39,7 @@ function SubmissionListPage() {
   });
   return (
     
-    <Box sx={{py: 4}}>
+    <Box>
         {loading && 
         (<div>Loading...</div>)}
 
@@ -41,17 +51,35 @@ function SubmissionListPage() {
             <Link to={`/vacancy/${vacancyId}`}>{data.vacancy.position}</Link> submissions
           </Typography>
           {data.vacancy.submissionList.map(
-            submission => (
+            submission => {
+              return (
               <Card key={submission.uuid} variant='outlined' className={classes.submissionListItem}>
-                <Typography>Name: {submission.fullname}</Typography>
-                <Typography>Email: {submission.email}</Typography>
-                <Typography>Phone: {submission.phone}</Typography>
+                { !singleVacancySusbmissions && 
+                  <Typography component='h5' variant='h5'>
+                    <Link to={`/vacancy/${vacancyId}`}>{data.vacancy.position} | {data.vacancy.company}</Link>
+                  </Typography>
+                }
+                {/* <Typography variant='body1' component='p' style={{fontWeight: 600}}>Name:</Typography><Typography variant='body1' component='p'>{submission.fullname}</Typography> */}
+                <Grid container>
+                  <Grid item xs={12}>
+                    <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>Name: </Typography>
+                    <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission.fullname}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>Email: </Typography>
+                    <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission.email}</Typography>
+                  </Grid>
+                  <Grid item xs={12}>
+                    <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>Phone: </Typography>
+                    <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission.phone}</Typography>
+                  </Grid>
+                </Grid>
                 {JSON.parse(submission.answers).map(answer => (
                     <SubmissionListItemAnswer key={answer.q} answer={answer} vacancy={data.vacancy} />
                   )
                 )}
               </Card>
-            )
+            )}
           )}
         </>
         }
@@ -59,5 +87,9 @@ function SubmissionListPage() {
     </Box>
   )
 };
+
+SubmissionListPage.propTypes = {
+  singleVacancySusbmissions: PropTypes.bool
+}
 
 export default SubmissionListPage;

@@ -6,6 +6,7 @@ import {
   Link,
   Typography,
   Box,
+  Card,
   Button
 } from '@material-ui/core';
 
@@ -19,6 +20,9 @@ const useStyles = makeStyles(theme => ({
   answerContainer: {
     margin: theme.spacing(1, 0, 1, 3),
     padding: theme.spacing(.5)
+  },
+  answerBlock: {
+    padding: theme.spacing(.4),
   }
 }));
 function SubmissionListItemAnswer(props) {
@@ -28,7 +32,7 @@ function SubmissionListItemAnswer(props) {
   const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
   return (
     <>
-      <div className='answer-block'>
+      <Card elevation={1} className={`answer-block ${classes.answerBlock}`}>
         
         <Typography variant='subtitle1' style={{fontWeight: 600}}>{answer.q}</Typography>
         <Box className={classes.answerContainer}>
@@ -45,7 +49,7 @@ function SubmissionListItemAnswer(props) {
         {/* {answerFull.t === 'date' && <>
           <p>{answer.a}</p>
         </>} */}
-      </div>
+      </Card>
     </>
   );
 };

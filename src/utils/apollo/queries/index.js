@@ -49,6 +49,8 @@ const QUERIES = {
                 email
                 phone
                 answers
+                decision
+                comment
                 ts
             }
         }

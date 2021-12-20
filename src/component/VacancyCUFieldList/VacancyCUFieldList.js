@@ -29,7 +29,7 @@ import {
 import {
   FIELD_TYPE_VALUE_TO_HELPER_TEXT_MAP,
   FIELD_TYPE_VALUE_TO_NAME_MAP
-} from './constans';
+} from './constants';
 
 /**
  * A dialog to edit field's parameters

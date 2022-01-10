@@ -7,7 +7,8 @@ import {
   VacancyCreateEditPage,
   VacancySubmissionPage,
   SubmissionListPage,
-  SubmissionSalutationPage
+  SubmissionSalutationPage,
+  VacancyPage
 } from 'appPage';
 import { history } from 'utils/redux';
 import { Template } from 'component';
@@ -46,6 +47,7 @@ const AuthenticatedRoutes = () => {
 
           {/* Vacancy statistics view */}
           <Route exact path='/vacancy/:id([a-f,0-9]+)'>
+            <VacancyPage />
           </Route>
 
           <Route exact path='/vacancy'>

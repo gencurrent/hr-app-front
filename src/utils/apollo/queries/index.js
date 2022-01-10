@@ -33,6 +33,7 @@ const QUERIES = {
             company
             text
             fields
+            ts
         }
     }`,
     VACANCY_WITH_SUBMISSION_LIST: gql`query vacancy($id: ID!){

@@ -2,6 +2,7 @@ import MainStatsPage from './MainStatsPage';
 import VacancySubmissionPage from './VacancySubmissionPage';
 import VacancyListPage from './VacancyListPage';
 import VacancyCreateEditPage from './VacancyCreateEditPage';
+import VacancyPage from './VacancyPage';
 import AuthenticationPage from './AuthenticationPage';
 import SubmissionListPage from './SubmissionListPage';
 import SubmissionSalutationPage from './SubmissionSalutationPage';
@@ -14,6 +15,7 @@ export {
   VacancySubmissionPage,
   VacancyCreateEditPage,
   VacancyListPage,
+  VacancyPage,
   SubmissionListPage,
   SubmissionSalutationPage,
 

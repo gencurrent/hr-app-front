@@ -143,7 +143,6 @@ const SignIn = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-
     const hanldeSubmit = e => {
         e.preventDefault();
         const data = {
@@ -245,7 +244,6 @@ const AuthenticationPage = () => {
 
     }
     return (
-        
         <Container component='main' maxWidth='xs'>
             <Paper square>
                 <Tabs

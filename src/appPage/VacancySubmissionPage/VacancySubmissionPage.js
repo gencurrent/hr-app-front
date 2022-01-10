@@ -287,7 +287,7 @@ const VacancySubmissionPage = () => {
             {loading && <div>Loading</div>}
             {error && <div>Error</div>}
             {vacancyData && <>
-                <Box sx={{py: 4}}>
+              <Box sx={{py: 4}}>
                 <Paper variant='elevation' className={classes.mainCard} >
                     <Typography variant='h4' align='center' gutterBottom>{vacancyData.vacancy.position}</Typography>
                     {/* Should we use Stepper ? */}

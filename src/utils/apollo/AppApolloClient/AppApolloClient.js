@@ -16,15 +16,17 @@ const AsyncTokenLookup = (refresh) => new Promise((resolve, reject) => {
      * @param {String} refresh a Refresh token to lookup an Access token with
      * @return {Promise} resolves the data got from GQ query; rejects an error after the request
      */
-    console.log(`AsyncTokenLookup`);
+    console.log(`AsyncTokenLookup`, refresh);
     const client = new ApolloClient({link: httpLink, cache: new InMemoryCache()});
     client.query({query:QUERIES.REFRESH,
         variables: {refreshToken: refresh},
         headers: {},
     }).then(response => {
         const gqlData = response.data;
+        console.log(`AsyncTokenLookup resolve(), gqlData = `, gqlData);
         resolve(gqlData);
     }).catch(error => {
+        console.log(`AsyncTokenLookup reject(), error = `, error);
         reject(error);
     });
 });
@@ -34,6 +36,7 @@ const ExtractTokenToLS = (gqlData) => new Promise((resolve, reject) => {
      * Extract token data to LocalStorage
      * @param {Object} gqlData the data received from AsyncTokenLookup promise function
      */ 
+    console.log(`ExtractTokenToLS, gqlData = `, gqlData);
     let {token, payload} = {...gqlData.refreshToken};
     let tokenExp = payload.exp;
     localStorage.setItem('token', token);
@@ -41,10 +44,12 @@ const ExtractTokenToLS = (gqlData) => new Promise((resolve, reject) => {
     resolve(gqlData);
 });
 
-const GQLDataToTokenData = (gqlData) => new Promise((succeess, reject) => {
+const GQLDataToTokenData = (gqlData) => new Promise((resolve, reject) => {
+    console.log(`GQLDataToTokenData gqlData = `, gqlData)
     let {token, payload} = {...gqlData.refreshToken};
     let tokenExp = payload.exp;
-    succeess({token: token, tokenExpiresIn: tokenExp});
+    resolve({token: token, tokenExpiresIn: tokenExp});
+    reject(undefined);
 })
 
 const TokenDataToContext = (tokenData) => new Promise((resolve, reject) => {
@@ -53,6 +58,9 @@ const TokenDataToContext = (tokenData) => new Promise((resolve, reject) => {
      * @param {Object} tokenData An object containing 'token' key with Access token value
      */ 
     console.log(`TokenDataToContext `, tokenData);
+    if (tokenData === undefined) {
+        reject();
+    }
     const { token } = tokenData;
     const context = {headers: {Authorization: `Bearer ${token}`}};
     resolve(context);
@@ -64,6 +72,7 @@ const CheckTokenData = (tokenData) => new Promise((resolve, reject) => {
      * Check the AccessToken being on its place and its Expiration
      * return: resolve — tokenData
      */
+    console.log(`CheckTokenData, tokenData = `, tokenData);
     let {token, tokenExpiresIn} = {...tokenData};
     if (!(token && tokenExpiresIn)) {
         console.log('Error here');
@@ -90,10 +99,13 @@ const asyncAuthLink = setContext(
         new Promise((resolve, reject) => {
         // do some async lookup here
         // #1 Check token
+        console.log(`asyncAuthLink, bp2`);
+
         let token = localStorage.getItem('token');
         let tokenExpiresIn = localStorage.getItem('tokenExpiresIn');
         tokenExpiresIn = tokenExpiresIn ? parseInt(tokenExpiresIn) : undefined;
         let refresh = localStorage.getItem('refresh');
+        console.log(`asyncAuthLink, bp1`);
         /**
          * TODO: Refactor the error about 
          */
@@ -102,7 +114,14 @@ const asyncAuthLink = setContext(
                 AsyncTokenLookup(refresh)
                 .then(ExtractTokenToLS)
                 .then(GQLDataToTokenData)
-                .catch(error => window.location.replace('/auth/signin'))
+                .catch(error => {
+                    console.log(error.message);
+                    if (error.message === 'NetworkError when attempting to fetch resource.'){
+                        return resolve
+                    }
+                    console.log(`Error caught`, error);
+                    window.location.replace('/auth/signin');
+                })
             )
             .then(TokenDataToContext)
             .then(resolve);

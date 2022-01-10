@@ -46,7 +46,13 @@ const VacancyListItem = (props) => {
 
       <CardContent>
         <Typography component='h4' variant='h5'>
+          <Link to={{
+              pathname: `/vacancy/${vacancy.id}`,
+              vacancy: vacancy
+            }}
+          >
           {vacancy.position}
+          </Link>
         </Typography>
         <Box>
           <Typography component='h6' variant='h6'>

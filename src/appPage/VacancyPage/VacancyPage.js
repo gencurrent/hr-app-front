@@ -14,7 +14,11 @@ import { useQuery } from '@apollo/client';
 
 const useStyles = makeStyles((theme) => ({
   questionItem: {
-    margin: theme.spacing(1, 0)
+    margin: theme.spacing(.2, 0),
+    padding: theme.spacing(.5)
+  },
+  questionCard: {
+    padding: theme.spacing(1)
   },
   vacancyQuestion: {
     fontWeight: 700
@@ -60,9 +64,11 @@ function VacancyPage(props) {
                   item sm={12}
                   className={classes.questionItem}
                 >
-                  <Card variant='outlined'>
-                    <Typography className={classes.vacancyQuestion}>{idx + 1}. {field.q}</Typography>
-                    <Typography>{field.t.replace(/./, c => c.toUpperCase())}</Typography><Typography>{field.r ? 'Required' : ''}</Typography>
+                  <Card variant='outlined' className={classes.questionCard}>
+                    <Typography className={classes.vacancyQuestion} component='span'>{idx + 1}. </Typography>
+                    <Typography className={classes.vacancyQuestion} component='span' >{field.r ? '[Required] ' : ''}</Typography>
+                    <Typography className={classes.vacancyQuestion} component='span'>{field.q}</Typography>
+                    <Typography>{field.t.replace(/./, c => c.toUpperCase())}</Typography>
                     
                   </Card>
                 </Grid>

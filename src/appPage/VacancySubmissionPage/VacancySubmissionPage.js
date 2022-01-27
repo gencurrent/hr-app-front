@@ -278,7 +278,6 @@ const VacancySubmissionPage = () => {
     const editData = (key, value) => {
         const answersData = {...answers};
         answersData[key] = value;
-        console.log(answersData);
         setAnswers(answersData);
     }
     

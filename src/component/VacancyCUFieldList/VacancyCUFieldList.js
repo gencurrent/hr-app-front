@@ -101,7 +101,7 @@ const VacancyCUFieldListItemDialog = (props) => {
               </Grid>
 
               <Grid item xs={12} sm={12}>
-                <FormControlLabel control={<Checkbox defaultChecked={true} onChange={updateRequired} />} label="Field is required" />
+                <FormControlLabel control={<Checkbox checked={fieldDescription.r} onChange={updateRequired} />} label="Field is required" />
               </Grid>
             </Grid>
             

@@ -14,6 +14,7 @@
     "@testing-library/user-event": "^12.8.3",
     "copy-to-clipboard": "^3.3.1",
     "graphql": "^15.5.1",
+    "npm": "^8.3.2",
     "react": "^17.0.2",
     "react-d3-speedometer": "^1.0.1",
     "react-dom": "^17.0.2",
@@ -28,7 +29,7 @@
   },
   "scripts": {
     "start": "NODE_HOST=0.0.0.0:8080 REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket react-scripts start",
-    "build": "react-scripts build",
+    "build": "NODE_HOST=hr-app.com REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

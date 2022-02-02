@@ -61,7 +61,6 @@ function VacancyPage(props) {
           gutterBottom
         >{data.vacancy.company}</Typography>
           <Typography>Created: {datetimeToString(new Date(data.vacancy.ts))}</Typography>
-          <Typography>Fields</Typography>
           <Grid container>
             {JSON.parse(data.vacancy.fields).map((field, idx) => {
               return(

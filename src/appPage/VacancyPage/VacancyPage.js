@@ -8,19 +8,20 @@ import {
   Card
 } from '@material-ui/core';
 
+import { datetimeToString } from 'utils/date';
 import { authApolloClient, QUERIES } from 'utils/apollo';
 import { useParams } from 'react-router';
 import { useQuery } from '@apollo/client';
 
 const useStyles = makeStyles((theme) => ({
   questionItem: {
-    margin: theme.spacing(.2, 0),
+    margin: theme.spacing(.1, 0),
     padding: theme.spacing(.5)
   },
   questionCard: {
     padding: theme.spacing(1)
   },
-  vacancyQuestion: {
+  textBold: {
     fontWeight: 700
   }
 }));
@@ -50,13 +51,17 @@ function VacancyPage(props) {
       <Typography>Error</Typography>
     </>}
     {data &&
-      <Box sp={{py: 4}}>
-        <Paper variant='elevation'>
-          <Typography
-            variant='h4' component='h1'
-            gutterBottom
-          >Vacancy {data.vacancy.position}</Typography>
-          <Typography>Created: {(new Date(data.vacancy.ts)).toISOString().substring(0, 10)}</Typography>
+      <Box>
+        <Typography
+          variant='h4' component='h1'
+          gutterBottom
+        >{data.vacancy.position}</Typography>
+        <Typography
+          variant='h5' component='span'
+          gutterBottom
+        >{data.vacancy.company}</Typography>
+          <Typography>Created: {datetimeToString(new Date(data.vacancy.ts))}</Typography>
+          <Typography>Fields</Typography>
           <Grid container>
             {JSON.parse(data.vacancy.fields).map((field, idx) => {
               return(
@@ -65,10 +70,13 @@ function VacancyPage(props) {
                   className={classes.questionItem}
                 >
                   <Card variant='outlined' className={classes.questionCard}>
-                    <Typography className={classes.vacancyQuestion} component='span'>{idx + 1}. </Typography>
-                    <Typography className={classes.vacancyQuestion} component='span' >{field.r ? '[Required] ' : ''}</Typography>
-                    <Typography className={classes.vacancyQuestion} component='span'>{field.q}</Typography>
-                    <Typography>{field.t.replace(/./, c => c.toUpperCase())}</Typography>
+                    <Typography className={classes.textBold} component='span'>{idx + 1}. </Typography>
+                    <Typography className={classes.textBold} component='span' >{field.r ? '[Required] ' : ''}</Typography>
+                    <Typography className={classes.textBold} component='span'>{field.q}</Typography>
+                    <div>
+                      <Typography component="span">Type:</Typography><Typography component="span" className={classes.textBold}>{field.t.replace(/./, c => c.toUpperCase())}</Typography>
+                      
+                    </div>
                     
                   </Card>
                 </Grid>
@@ -78,7 +86,6 @@ function VacancyPage(props) {
           </Grid>
           
           
-        </Paper>
       </Box>
     }
   </>);

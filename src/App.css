@@ -126,3 +126,9 @@ a:visited, .link-undecorated {
   position: static;
   bottom: 0;
 }
+
+
+
+.text-bold {
+  font-weight: 700
+}

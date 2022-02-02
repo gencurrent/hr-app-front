@@ -48,6 +48,11 @@ function SubmissionItem(props) {
   const { submission, singleVacancySusbmissions, vacancyData, vacancyId } = props;
   const classes = useStyles();
   let ts = new Date(submission.ts);
+  // const tsString = new RegExp("(?P=<year>\d{4})\-(?P=<month>\d{2})\-(?P=<day>\d{2})");
+  const reg = /^(?<date>\d{4}-\d{2}-\d{2})T(?<hour>\d{2}):(?<minute>\d{2}).*$/gm ;
+  const matches = ts.toISOString().matchAll(reg).next().value.groups;
+  const tsString = `${matches["date"]} ${matches["hour"]}:${matches["minute"]}`;
+  console.log(tsString);
   let [decision, setDecision ] = useState(submission.decision);
   let [decisionClass, setDecisionClass ] = useState(classes[decision.toLowerCase()]);
   
@@ -90,7 +95,7 @@ function SubmissionItem(props) {
           </FormControl>
         </Grid>
         <Grid item >
-          {ts.toISOString().substring(0, 10)}
+          {tsString}
         </Grid>
       </Grid>
       <Grid container>

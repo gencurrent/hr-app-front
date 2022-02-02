@@ -10,11 +10,6 @@ import {
   Button
 } from '@material-ui/core';
 
-import {
-  FileCopy,
-  Delete,
-  HighlightOff
-} from '@material-ui/icons';
 
 const useStyles = makeStyles(theme => ({
   answerContainer: {

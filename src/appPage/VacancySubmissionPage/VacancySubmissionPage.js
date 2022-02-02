@@ -1,11 +1,3 @@
-/**
- * TOOD:
- * 1. Load the vacancy
- * 2. Insert data into HTML
- * 3. Create Fields based on the submission
- * 4. Send the submission
- */
-
 import { React, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { useQuery } from '@apollo/client';

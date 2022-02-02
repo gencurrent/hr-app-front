@@ -169,24 +169,24 @@ const VacancyCUFieldList = (props) => {
               onClose={closeAddFieldDialog}
               onSave={saveField}
             />
-            {fields.map((el, idx) =>
-                <Grid key={idx} container spacing={2}>
-                    <Grid item xs={12}>
-                        <Card variant='outlined'>
-                          <CardContent>
-                            <Typography component='h6' variant='h6'>{idx+1}: {el.q}</Typography>
-                            <Typography component='span' variant='span'>{FIELD_TYPE_VALUE_TO_NAME_MAP[el.t]}</Typography> | <Typography component='span' color='text.secondary' variant='span'>{el.r ? "Required" : "Not required"}</Typography>
-                          </CardContent>
-                          <CardActions disableSpacing>
-                            <Button>Edit</Button>
-                            <Button onClick={e => removeField(idx)}>Delete</Button>
-                          </CardActions>
-                        </Card>
-                    </Grid>
-                </Grid>
-            )}
-            <Grid >
-                <Button variant='contained' color='secondary' onClick={openAddFieldDialog}>Add field</Button>
+            <Grid container spacing={2}>
+              {fields.map((el, idx) =>
+              <Grid key={idx} item sm={12}>
+                  <Card variant='outlined'>
+                    <CardContent>
+                      <Typography component='h6' variant='h6'>{idx+1}: {el.q}</Typography>
+                      <Typography component='span' variant='span'>{FIELD_TYPE_VALUE_TO_NAME_MAP[el.t]}</Typography> | <Typography component='span' color='text.secondary' variant='span'>{el.r ? "Required" : "Not required"}</Typography>
+                    </CardContent>
+                    <CardActions disableSpacing>
+                      <Button>Edit</Button>
+                      <Button onClick={e => removeField(idx)}>Delete</Button>
+                    </CardActions>
+                  </Card>
+              </Grid>
+              )}
+              <Grid item>
+                  <Button variant='contained' color='secondary' onClick={openAddFieldDialog}>Add field</Button>
+              </Grid>
             </Grid>
         </>
     )

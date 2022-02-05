@@ -85,7 +85,7 @@ function AnonymousLandingPage() {
       <ThemeProvider theme={darkTheme}>
         <Grid container>
           <Grid item sm={12} md={6}>
-            <Typography component='h1' variant='h2' align='center' style={{fontWeight: 400}}>Make recruiting a<br/>simple game</Typography>
+            <Typography component='h1' variant='h3' align='center' style={{fontWeight: 400}}>Make recruiting a<br/>simple game</Typography>
             <LPIcon className='lp-image' />
           </Grid>
           <Grid item sm={12} md={6}>
@@ -100,7 +100,7 @@ function AnonymousLandingPage() {
         <Grid container>
           {/* CheckBoxes */}
           <Grid item sm={12} md={6}>
-            <Typography component='h1' variant='h2' align='center' style={{fontWeight: 400}}>The benefits</Typography>
+            <Typography component='h1' variant='h3' align='center' style={{fontWeight: 400}}>The benefits</Typography>
             <Grid container justifyContent='center'>
               <Grid item sm={12} md={8}>
                 <Card>
@@ -195,7 +195,7 @@ function AnonymousLandingPage() {
               segments={1000}
               needleHeightRatio={0.8}
               currentValueText={speedometerText}
-              valueTextFontSize='22px'
+              valueTextFontSize={windowWidth < 500 ? '12px' : '22px'}
             />
             </Container>
           </Grid>
@@ -208,21 +208,21 @@ function AnonymousLandingPage() {
       <ThemeProvider theme={darkTheme}>
         <Grid container>
           <Grid item sm={12} md={6}>
-            <Typography component='h1' variant='h2' align='center' style={{fontWeight: 400}}>The essence</Typography>
+            <Typography component='h1' variant='h3' align='center' style={{fontWeight: 400}}>The essence</Typography>
 
             <Grid container justifyContent='center'><Grid item sm={12} md={8}>
                 <Grid container justifyContent='flex-start' spacing={2}>
                   <Grid item sm={12}>
-                    <Typography variant='h4' component='h3'>1. Create a vacancy</Typography>
+                    <Typography variant='h5' component='h5'>1. Create a vacancy</Typography>
                   </Grid>
                   <Grid item sm={12}>
-                    <Typography variant='h4' component='h3'>2. Let your candidates fill the vacancy form</Typography>
+                    <Typography variant='h5' component='h5'>2. Let your candidates fill the vacancy form</Typography>
                   </Grid>
                   <Grid item sm={12}>
-                    <Typography variant='h4' component='h3'>3. Check: Score and filter responses</Typography>
+                    <Typography variant='h5' component='h5'>3. Check: Score and filter responses</Typography>
                   </Grid>
                   <Grid item sm={12}>
-                    <Typography variant='h4' component='h3'>4. Choose among the best candidates</Typography>
+                    <Typography variant='h5' component='h5'>4. Choose among the best candidates</Typography>
                   </Grid>
                 </Grid>
             </Grid></Grid>

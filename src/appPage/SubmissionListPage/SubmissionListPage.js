@@ -68,7 +68,11 @@ function SubmissionItem(props) {
     <Card key={submission.uuid} variant='outlined' className={classes.submissionListItem}>
       { !singleVacancySusbmissions && 
         <Typography component='h5' variant='h5'>
-          <Link to={`/vacancy/${vacancyId}`}>{vacancyData.vacancy.position} | {vacancyData.vacancy.company}</Link>
+          <Link
+            className='link-undecorated'
+            to={`/vacancy/${vacancyId}`}
+          >{vacancyData.vacancy.position} | {vacancyData.vacancy.company}
+          </Link>
         </Typography>
       }
       {/* <Typography variant='body1' component='p' style={{fontWeight: 600}}>Name:</Typography><Typography variant='body1' component='p'>{submission.fullname}</Typography> */}
@@ -140,7 +144,10 @@ function SubmissionListPage(props) {
         {data &&
         <>
           <Typography component='h3' variant='h4'>
-            <Link to={`/vacancy/${vacancyId}`}>{data.vacancy.position}</Link> submissions
+            <Link
+              className='link-undecorated'
+              to={`/vacancy/${vacancyId}`}
+            >{data.vacancy.position}</Link> submissions
           </Typography>
           {data.vacancy.submissionList.map(
             submission => (

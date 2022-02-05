@@ -46,7 +46,9 @@ const VacancyListItem = (props) => {
 
       <CardContent>
         <Typography component='h4' variant='h5'>
-          <Link to={{
+          <Link
+            className='link-undecorated'
+            to={{
               pathname: `/vacancy/${vacancy.id}`,
               vacancy: vacancy
             }}
@@ -55,9 +57,8 @@ const VacancyListItem = (props) => {
           </Link>
         </Typography>
         <Box>
-          <Typography component='h6' variant='h6'>
-            {vacancy.company}
-          </Typography>
+          <Typography component='span' variant='body'>Company: </Typography>
+          <Typography component='span' variant='body'>{vacancy.company}</Typography>
         </Box>
         <Box>
           <Typography component='h5' variant='h5'>
@@ -72,14 +73,30 @@ const VacancyListItem = (props) => {
       </CardContent>
 
       <CardActions>
+        <Button
+          variant='outlined'
+          size='small'
+          onClick={onCopyLink}
+          color='secondary'
+        ><FileCopy/>URL</Button>
         <Link to={`/vacancy/${vacancy.id}/apply`}>
-          <Button variant='outlined' size='small'>Apply</Button>
+          <Button
+            variant='outlined'
+            size='small'
+            color='secondary'
+          >Apply</Button>
         </Link>
-        <Link to={`/vacancy/create`}>
-          <Button variant='outlined' size='small' >Duplicate</Button>
-        </Link>
-        <Button variant='outlined' size='small' onClick={onCopyLink}><FileCopy/>URL</Button>
-        <Button variant='outlined' onClick={onDelete} size='small' ><Delete/>Delete</Button>
+        {/* <Link to={`/vacancy/create`}>
+          <Button
+            variant='outlined'
+            size='small'
+          >Duplicate</Button>
+        </Link> */}
+        <Button
+          variant='outlined'
+          onClick={onDelete}
+          size='small'
+        ><Delete/>Delete</Button>
       </CardActions>
 
     </Card>

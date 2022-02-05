@@ -11,10 +11,12 @@ import {
     Tabs,
     Tab
 } from '@material-ui/core';
+import Snackbar from '@mui/material/Snackbar';
 import { Route, Switch, useRouteMatch, useHistory } from 'react-router-dom';
 import { gql } from '@apollo/client';
 
 import { pureApolloClient } from 'utils/apollo';
+import { Alert } from '@mui/material';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -142,6 +144,18 @@ const SignIn = () => {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+    const [snackBarOpen, setSnackBarOpen] = useState(false);
+    
+    const snackBarSettings = {
+        vertical: 'bottom',
+        horizontal: 'left'
+    }
+    function openSnackBar() {
+        setSnackBarOpen(true);
+    }
+    function closeSnackBar() {
+        setSnackBarOpen(false);
+    }
 
     const hanldeSubmit = e => {
         e.preventDefault();
@@ -170,7 +184,8 @@ const SignIn = () => {
         })
         .catch(error => {
             if (error.message === 'Please enter valid credentials'){
-                console.warn('Invalid credentials');
+                openSnackBar();
+                setTimeout(() => {closeSnackBar();}, 4000);
             }
         })
     };
@@ -178,8 +193,24 @@ const SignIn = () => {
     const onEditPassword = e => {setPassword(e.target.value);};
 
 
+    const SnackBarAuthenticationResult = (
+      <Snackbar
+        anchorOrigin={snackBarSettings}
+        open={snackBarOpen}
+        onClose={closeSnackBar}
+        message="Failed to sign in"
+        keys={"Horizontal"}
+        severity="error"
+      >
+        <Alert severity="error" onClose={closeSnackBar}>
+            Authentication failed
+        </Alert>
+    </Snackbar>
+    )
+
     return (
             <div className={classes.paper}>
+                {SnackBarAuthenticationResult}
                 <Typography component='h1' variant='h5'>
                     Sign In
                 </Typography>

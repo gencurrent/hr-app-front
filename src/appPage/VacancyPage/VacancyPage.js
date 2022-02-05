@@ -57,15 +57,19 @@ function VacancyPage(props) {
           gutterBottom
         >{data.vacancy.position}</Typography>
         <Typography
-          variant='h5' component='span'
-          gutterBottom
+          variant='h6' component='span'
+        >Company: </Typography>
+        <Typography
+          className={classes.textBold}
+          variant='h6' component='span'
         >{data.vacancy.company}</Typography>
           <Typography>Created: {datetimeToString(new Date(data.vacancy.ts))}</Typography>
+          <Typography>Fields:</Typography>
           <Grid container>
             {JSON.parse(data.vacancy.fields).map((field, idx) => {
               return(
                 <Grid
-                  item sm={12}
+                  item xs={12}
                   className={classes.questionItem}
                 >
                   <Card variant='outlined' className={classes.questionCard}>

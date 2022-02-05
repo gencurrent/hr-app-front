@@ -19,7 +19,7 @@ import { QUERIES } from 'utils/apollo';
 const useStyles = makeStyles(theme => ({
   cardStyle: {
     // margin: theme.spacing(3, 0, 2)
-  }  
+  }
 }));
 
 const MainStatsPage = () =>  {
@@ -32,13 +32,13 @@ const MainStatsPage = () =>  {
   if (error){
     return (<div> Error...</div>)
   }
-  console.log(data);
   const { userMainStats } = data;
   const {
     submissionCountTotal,
     submissionCountNew,
     vacancyStatsList
   } = userMainStats;
+  vacancyStatsList.sort((a, b) => b.submissionCountTotal - a.submissionCountTotal);
   return (
     <>
      <Typography component='h4' variant='h4'>Main statistics</Typography>
@@ -46,7 +46,7 @@ const MainStatsPage = () =>  {
        <Grid item>
           <Card className={classes.cardStyle}>
             <CardContent>
-              <Typography component='h6' variant='h6'>All submissions</Typography>
+              <Typography component='h5' variant='h5'>All submissions</Typography>
               <Grid container direction='column' spacing={1}>
                 <Grid item>
                   <Link to='/submissions'>
@@ -65,7 +65,7 @@ const MainStatsPage = () =>  {
        <Grid item>
           <Card className={classes.cardStyle}>
             <CardContent>
-              <Typography component='h6' variant='h6'>Top vacancies submissions</Typography>
+              <Typography component='h5' variant='h5'>Top vacancies</Typography>
               <Grid container direction='column' spacing={1}>
                 <Grid item>
                   <Link to='/vacancy'>
@@ -76,9 +76,8 @@ const MainStatsPage = () =>  {
                   
                 <Grid item>
                   <Link className='link-undecorated' to={`/vacancy/${vacancyStatsItem.id}/submission`}>
-                    <Typography variant='h5' component='h4'>{vacancyStatsItem.position}</Typography>
-                    <Typography>New: +{vacancyStatsItem.submissionCountNew}</Typography>
-                    <Typography variant='body1'>Total: {vacancyStatsItem.submissionCountTotal}</Typography>
+                    <Typography variant='h6' component='h5'>{vacancyStatsItem.position}</Typography>
+                    <Typography variant='body2'>Submissions: {vacancyStatsItem.submissionCountTotal} (+{vacancyStatsItem.submissionCountNew})</Typography>
                   </Link>
                 </Grid>
                 ))}

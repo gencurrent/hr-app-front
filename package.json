@@ -28,7 +28,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "NODE_HOST=0.0.0.0:8080 REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket react-scripts start",
+    "start": "NODE_HOST=0.0.0.0:8080 REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket HOST=127.0.0.1 react-scripts start",
     "build": "NODE_HOST=hr-app.com REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -8,7 +8,7 @@ import { Router,
   Switch } from 'react-router';
 import {
   AnonymousLandingPage,
-  VacancySubmissionPage,
+  AnonymousVacancySubmissionPage,
   AuthenticationPage,
   SubmissionSalutationPage
 } from 'appPage';
@@ -27,7 +27,7 @@ const AnonymousRoutes = () => {
 
           <Route path='/vacancy/:id([a-f,0-9]+)/apply'>
             <Template>
-              <VacancySubmissionPage />
+              <AnonymousVacancySubmissionPage />
             </Template>
           </Route>
 

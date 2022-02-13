@@ -25,8 +25,8 @@ const QUERIES = {
            submissionCountTotal
        } 
     }`,
-    VACANCY: gql`query vacancy($id: ID!){
-        vacancy(id: $id){
+    VACANCY: gql`query vacancy($id: ID!, $forSubmission: Boolean = null){
+        vacancy(id: $id, forSubmission: $forSubmission){
             uuid
             submissionUUID
             position
@@ -39,7 +39,6 @@ const QUERIES = {
     VACANCY_WITH_SUBMISSION_LIST: gql`query vacancy($id: ID!){
         vacancy(id: $id){
             uuid
-            submissionUUID
             position
             company
             text

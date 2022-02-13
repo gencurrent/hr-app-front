@@ -5,7 +5,7 @@ import {
   MainStatsPage,
   VacancyListPage,
   VacancyCreateEditPage,
-  VacancySubmissionPage,
+  AnonymousVacancySubmissionPage,
   SubmissionListPage,
   SubmissionSalutationPage,
   VacancyPage
@@ -37,7 +37,7 @@ const AuthenticatedRoutes = () => {
           </Route>
           
           <Route path='/vacancy/:id([a-f,0-9]+)/apply'>
-            <VacancySubmissionPage />
+            <AnonymousVacancySubmissionPage />
           </Route>
 
           <Route path='/vacancy/:id([a-f,0-9]+)/applied'>

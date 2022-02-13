@@ -30,15 +30,17 @@ const MUTATIONS = {
   CREATE_SUBMISSION: gql`
   mutation CreateSubmission(
     $vacancyId: ID!,
-    $answers: JSONString!,
     $fullname: String!,
     $email: String!,
-    $phone: String!
+    $phone: String!,
+    $resume: String!,
+    $answers: JSONString!
   ){
-    createSubmission(vacancyId: $vacancyId, answers: $answers, fullname: $fullname, email: $email, phone: $phone){
+    createSubmission(vacancyId: $vacancyId, answers: $answers, fullname: $fullname, email: $email, phone: $phone, resume: $resume){
       fullname
       email
       phone
+      resume
       answers
       ts
     }

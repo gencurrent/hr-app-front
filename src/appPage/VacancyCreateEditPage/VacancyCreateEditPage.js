@@ -8,10 +8,6 @@ import {
     FormHelperText, 
     Typography,
     Button,
-    Card,
-    CardContent,
-    CardActions,
-    Container,
     Grid
 } from '@material-ui/core';
 
@@ -99,11 +95,6 @@ const VacancyCreateEditPage = (props) => {
           <Button variant='contained' color='primary' onClick={save}>Save</Button>
           </Grid>
         </Grid>
-        // </CardContent>
-        // <CardActions>
-        // </CardActions>
-          
-      // </Card>
     )
 };
 

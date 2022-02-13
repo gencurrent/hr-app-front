@@ -89,7 +89,7 @@ const VacancyCUFieldListItemDialog = (props) => {
                   variant='standard'
                   onChange={updateType}
                   fullWidth
-                  defaultValue='line'
+                  value={fieldDescription.t}
                 >
                     <MenuItem key='line' value='line'>Line</MenuItem>
                     <MenuItem key='text' value='text'>Text</MenuItem>
@@ -153,7 +153,7 @@ const VacancyCUFieldList = (props) => {
         let newFields = [...fields];
         newFields.push(fieldProps);
         setFields(newFields);
-        props.setFields && props.setFields(newFields);  // Update parent component fields
+        props.setFields && props.setFields(newFields);  // Update the parent component fields
     }
 
     const removeField = fieldIdx => {

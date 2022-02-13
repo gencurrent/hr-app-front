@@ -93,7 +93,7 @@ function SubmissionItem(props) {
     return (
       <Grid container>
         {fieldList.map(field => (
-          <Grid style={{margin: '8px 0'}} item xs={12}>
+          <Grid key={field.field} style={{margin: '8px 0'}} item xs={12}>
             <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>{field.title}: </Typography>
             {field.type === 'field' ? (
                 <MUILink target="_blank" download href={`${fileUrlBase}/${submission.resume}`}>
@@ -134,7 +134,7 @@ function SubmissionItem(props) {
               onChange={onDecisionChange}
             >
               { Object.keys(DECISION_VALUE_LABEL_MAP).map(key => 
-                <MenuItem value={key}>{DECISION_VALUE_LABEL_MAP[key]}</MenuItem>
+                <MenuItem value={key} key={key}>{DECISION_VALUE_LABEL_MAP[key]}</MenuItem>
 
               )}
             </Select>   
@@ -183,6 +183,7 @@ function SubmissionListPage(props) {
           {data.vacancy.submissionList.map(
             submission => (
               <SubmissionItem
+                key={submission.uuid}
                 submission={submission}
                 vacancyId={vacancyId}
                 vacancyData={data}

@@ -48,6 +48,7 @@ const QUERIES = {
                 fullname
                 email
                 phone
+                resume
                 answers
                 decision
                 comment

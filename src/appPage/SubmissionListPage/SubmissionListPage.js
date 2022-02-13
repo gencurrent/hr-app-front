@@ -4,10 +4,12 @@ import { useQuery } from '@apollo/client';
 import {
   makeStyles,
   Box,
+  Button,
   Card,
   Grid,
   InputLabel,
   FormControl,
+  Link as MUILink,
   Select,
   MenuItem,
   Typography
@@ -63,6 +65,49 @@ function SubmissionItem(props) {
     setDecision(value);
     setDecisionClass(classes[value.toLowerCase()]);
   }
+
+  
+  const fieldList = [
+    {
+      field: 'fullname',
+      title: 'Full Name'
+    },
+    {
+      field: 'email',
+      title: 'Email'
+    },
+    {
+      field: 'phone',
+      title: 'Phone'
+    },
+    {
+      field: 'resume',
+      title: 'Resume',
+      type: 'field'
+    }
+  ];
+
+  function FieldItemsGrid(props) {
+    const {submission} = props;
+    const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
+    return (
+      <Grid container>
+        {fieldList.map(field => (
+          <Grid style={{margin: '8px 0'}} item xs={12}>
+            <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>{field.title}: </Typography>
+            {field.type === 'field' ? (
+                <MUILink target="_blank" download href={`${fileUrlBase}/${submission.resume}`}>
+                  <Button variant='outlined' color='primary'>Download</Button>
+                </MUILink>
+              ) :  (
+                <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission[field.field]}</Typography>
+              )
+            }
+          </Grid> 
+        ))}
+      </Grid>
+    )
+  };
   
   return (
     <Card key={submission.uuid} variant='outlined' className={classes.submissionListItem}>
@@ -75,7 +120,6 @@ function SubmissionItem(props) {
           </Link>
         </Typography>
       }
-      {/* <Typography variant='body1' component='p' style={{fontWeight: 600}}>Name:</Typography><Typography variant='body1' component='p'>{submission.fullname}</Typography> */}
 
       <Grid container justifyContent='space-between'>
         <Grid item>
@@ -100,20 +144,7 @@ function SubmissionItem(props) {
           {tsString}
         </Grid>
       </Grid>
-      <Grid container>
-        <Grid item xs={12}>
-          <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>Name: </Typography>
-          <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission.fullname}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>Email: </Typography>
-          <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission.email}</Typography>
-        </Grid>
-        <Grid item xs={12}>
-          <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>Phone: </Typography>
-          <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission.phone}</Typography>
-        </Grid>
-      </Grid>
+      <FieldItemsGrid submission={submission} />
       {JSON.parse(submission.answers).map(answer => (
           <SubmissionListItemAnswer key={answer.q} answer={answer} vacancy={vacancyData.vacancy} />
         )

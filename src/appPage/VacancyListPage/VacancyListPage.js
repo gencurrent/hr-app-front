@@ -25,7 +25,6 @@ const VacancyListPage = () => {
   if (error) return 'Error';
 
   function onVacancyDelete(vacancyId) {
-    console.log('VacancyList // onVacancyDelete // vacancyId', vacancyId);
     setCurrentVacancy(data.vacancyList.find(el => el.id === vacancyId));
     setConfirmDialogOpen(true);
   };

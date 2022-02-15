@@ -20,8 +20,7 @@ import { datetimeToString } from 'utils/date';
 import { SubmissionListItemAnswer } from 'component';
 import { QUERIES } from 'utils/apollo';
 import { 
-  DECISION_VALUE_LABEL_MAP,
-  DECISION_VALUE_TO_SELECT_PROPERTIES
+  DECISION_VALUE_LABEL_MAP
 } from './constants';
 
 const useStyles = makeStyles((theme) => ({
@@ -48,7 +47,8 @@ const useStyles = makeStyles((theme) => ({
 
 
 function SubmissionItem(props) {
-  const { submission, singleVacancySusbmissions, vacancyData, vacancyId } = props;
+  const { submission, singleVacancySusbmissions, vacancyId } = props;
+  let { vacancyData } = props;
   const classes = useStyles();
   let ts = new Date(submission.ts);
   // const tsString = new RegExp("(?P=<year>\d{4})\-(?P=<month>\d{2})\-(?P=<day>\d{2})");\
@@ -108,6 +108,8 @@ function SubmissionItem(props) {
       </Grid>
     )
   };
+
+  vacancyData = submission.vacancy || vacancyData;
   
   return (
     <Card key={submission.uuid} variant='outlined' className={classes.submissionListItem}>
@@ -116,7 +118,7 @@ function SubmissionItem(props) {
           <Link
             className='link-undecorated'
             to={`/vacancy/${vacancyId}`}
-          >{vacancyData.vacancy.position} | {vacancyData.vacancy.company}
+          >{vacancyData.position} | {vacancyData.company}
           </Link>
         </Typography>
       }
@@ -146,7 +148,7 @@ function SubmissionItem(props) {
       </Grid>
       <FieldItemsGrid submission={submission} />
       {JSON.parse(submission.answers).map(answer => (
-          <SubmissionListItemAnswer key={answer.q} answer={answer} vacancy={vacancyData.vacancy} />
+          <SubmissionListItemAnswer key={answer.q} answer={answer} vacancy={vacancyData} />
         )
       )}
     </Card>
@@ -156,14 +158,25 @@ function SubmissionItem(props) {
 function SubmissionListPage(props) {
   const { singleVacancySusbmissions } = props;
   const classes = useStyles();
-  const { vacancyId } = useParams();
-  
-  let { loading, error, data } = useQuery(QUERIES.VACANCY_WITH_SUBMISSION_LIST, {
-    fetchPolicy: "no-cache",
-    variables: {
+  let { vacancyId } = useParams();
+
+  let query = undefined;
+  let variables = {};
+  if (singleVacancySusbmissions){
+    query = QUERIES.VACANCY_WITH_SUBMISSION_LIST;
+    variables = {
       id: vacancyId
-    }
+    };
+  }
+  else {
+    query = query = QUERIES.SUBMISSION_LIST;
+  }
+  
+  let { loading, error, data } = useQuery(query, {
+    fetchPolicy: "no-cache",
+    variables: variables
   });
+  const submissionList = data && ((data.vacancy && data.vacancy.submissionList) || (data.submissionList));
   return (
     
     <Box>
@@ -174,22 +187,32 @@ function SubmissionListPage(props) {
           (<div>Error loading submissions</div>)}
         {data &&
         <>
-          <Typography component='h3' variant='h4'>
-            <Link
-              className='link-undecorated'
-              to={`/vacancy/${vacancyId}`}
-            >{data.vacancy.position}</Link> submissions
-          </Typography>
-          {data.vacancy.submissionList.map(
-            submission => (
-              <SubmissionItem
-                key={submission.uuid}
-                submission={submission}
-                vacancyId={vacancyId}
-                vacancyData={data}
-                singleVacancySusbmissions={singleVacancySusbmissions}
-              />
-            )
+          {singleVacancySusbmissions &&
+            <Typography component='h3' variant='h4'>
+              <Link
+                className='link-undecorated'
+                to={`/vacancy/${vacancyId}`}
+              >{data.vacancy.position}</Link> submissions
+            </Typography>
+          }
+          {!singleVacancySusbmissions &&
+            <Typography component='h3' variant='h4'>All submissions</Typography>
+          }
+          
+          {submissionList.map(
+            submission => {
+              vacancyId = singleVacancySusbmissions ? vacancyId : submission.vacancy.id;
+              let vacancyData = singleVacancySusbmissions ? data.vacancy : submission.vacancy;
+              return (
+                <SubmissionItem
+                  key={submission.uuid}
+                  submission={submission}
+                  vacancyId={vacancyId}
+                  vacancyData={vacancyData}
+                  singleVacancySusbmissions={singleVacancySusbmissions}
+                />
+              )
+            }
           )}
         </>
         }

@@ -35,7 +35,6 @@ export default function RequestDemoForm() {
       mutation: MUTATIONS.CREATE_DEMO_REQUEST,
       variables: data
     }).then(result => {
-      console.log(result);
       setRequestSent(true);
     })
     .catch(error => {

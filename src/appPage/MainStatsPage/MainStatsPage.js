@@ -49,12 +49,12 @@ const MainStatsPage = () =>  {
               <Typography component='h5' variant='h5'>All submissions</Typography>
               <Grid container direction='column' spacing={1}>
                 <Grid item>
-                  <Link to='/submissions'>
+                  <Link to='/submission-list?status=new'>
                     <Button variant='contained' color='primary'>New submissions: +{submissionCountNew}</Button>
                   </Link>
                 </Grid>
                 <Grid item>
-                  <Link to='/submissions'>
+                  <Link to='/submission-list'>
                     <Button >Total submissions: {submissionCountTotal}</Button>
                   </Link>
                 </Grid>
@@ -68,7 +68,7 @@ const MainStatsPage = () =>  {
               <Typography component='h5' variant='h5'>Top vacancies</Typography>
               <Grid container direction='column' spacing={1}>
                 <Grid item>
-                  <Link to='/vacancy'>
+                  <Link to='/vacancy-list'>
                     <Button variant='contained' color='primary'>All vacancies</Button>
                   </Link>
                 </Grid>

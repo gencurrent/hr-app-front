@@ -20,15 +20,17 @@
     "react-dom": "^17.0.2",
     "react-dropzone": "^11.4.2",
     "react-redux": "^7.2.4",
+    "react-redux-i18n": "^1.9.3",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
     "react-router-redux": "^4.0.8",
     "react-scripts": "^4.0.3",
+    "redux-thunk": "^2.4.1",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "NODE_HOST=0.0.0.0:8080 REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket HOST=127.0.0.1 react-scripts start",
+    "start": "NODE_HOST=0.0.0.0:8080 REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket HOST=0.0.0.0 react-scripts start",
     "build": "NODE_HOST=hr-app.com REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

@@ -2,9 +2,7 @@ import { React } from 'react';
 import {
   makeStyles,
   Typography,
-  Box,
   Grid,
-  Paper,
   Card
 } from '@material-ui/core';
 
@@ -51,19 +49,28 @@ function VacancyPage(props) {
       <Typography>Error</Typography>
     </>}
     {data &&
-      <Box>
-        <Typography
-          variant='h4' component='h1'
-          gutterBottom
-        >{data.vacancy.position}</Typography>
-        <Typography
-          variant='h6' component='span'
-        >Company: </Typography>
-        <Typography
-          className={classes.textBold}
-          variant='h6' component='span'
-        >{data.vacancy.company}</Typography>
-          <Typography>Created: {datetimeToString(new Date(data.vacancy.ts))}</Typography>
+      <>
+      <Typography
+        variant='h4' component='h1'
+        gutterBottom
+      >{data.vacancy.position}</Typography>
+      <Card variant='outlined'>
+        <Grid container>
+          <Grid item xs={12}>
+            <Typography component='span'>Vacancy: </Typography>
+            <Typography className={classes.textBold} component='span'>{data.vacancy.position}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography component='span'>Company: </Typography>
+            <Typography className={classes.textBold} component='span'>{data.vacancy.company}</Typography>
+          </Grid>
+          <Grid item xs={12}>
+            <Typography component='span'>Created: </Typography>
+            <Typography className={classes.textBold} component='span'>{datetimeToString(new Date(data.vacancy.ts))}</Typography>
+          </Grid>
+        </Grid> 
+        
+          
           <Typography>Fields:</Typography>
           <Grid container>
             {JSON.parse(data.vacancy.fields).map((field, idx) => {
@@ -87,9 +94,9 @@ function VacancyPage(props) {
 
             })}
           </Grid>
-          
-          
-      </Box>
+
+        </Card>
+      </>
     }
   </>);
 };

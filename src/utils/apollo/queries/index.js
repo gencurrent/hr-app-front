@@ -68,6 +68,7 @@ const QUERIES = {
       comment
       ts
       vacancy {
+        id
         uuid
         fields
         position

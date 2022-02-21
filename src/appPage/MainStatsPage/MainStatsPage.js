@@ -13,10 +13,17 @@ import {
   Typography,
   CardContent
 } from '@material-ui/core';
+import { Translate } from 'react-redux-i18n';
+
+
 import { authApolloClient } from 'utils/apollo';
 import { QUERIES } from 'utils/apollo';
 
 const useStyles = makeStyles(theme => ({
+
+  pageGridStyle: {
+    marginTop: theme.spacing(2),
+  },
   cardStyle: {
     // margin: theme.spacing(3, 0, 2)
   }
@@ -41,8 +48,10 @@ const MainStatsPage = () =>  {
   vacancyStatsList.sort((a, b) => b.submissionCountTotal - a.submissionCountTotal);
   return (
     <>
-     <Typography component='h4' variant='h4'>Main statistics</Typography>
-     <Grid container direction='column' spacing={2}>
+      <Typography component='h4' variant='h4'>
+        <Translate value='mainStatistics'/>
+      </Typography>
+     <Grid container direction='column' spacing={2} className={classes.pageGridStyle}>
        <Grid item>
           <Card className={classes.cardStyle}>
             <CardContent>

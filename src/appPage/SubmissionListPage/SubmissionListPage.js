@@ -94,13 +94,13 @@ function SubmissionItem(props) {
       <Grid container>
         {fieldList.map(field => (
           <Grid key={field.field} style={{margin: '8px 0'}} item xs={12}>
-            <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>{field.title}: </Typography>
+            <Typography variant='body1' component='p' className={`${classes.inline}`}>{field.title}: </Typography>
             {field.type === 'field' ? (
                 <MUILink target="_blank" download href={`${fileUrlBase}/${submission.resume}`}>
                   <Button variant='outlined' color='primary'>Download</Button>
                 </MUILink>
               ) :  (
-                <Typography variant='body1' component='p' className={`${classes.inline}`}>{submission[field.field]}</Typography>
+                <Typography variant='body1' component='p' className={`${classes.bold} ${classes.inline}`}>{submission[field.field]}</Typography>
               )
             }
           </Grid> 

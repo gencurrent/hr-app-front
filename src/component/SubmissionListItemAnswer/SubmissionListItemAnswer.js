@@ -27,7 +27,7 @@ function SubmissionListItemAnswer(props) {
   const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
   return (
     <>
-      <Card elevation={1} className={`answer-block ${classes.answerBlock}`}>
+      <Card elevation={0} className={`answer-block ${classes.answerBlock}`}>
         
         <Typography variant='subtitle1' style={{fontWeight: 600}}>{answer.q}</Typography>
         <Box className={classes.answerContainer}>

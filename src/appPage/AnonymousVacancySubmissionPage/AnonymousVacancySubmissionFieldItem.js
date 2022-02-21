@@ -3,7 +3,7 @@
  */
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
-
+import { I18n } from 'react-redux-i18n';
 import {
     Grid,
     Typography,
@@ -24,7 +24,8 @@ const AnonymousVacancySubmissionFieldItem = (props) => {
     // File fields
     const [stateFiles, setStateFiles] = useState([]);
     // Field-specific errors
-    const [fieldError, setFieldError] = useState(field.r ? 'The field is required' : '');
+    const fieldRequiredText = I18n.t('AnonymousVacancySubmissionPage.fieldIsRequired')
+    const [fieldError, setFieldError] = useState(field.r ? fieldRequiredText : '');
     const {
         acceptedFiles,
         getRootProps,
@@ -61,7 +62,7 @@ const AnonymousVacancySubmissionFieldItem = (props) => {
         const key = field.q;
         if (field.r){
             if(value === undefined || value === ''){
-                setFieldError('The field is required');
+                setFieldError(fieldRequiredText);
             }
         }
         else {

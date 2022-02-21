@@ -49,13 +49,15 @@ const MainStatsPage = () =>  {
   return (
     <>
       <Typography component='h4' variant='h4'>
-        <Translate value='mainStatistics'/>
+        <Translate value='mainStatistics.title'/>
       </Typography>
      <Grid container direction='column' spacing={2} className={classes.pageGridStyle}>
        <Grid item>
           <Card className={classes.cardStyle}>
             <CardContent>
-              <Typography component='h5' variant='h5'>All submissions</Typography>
+              <Typography component='h5' variant='h5'>
+                <Translate value='mainStatistics.allSubmissions'/>
+              </Typography>
               <Grid container direction='column' spacing={1}>
                 <Grid item>
                   <Link to='/submission-list?status=new'>
@@ -74,7 +76,9 @@ const MainStatsPage = () =>  {
        <Grid item>
           <Card className={classes.cardStyle}>
             <CardContent>
-              <Typography component='h5' variant='h5'>Top vacancies</Typography>
+              <Typography component='h5' variant='h5'>
+                <Translate value='mainStatistics.topVacancies'/>
+              </Typography>
               <Grid container direction='column' spacing={1}>
                 <Grid item>
                   <Link to='/vacancy-list'>

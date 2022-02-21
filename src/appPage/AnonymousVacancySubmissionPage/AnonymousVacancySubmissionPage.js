@@ -1,5 +1,6 @@
 import { React, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
+import { Translate, I18n } from 'react-redux-i18n';
 import { useQuery } from '@apollo/client';
 import {
     FormControl,
@@ -124,28 +125,28 @@ const AnonymousVacancySubmissionPage = () => {
                         <FormControl fullWidth={false} className={classes.formControl} variant='outlined' >
                             <TextField
                                 onChange={e => setFullname(e.target.value)}
-                                label={'Full name'}
+                                label={I18n.t('AnonymousVacancySubmissionPage.fullName')}
                                 name='name'
                                 id='name'
                                 required
-                                helperText={'Required'}
+                                helperText={I18n.t('AnonymousVacancySubmissionPage.required')}
                                 margin='normal'
                                 autoComplete='name'
                                 fullWidth
                             />
                             <TextField
                                 onChange={e => setEmail(e.target.value)}
-                                label={'Email'}
+                                label={I18n.t('AnonymousVacancySubmissionPage.email')}
                                 name='email'
                                 id='email'
                                 required
-                                helperText={'Required'}
+                                helperText={I18n.t('AnonymousVacancySubmissionPage.required')}
                                 margin='normal'
                                 autoComplete='email'
                                 fullWidth
                             />
                             <TextField
-                                label={'Phone in format +(country code)(number)'}
+                                label={I18n.t('AnonymousVacancySubmissionPage.phone')}
                                 name='phone'
                                 id='phone'
                                 onChange={e => setPhone(e.target.value)}
@@ -157,7 +158,7 @@ const AnonymousVacancySubmissionPage = () => {
                                 fieldRequired={true}
                                 callBack={onResumeFieldUpdated}
                                 vacancy={vacancyData.vacancy}
-                                fieldText={'Resume file'}
+                                fieldText={I18n.t('AnonymousVacancySubmissionPage.resume')}
                             />
                         </FormControl>
                             <FormControl fullWidth={true} className={classes.formControl} variant='outlined' >
@@ -177,7 +178,7 @@ const AnonymousVacancySubmissionPage = () => {
                         <Grid item spacing={6} xs={12}>
                             <Box sx={{ display: 'flex', justifyContent: 'flex-end' }}>
                                 <Button onClick={submitAnswers} variant='contained' color='primary'>
-                                    Submit
+                                    <Translate value='AnonymousVacancySubmissionPage.submit'/>
                                 </Button>
                             </Box>
                         </Grid>

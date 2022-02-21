@@ -1,7 +1,7 @@
 import { React, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { Translate, setLocale, i18nReducer } from 'react-redux-i18n';
+import { Translate, setLocale } from 'react-redux-i18n';
 import {
     makeStyles,
     AppBar,
@@ -58,10 +58,6 @@ const Mainbar = () => {
     history.push('/');
     history.go(0);
   }
-  
-  function getInitialLanguage() {
-    return locale;  // TODO: fix
-  }
 
   return (
     <AppBar>
@@ -73,7 +69,7 @@ const Mainbar = () => {
           labelId='select-language-select-label'
           id='select-language-select'
           label='Language'
-          value={getInitialLanguage()}
+          value={locale}
           onChange={onLanguageSelected}
           variant='outlined'
         >
@@ -108,8 +104,8 @@ const Mainbar = () => {
               open={open}
               onClose={handleClose}
             >
-                <MaterialMenuItem onClick={handleClose}>Profile</MaterialMenuItem>
-                <MaterialMenuItem onClick={onLogOutClick}>Log Out</MaterialMenuItem>
+                <MaterialMenuItem onClick={handleClose}><Translate value='mainBar.profile' /></MaterialMenuItem>
+                <MaterialMenuItem onClick={onLogOutClick}><Translate value='mainBar.logOut' /></MaterialMenuItem>
             </Menu>
         </div>
       </Toolbar>

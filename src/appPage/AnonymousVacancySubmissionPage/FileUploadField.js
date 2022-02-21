@@ -8,6 +8,7 @@ import {
   DeleteForever
 } from '@material-ui/icons';
 import { useDropzone } from 'react-dropzone';
+import { I18n } from 'react-redux-i18n';
 
 import { pureApolloClient, MUTATIONS } from 'utils/apollo';
 
@@ -20,8 +21,9 @@ function FileUploadField(props) {
     fieldText
   } = props;
 
+  const fieldRequiredText = I18n.t('AnonymousVacancySubmissionPage.fieldIsRequired')
   const [stateFiles, setStateFiles] = useState([]);
-  const [fieldError, setFieldError] = useState(fieldRequired ? 'The field is required' : '');
+  const [fieldError, setFieldError] = useState(fieldRequired ? fieldRequiredText : '');
   const {
       acceptedFiles,
       getRootProps,
@@ -43,7 +45,7 @@ function FileUploadField(props) {
    */
   function valueUpdatedcallBackWrapper(value) {
     if (fieldRequired && !value){
-      setFieldError('The field is required');
+      setFieldError(fieldRequiredText);
     }
     else {
       setFieldError(undefined);

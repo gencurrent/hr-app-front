@@ -21,7 +21,12 @@ import {
   RequestDemoForm,
   DownBar
 } from 'component';
-import { lightTheme, darkTheme } from 'utils/material';
+import {
+  lightTheme,
+  darkTheme,
+  lightThemeOld,
+  darkThemeOld
+} from 'utils/material';
 import { Box } from "@mui/system";
 
 
@@ -80,23 +85,21 @@ function AnonymousLandingPage() {
         </Grid>
       </Box>
     </div>
+
     <Container className={`lp-background ${classes.container}`} maxWidth={false}>
-      
-      <ThemeProvider theme={darkTheme}>
-        <Grid container>
-          <Grid item sm={12} md={6}>
-            <Typography component='h1' variant='h3' align='center' style={{fontWeight: 400}}>Make recruiting a<br/>simple game</Typography>
-            <LPIcon className='lp-image' />
-          </Grid>
-          <Grid item sm={12} md={6}>
-            <RequestDemoForm/>
-          </Grid>
+      <Grid container>
+        <Grid item sm={12} md={6}>
+          <Typography component='h1' variant='h3' align='center' style={{fontWeight: 400}}>Make recruiting a<br/>simple game</Typography>
+          <LPIcon className='lp-image' />
         </Grid>
-      </ThemeProvider>
+        <Grid item sm={12} md={6}>
+          <RequestDemoForm/>
+        </Grid>
+      </Grid>
     </Container>
 
     <Container className={`lp-benefits-block ${classes.container}`} maxWidth={false}>
-      <ThemeProvider theme={lightTheme}>
+      <ThemeProvider theme={lightThemeOld}>
         <Grid container>
           {/* CheckBoxes */}
           <Grid item sm={12} md={6}>
@@ -205,30 +208,28 @@ function AnonymousLandingPage() {
     </Container>
 
     <Container className={`${classes.container}`} maxWidth={false}>
-      <ThemeProvider theme={darkTheme}>
-        <Grid container>
-          <Grid item sm={12} md={6}>
-            <Typography component='h1' variant='h3' align='center' style={{fontWeight: 400}}>The essence</Typography>
+      <Grid container>
+        <Grid item sm={12} md={6}>
+          <Typography component='h1' variant='h3' align='center' style={{fontWeight: 400}}>The essence</Typography>
 
-            <Grid container justifyContent='center'><Grid item sm={12} md={8}>
-                <Grid container justifyContent='flex-start' spacing={2}>
-                  <Grid item sm={12}>
-                    <Typography variant='h5' component='h5'>1. Create a vacancy</Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Typography variant='h5' component='h5'>2. Let your candidates fill the vacancy form</Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Typography variant='h5' component='h5'>3. Check: Score and filter responses</Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Typography variant='h5' component='h5'>4. Choose among the best candidates</Typography>
-                  </Grid>
+          <Grid container justifyContent='center'><Grid item sm={12} md={8}>
+              <Grid container justifyContent='flex-start' spacing={2}>
+                <Grid item sm={12}>
+                  <Typography variant='h5' component='h5'>1. Create a vacancy</Typography>
                 </Grid>
-            </Grid></Grid>
-          </Grid>
+                <Grid item sm={12}>
+                  <Typography variant='h5' component='h5'>2. Let your candidates fill the vacancy form</Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <Typography variant='h5' component='h5'>3. Check: Score and filter responses</Typography>
+                </Grid>
+                <Grid item sm={12}>
+                  <Typography variant='h5' component='h5'>4. Choose among the best candidates</Typography>
+                </Grid>
+              </Grid>
+          </Grid></Grid>
         </Grid>
-      </ThemeProvider>
+      </Grid>
     </Container>
 
     <DownBar />

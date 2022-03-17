@@ -1,4 +1,12 @@
-import { lightTheme, darkTheme } from './themes';
+import {
+  darkTheme,
+  lightTheme,
+  lightThemeOld,
+  darkThemeOld
+} from './themes';
 export {
-  lightTheme, darkTheme
+  darkTheme,
+  lightTheme,
+  lightThemeOld,
+  darkThemeOld
 };

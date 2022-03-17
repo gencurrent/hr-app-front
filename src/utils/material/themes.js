@@ -1,8 +1,38 @@
-import { createTheme } from '@material-ui/core';
+import { createTheme as createThemeOld } from '@material-ui/core';
 import { deepOrange, red } from '@material-ui/core/colors';
+import { createTheme } from '@mui/material';
 
+
+const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+    text: {
+      primary: '#ff5722'
+    },
+    primary: {
+      main: '#ff5722',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+  },
+});
 
 const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+    primary: {
+      main: '#ff5722',
+    },
+    secondary: {
+      main: '#f50057',
+    },
+  },
+});
+
+
+
+const darkThemeOld = createThemeOld({
   palette: {
     type: 'dark',
     primary: {
@@ -24,7 +54,7 @@ const darkTheme = createTheme({
   }
 });
 
-const lightTheme = createTheme({
+const lightThemeOld = createThemeOld({
   palette: {
     type: 'light',
     primary: {
@@ -48,5 +78,7 @@ const lightTheme = createTheme({
 
 export {
   lightTheme,
-  darkTheme
+  darkTheme,
+  lightThemeOld,
+  darkThemeOld
 };

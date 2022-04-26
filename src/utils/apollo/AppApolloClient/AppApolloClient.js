@@ -9,7 +9,7 @@ import { setContext } from "@apollo/client/link/context";
 import QUERIES from '../queries';
 
 
-const httpLink = new HttpLink({uri: `http://${window.location.hostname}:8080/graphql`});
+const httpLink = new HttpLink({uri: `http://${window.location.hostname}:80/graphql`});
 
 const AsyncTokenLookup = (refresh) => new Promise((resolve, reject) => {
     /**

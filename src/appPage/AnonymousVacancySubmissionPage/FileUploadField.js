@@ -81,13 +81,13 @@ function FileUploadField(props) {
       (response) => { 
         let signature = JSON.parse(response.data.createS3UploadRequest.signature);
         let {url, key} = signature;
-        let formData = new FormData();
-        formData.append('files', file, filename);
         // Push the validated file to the Cloud Storage
         fetch(url, {
-          method: 'POST',
-          cache: 'no-cache',
-          body: formData
+          method: 'PUT',
+          body: file,
+          headers: {
+            "x-amz-acl": "public-read",
+          }
         })
           .then(e => valueUpdatedcallBackWrapper(key))
           .then(() => {

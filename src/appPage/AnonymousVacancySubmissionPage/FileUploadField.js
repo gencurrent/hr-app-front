@@ -43,7 +43,7 @@ function FileUploadField(props) {
    * The wrapper around the parent's callback on the value being udpated.
    * @param {String|undefined} value A file path in Cloud Storage in String or an undefined (file removed from uploading) value
    */
-  function valueUpdatedcallBackWrapper(value) {
+  function valueUpdatedCallBackWrapper(value) {
     if (fieldRequired && !value){
       setFieldError(fieldRequiredText);
     }
@@ -56,7 +56,7 @@ function FileUploadField(props) {
 
   function removeFile(file){
     setStateFiles([]);
-    valueUpdatedcallBackWrapper(undefined);
+    valueUpdatedCallBackWrapper(undefined);
   };
   function reduceFileName(filename) {
       let re = /^(?<name>.*?)\.?(?<ext>\w*)$/g;
@@ -89,10 +89,20 @@ function FileUploadField(props) {
             "x-amz-acl": "public-read",
           }
         })
-          .then(e => valueUpdatedcallBackWrapper(key))
+          .then(e => {
+            if (!e.ok) {
+              throw new Error("Could not upload the file");
+            }
+            valueUpdatedCallBackWrapper(key);
+            
+          })
           .then(() => {
               setStateFiles([file]);
               setFieldError(undefined);
+          })
+          .catch(error => {
+            setStateFiles([]);
+            setFieldError(error.message);
           });
       }
     );
@@ -120,7 +130,7 @@ function FileUploadField(props) {
                 <p>{acceptedFileItems}</p>
         </div>
     </div>
-    {fieldRequired && <p class="MuiFormHelperText-root Mui-error Mui-required">{fieldError}</p>}
+    {fieldRequired && <p className="MuiFormHelperText-root Mui-error Mui-required">{fieldError}</p>}
     </>
     );
 };

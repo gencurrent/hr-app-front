@@ -117,8 +117,8 @@ const AnonymousVacancySubmissionFieldItem = (props) => {
     }
 
     return (
-          <Grid container>
-            <Grid item spacing={6} sm={12} xs={12}>
+          <Grid container spacing={6} >
+            <Grid item sm={12} xs={12}>
             {field.t === 'text' && <TextField
                 onChange={setKey}
                 label={field.q}
@@ -171,7 +171,7 @@ const AnonymousVacancySubmissionFieldItem = (props) => {
                         <p>{acceptedFileItems}</p>
                 </div>
             </div>
-            {field.r && <p class="MuiFormHelperText-root Mui-error Mui-required">{fieldError}</p>}
+            {field.r && <p className="MuiFormHelperText-root Mui-error Mui-required">{fieldError}</p>}
             </>}
             {/* {field.t === 'date' && <TextField
                     onChange={setKey}

@@ -24,7 +24,7 @@ function SubmissionListItemAnswer(props) {
   const classes = useStyles();
   const {answer, vacancy} = props;
   const answerFull = {...JSON.parse(vacancy.fields).find(el => el.q === answer.q), ...answer};
-  const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
+  const fileUrlBase = "https://hr-eco-bucket.s3.eu-central-1.amazonaws.com";
   return (
     <>
       <Card elevation={0} className={`answer-block ${classes.answerBlock}`}>

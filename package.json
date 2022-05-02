@@ -30,8 +30,8 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket react-scripts start",
-    "build": "REACT_APP_CLOUD_STORAGE_URL_BASE=https://storage.googleapis.com/hr-eco-bucket react-scripts build",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

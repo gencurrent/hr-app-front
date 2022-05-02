@@ -89,7 +89,7 @@ function SubmissionItem(props) {
 
   function FieldItemsGrid(props) {
     const {submission} = props;
-    const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
+    const fileUrlBase = "https://hr-eco-bucket.s3.eu-central-1.amazonaws.com";
     return (
       <Grid container>
         {fieldList.map(field => (

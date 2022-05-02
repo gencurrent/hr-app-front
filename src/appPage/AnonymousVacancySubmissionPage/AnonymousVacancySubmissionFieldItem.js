@@ -16,6 +16,7 @@ import {
     DeleteForever
 } from '@material-ui/icons';
 import { useDropzone } from 'react-dropzone';
+import FileUploadField from './FileUploadField';
 
 
 const AnonymousVacancySubmissionFieldItem = (props) => {
@@ -26,27 +27,6 @@ const AnonymousVacancySubmissionFieldItem = (props) => {
     // Field-specific errors
     const fieldRequiredText = I18n.t('AnonymousVacancySubmissionPage.fieldIsRequired')
     const [fieldError, setFieldError] = useState(field.r ? fieldRequiredText : '');
-    const {
-        acceptedFiles,
-        getRootProps,
-        getInputProps
-    } = useDropzone({
-        multiple: false,
-        validator: fileProcessor
-    });
-
-
-    const onFileRemove = e => {
-        e.stopPropagation();
-        removeFile(acceptedFiles[0]);
-    }
-
-    const acceptedFileItems = stateFiles.map(file => (
-        <li key={file.path}>
-            {reduceFileName(file.path)} — {file.size} bytes
-            <Button variant='outlined' size='small' onClick={onFileRemove}><DeleteForever/>Remove</Button>
-        </li>
-    ))
 
     
     const setKey = (e) => {
@@ -159,19 +139,12 @@ const AnonymousVacancySubmissionFieldItem = (props) => {
                 key={`field-${field.q}`}
             />}
             {field.t === 'file' && <>
-            <p className="MuiInputBase-input MuiInput-input">{field.q}</p>
-            <div className='drag-n-drop background-stripes'>
-                <div
-                    {...getRootProps({className: 'dropzone'})}
-                    >
-                        <input {...getInputProps()} />
-                        <p style={{'textAlign': 'center'}}>Click here or drop a file here</p>
-                        {/* <em>Only files with size less than 2MB are allowed</em> */}
-                        <Typography align='center' component='h4'>Accepted file</Typography>
-                        <p>{acceptedFileItems}</p>
-                </div>
-            </div>
-            {field.r && <p className="MuiFormHelperText-root Mui-error Mui-required">{fieldError}</p>}
+                <FileUploadField
+                callBack={file => props.valueUpdateCallback(field.q, file)}
+                fieldRequired={field.r}
+                vacancy={vacancy}
+                fieldText={field.q}
+                />
             </>}
             {/* {field.t === 'date' && <TextField
                     onChange={setKey}

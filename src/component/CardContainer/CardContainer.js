@@ -1,11 +1,10 @@
 /**
  * The standard UI container using the Card component
  */
-
+import { makeStyles } from "@mui/styles";
 import {
-  Card,
-  makeStyles
-} from '@material-ui/core';
+  Card
+} from '@mui/material';
 
 const useStyles = makeStyles(theme => ({
   cardStyleDefault: {

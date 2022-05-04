@@ -6,16 +6,10 @@ import PropTypes from 'prop-types';
 import { I18n } from 'react-redux-i18n';
 import {
     Grid,
-    Typography,
     TextField,
-    Button
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { pureApolloClient, MUTATIONS } from 'utils/apollo';
-import {
-    DeleteForever
-} from '@material-ui/icons';
-import { useDropzone } from 'react-dropzone';
 import FileUploadField from './FileUploadField';
 
 

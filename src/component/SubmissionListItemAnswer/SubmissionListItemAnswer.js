@@ -1,14 +1,14 @@
 import { React } from 'react';
 import PropTypes from 'prop-types';
 
+import { makeStyles } from "@mui/styles";
 import {
-  makeStyles,
   Link,
   Typography,
   Box,
   Card,
   Button
-} from '@material-ui/core';
+} from '@mui/material';
 
 
 const useStyles = makeStyles(theme => ({

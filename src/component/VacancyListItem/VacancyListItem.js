@@ -2,19 +2,19 @@ import { React } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import { makeStyles } from "@mui/styles";
 import {
-  makeStyles,
   Box,
   Button,
   Typography,
   Card,
   CardContent,
   CardActions
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   FileCopy,
   Delete
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import copy from 'copy-to-clipboard';
 
 const useStyles = makeStyles((theme) => ({

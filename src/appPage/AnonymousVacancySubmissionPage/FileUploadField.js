@@ -3,10 +3,10 @@ import PropTypes from 'prop-types';
 import {
   Typography,
   Button
-} from '@material-ui/core';
+} from '@mui/material';
 import {
   DeleteForever
-} from '@material-ui/icons';
+} from '@mui/icons-material';
 import { useDropzone } from 'react-dropzone';
 import { I18n } from 'react-redux-i18n';
 

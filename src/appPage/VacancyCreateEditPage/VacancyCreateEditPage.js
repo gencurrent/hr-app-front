@@ -9,7 +9,7 @@ import {
     Typography,
     Button,
     Grid
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { VacancyCUFieldList } from 'component';
 import {
@@ -17,7 +17,6 @@ import {
   FIELD_VACANCY_HELPER_TEXT_DEFAULT_LENGTH_ERROR
 } from './constants';
 import { MUTATIONS } from 'utils/apollo';
-import { Box } from '@mui/system';
 
 
 

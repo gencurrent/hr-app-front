@@ -2,20 +2,17 @@ import { React, useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { Translate, setLocale } from 'react-redux-i18n';
+import { makeStyles } from '@mui/styles';
 import {
-    makeStyles,
-    AppBar,
-    Toolbar,
-    Menu,
-    MenuItem as MaterialMenuItem,
-    Typography,
-    IconButton
-} from '@material-ui/core';
-import {
+  AppBar,
+  Toolbar,
+  Menu,
+  Typography,
+  IconButton,
   Select,
   MenuItem
 } from '@mui/material';
-import { AccountCircle } from '@material-ui/icons';
+import { AccountCircle } from '@mui/icons-material';
 
 import languageDict from './languageDict';
 
@@ -104,8 +101,8 @@ const Mainbar = () => {
               open={open}
               onClose={handleClose}
             >
-                <MaterialMenuItem onClick={handleClose}><Translate value='mainBar.profile' /></MaterialMenuItem>
-                <MaterialMenuItem onClick={onLogOutClick}><Translate value='mainBar.logOut' /></MaterialMenuItem>
+                <MenuItem onClick={handleClose}><Translate value='mainBar.profile' /></MenuItem>
+                <MenuItem onClick={onLogOutClick}><Translate value='mainBar.logOut' /></MenuItem>
             </Menu>
         </div>
       </Toolbar>

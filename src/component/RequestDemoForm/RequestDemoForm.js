@@ -13,7 +13,7 @@ import {
   DialogTitle,
   DialogContent,
   DialogContentText
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { pureApolloClient, MUTATIONS } from 'utils/apollo';
 

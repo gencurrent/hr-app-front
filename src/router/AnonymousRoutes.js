@@ -12,7 +12,7 @@ import {
   AuthenticationPage,
   SubmissionSalutationPage
 } from 'appPage';
-import { CssBaseline } from '@material-ui/core';
+import { CssBaseline } from '@mui/material';
 import { history } from 'utils/redux';
 import { Template } from 'component';
 

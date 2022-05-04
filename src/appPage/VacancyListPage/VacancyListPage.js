@@ -4,7 +4,7 @@ import {
   Button,
   Box,
   Typography
-} from '@material-ui/core';
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 
 import { DeleteConfirmationDialog } from 'component';

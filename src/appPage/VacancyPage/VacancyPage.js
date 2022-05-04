@@ -1,13 +1,13 @@
 import { React } from 'react';
+import { makeStyles } from "@mui/styles";
 import {
-  makeStyles,
   Typography,
   Grid,
   Card
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { datetimeToString } from 'utils/date';
-import { authApolloClient, QUERIES } from 'utils/apollo';
+import { QUERIES } from 'utils/apollo';
 import { useParams } from 'react-router';
 import { useQuery } from '@apollo/client';
 

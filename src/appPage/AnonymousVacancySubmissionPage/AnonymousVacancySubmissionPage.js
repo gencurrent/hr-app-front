@@ -2,6 +2,7 @@ import { React, useState } from 'react';
 import { useParams, useHistory } from 'react-router-dom';
 import { Translate, I18n } from 'react-redux-i18n';
 import { useQuery } from '@apollo/client';
+import {makeStyles} from "@mui/styles";
 import {
   FormControl,
   Box,
@@ -10,8 +11,7 @@ import {
   Typography,
   TextField,
   Button,
-  makeStyles
-} from '@material-ui/core';
+} from '@mui/material';
 
 import { pureApolloClient, MUTATIONS, QUERIES } from 'utils/apollo';
 import AnonymousVacancySubmissionFieldItem from './AnonymousVacancySubmissionFieldItem';

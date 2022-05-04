@@ -3,29 +3,26 @@
  */
 import {ReactComponent as LPIcon} from "public/LP-icon.svg";
 import { React, useState } from 'react';
+import { makeStyles } from "@mui/styles";
 import {
   Container,
   Grid,
   Typography,
-  makeStyles,
   Button,
   Checkbox,
   FormControlLabel,
   ThemeProvider,
-  Card
-} from '@material-ui/core';
+  Card,
+} from '@mui/material';
 import { Link } from 'react-router-dom';
 import ReactSpeedometer from 'react-d3-speedometer';
 
 import {
   RequestDemoForm,
-  DownBar
+  DownBar,
 } from 'component';
 import {
   lightTheme,
-  darkTheme,
-  lightThemeOld,
-  darkThemeOld
 } from 'utils/material';
 import { Box } from "@mui/system";
 
@@ -99,7 +96,7 @@ function AnonymousLandingPage() {
     </Container>
 
     <Container className={`lp-benefits-block ${classes.container}`} maxWidth={false}>
-      <ThemeProvider theme={lightThemeOld}>
+      <ThemeProvider theme={lightTheme}>
         <Grid container>
           {/* CheckBoxes */}
           <Grid item sm={12} md={6}>

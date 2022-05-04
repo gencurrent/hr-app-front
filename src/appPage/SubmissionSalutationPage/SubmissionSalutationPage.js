@@ -2,7 +2,7 @@ import { React } from 'react';
 import {
   Box,
   Typography
-} from '@material-ui/core';
+} from '@mui/material';
 
 export default function SubmissionSalutationPage() {
   return (

@@ -1,20 +1,28 @@
 
 import { createTheme } from '@mui/material';
-import { deepOrange, red } from '@mui/material/colors';
+import {
+  deepOrange,
+  red,
+  grey,
+} from '@mui/material/colors';
 
 
 const lightTheme = createTheme({
   palette: {
     mode: 'light',
     text: {
-      primary: '#ff5722'
+      primary: grey[800],
+      secondary: grey[50],
     },
     primary: {
-      main: '#ff5722',
+      main: deepOrange[500],
     },
     secondary: {
-      main: '#f50057',
+      main: grey[800],
     },
+    background: {
+      default: 'white',
+    }
   },
 });
 

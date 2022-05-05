@@ -18,6 +18,9 @@ import languageDict from './languageDict';
 
 
 const useStyles = makeStyles(theme => ({
+  languageSelector: {
+    color: `${theme.palette.text.secondary} !important`,
+  },
   root: {
     flexGrow: 1
   },
@@ -68,12 +71,12 @@ const Mainbar = () => {
           label='Language'
           value={locale}
           onChange={onLanguageSelected}
+          className={classes.languageSelector}
           variant='outlined'
         >
           {Object.keys(languageDict).map((key) => (
             <MenuItem value={languageDict[key].short}>{languageDict[key].full}</MenuItem>) 
           )}
-
         </Select>
         <div>
             {/* TODO: Insert Typographed username here */}

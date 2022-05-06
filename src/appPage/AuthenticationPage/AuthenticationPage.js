@@ -20,6 +20,9 @@ import { pureApolloClient } from 'utils/apollo';
 
 
 const useStyles = makeStyles((theme) => ({
+    tabButton: {
+      "& [aria-selected=\"false\"]": theme.palette.text.secondary
+    },
     paper: {
         marginTop: theme.spacing(8),
         display: 'flex',
@@ -267,6 +270,7 @@ const AuthenticationPage = () => {
         '/signup'
     ]
     // Change default value
+    const classes = useStyles();
     let [currentTab, setCurrentTab] = useState(0);
     const handleTabChange = (e, newValue) => {
         
@@ -285,8 +289,8 @@ const AuthenticationPage = () => {
                   aria-label="disabled tabs example"
                   centered
                 >
-                    <Tab label='Sign In' component='h1'/>
-                    <Tab label='Sign Up'/>
+                    <Tab label='Sign In' component='h1' color="secondary" className={classes.tabButton}/>
+                    <Tab label='Sign Up' component='h1' className={classes.tabButton} />
                 </Tabs>
             </Paper>
             <Switch>

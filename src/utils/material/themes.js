@@ -12,7 +12,7 @@ const lightTheme = createTheme({
     mode: 'light',
     text: {
       primary: grey[800],
-      secondary: grey[50],
+      secondary: grey[600],
     },
     primary: {
       main: deepOrange[500],
@@ -21,7 +21,7 @@ const lightTheme = createTheme({
       main: grey[800],
     },
     background: {
-      default: 'white',
+      default: grey[50],
     }
   },
 });

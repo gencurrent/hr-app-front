@@ -289,7 +289,7 @@ const AuthenticationPage = () => {
                   aria-label="disabled tabs example"
                   centered
                 >
-                    <Tab label='Sign In' component='h1' color="secondary" className={classes.tabButton}/>
+                    <Tab label='Sign In' component='h1' className={classes.tabButton}/>
                     <Tab label='Sign Up' component='h1' className={classes.tabButton} />
                 </Tabs>
             </Paper>

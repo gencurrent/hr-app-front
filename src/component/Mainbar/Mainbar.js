@@ -15,14 +15,13 @@ import {
 import { AccountCircle } from '@mui/icons-material';
 
 import languageDict from './languageDict';
+import './index.css';
 
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(theme => (console.log('theme = ', theme) || {
   languageSelector: {
-    color: `${theme.palette.text.secondary} !important`,
-  },
-  root: {
-    flexGrow: 1
+    color: `${theme.palette.background.default} !important`,
+    borderColor: 'rgba(255, 255, 255, 0.43)'
   },
   title: {
     flexGrow: 1
@@ -61,14 +60,13 @@ const Mainbar = () => {
 
   return (
     <AppBar>
-      <Toolbar>
+      <Toolbar id='header-toolbar'>
         <Typography variant='h6' className={classes.title}>
             <Link style={{textDecoration: 'none', color: 'white'}} to='/'>HR-App</Link>
         </Typography>
         <Select
           labelId='select-language-select-label'
           id='select-language-select'
-          label='Language'
           value={locale}
           onChange={onLanguageSelected}
           className={classes.languageSelector}

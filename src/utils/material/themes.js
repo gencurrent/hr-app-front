@@ -13,6 +13,7 @@ const lightTheme = createTheme({
     text: {
       primary: grey[800],
       secondary: grey[600],
+      mainbar: grey[50],
     },
     primary: {
       main: deepOrange[500],
@@ -22,7 +23,7 @@ const lightTheme = createTheme({
     },
     background: {
       default: grey[50],
-    }
+    },
   },
 });
 

@@ -1,4 +1,4 @@
-# Front End application for the "HR-App" project  
+# Front End application for the "HR-Eco" project  
 
 ## Briefing
 

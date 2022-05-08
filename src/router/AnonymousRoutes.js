@@ -4,6 +4,10 @@
 
 import { React } from "react";
 import { Router, Route, Switch, useRouteMatch } from "react-router-dom";
+import { history } from "utils/redux";
+import { CssBaseline } from "@mui/material";
+import { Template } from "component";
+
 import {
   AnonymousLandingPage,
   VacancySubmissionPage,
@@ -11,9 +15,6 @@ import {
   SubmissionSalutationPage,
   VacancyInfoPage,
 } from "appPage";
-import { CssBaseline } from "@mui/material";
-import { history } from "utils/redux";
-import { Template } from "component";
 
 function ThemedRoutes() {
   const { path } = useRouteMatch();

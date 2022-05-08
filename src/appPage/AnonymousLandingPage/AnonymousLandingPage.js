@@ -18,12 +18,12 @@ import { Link } from "react-router-dom";
 import ReactSpeedometer from "react-d3-speedometer";
 
 import { RequestDemoForm, DownBar } from "component";
-import { lightTheme } from "utils/material";
+import { darkTheme, lightTheme } from "utils/material";
 import { Box } from "@mui/system";
 
 const useStyles = makeStyles((theme) => ({
   container: {
-    padding: theme.spacing(2),
+    padding: theme.spacing(5),
   },
   checkBoxFormGroup: {
     padding: theme.spacing(1),
@@ -35,11 +35,11 @@ const useStyles = makeStyles((theme) => ({
 
 function AnonymousLandingPage() {
   const speedometervalues = [
-    "❤️‍🩹 We are sorry to have nothing selected above",
-    "👩‍🔬 At least we could try it",
-    "👩‍💻 We are close to your expectations",
-    "🎉 We meet the most of your demands",
-    "🚀 HR-Eco is exactly what could help you",
+    "❤️‍🩹  We are sorry to have nothing selected above",
+    "👩‍🔬  At least we could try it",
+    "👩‍💻  We are close to your expectations",
+    "🎉  We meet the most of your demands",
+    "🚀  HR-Eco is exactly what could help you",
   ];
   const [checkedQuestions, setCheckedQuestions] = useState([
     false,
@@ -102,23 +102,26 @@ function AnonymousLandingPage() {
         className={`lp-background ${classes.container}`}
         maxWidth={false}
       >
-        <Grid container>
-          <Grid item sm={12} md={6}>
-            <Typography
-              component="h1"
-              variant="h3"
-              align="center"
-              style={{ fontWeight: 400 }}
-            >
-              Make recruiting a<br />
-              simple game
-            </Typography>
-            <LPIcon className="lp-image" />
+        <ThemeProvider theme={darkTheme}>
+          <Grid container>
+            <Grid item sm={12} md={6}>
+              <Typography
+                component="h1"
+                variant="h3"
+                align="center"
+                color="text.primary"
+                style={{ fontWeight: 400 }}
+              >
+                Make recruiting a<br />
+                simple game
+              </Typography>
+              <LPIcon className="lp-image" />
+            </Grid>
+            <Grid item sm={12} md={6}>
+              <RequestDemoForm />
+            </Grid>
           </Grid>
-          <Grid item sm={12} md={6}>
-            <RequestDemoForm />
-          </Grid>
-        </Grid>
+        </ThemeProvider>
       </Container>
 
       <Container
@@ -140,7 +143,7 @@ function AnonymousLandingPage() {
               <Grid container justifyContent="center">
                 <Grid item sm={12} md={8}>
                   <Card>
-                    <Box style={{ padding: "24px" }}>
+                    <Box sx={{ p: 2 }}>
                       <Grid container justifyContent="center" spacing={2}>
                         <Grid item sm={12} style={{ width: "100%" }}>
                           <Box className={`${classes.checkBoxFormGroup}`}>
@@ -224,7 +227,7 @@ function AnonymousLandingPage() {
               </Grid>
             </Grid>
             <Grid item sm={12} md={6} alignContent="center">
-              <Container style={{ padding: "12px" }}>
+              <Container sx={{ p: 2 }}>
                 <ReactSpeedometer
                   // fluidWidth={true}
                   height={300}
@@ -245,43 +248,45 @@ function AnonymousLandingPage() {
       </Container>
 
       <Container className={`${classes.container}`} maxWidth={false}>
-        <Grid container>
-          <Grid item sm={12} md={6}>
-            <Typography
-              component="h1"
-              variant="h3"
-              align="center"
-              style={{ fontWeight: 400 }}
-            >
-              The essence
-            </Typography>
+        <Grid container sx={{ justifyContent: "center" }}>
+          <Grid item sm={12} md={4}>
+            <Card>
+              <Typography
+                component="h1"
+                variant="h3"
+                align="center"
+                style={{ fontWeight: 400 }}
+              >
+                The essence
+              </Typography>
 
-            <Grid container justifyContent="center">
-              <Grid item sm={12} md={8}>
-                <Grid container justifyContent="flex-start" spacing={2}>
-                  <Grid item sm={12}>
-                    <Typography variant="h5" component="h5">
-                      1. Create a vacancy
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Typography variant="h5" component="h5">
-                      2. Let your candidates fill the vacancy form
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Typography variant="h5" component="h5">
-                      3. Check: Score and filter responses
-                    </Typography>
-                  </Grid>
-                  <Grid item sm={12}>
-                    <Typography variant="h5" component="h5">
-                      4. Choose among the best candidates
-                    </Typography>
+              <Grid container justifyContent="center" sx={{ p: 2 }}>
+                <Grid item>
+                  <Grid container justifyContent="flex-start" spacing={2}>
+                    <Grid item sm={12}>
+                      <Typography variant="h5" component="h5">
+                        1. Create a vacancy
+                      </Typography>
+                    </Grid>
+                    <Grid item sm={12}>
+                      <Typography variant="h5" component="h5">
+                        2. Let your candidates fill the vacancy form
+                      </Typography>
+                    </Grid>
+                    <Grid item sm={12}>
+                      <Typography variant="h5" component="h5">
+                        3. Check: Score and filter responses
+                      </Typography>
+                    </Grid>
+                    <Grid item sm={12}>
+                      <Typography variant="h5" component="h5">
+                        4. Choose among the best candidates
+                      </Typography>
+                    </Grid>
                   </Grid>
                 </Grid>
               </Grid>
-            </Grid>
+            </Card>
           </Grid>
         </Grid>
       </Container>

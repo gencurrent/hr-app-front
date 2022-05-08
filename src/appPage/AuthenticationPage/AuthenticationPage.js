@@ -11,8 +11,8 @@ import {
   Paper,
   Tabs,
   Tab,
+  Snackbar,
 } from "@mui/material";
-import Snackbar from "@mui/material/Snackbar";
 import { Route, Switch, useRouteMatch, useHistory } from "react-router-dom";
 import { gql } from "@apollo/client";
 

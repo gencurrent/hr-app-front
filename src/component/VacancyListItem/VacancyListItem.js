@@ -10,8 +10,12 @@ import {
   Card,
   CardContent,
   CardActions,
+  Grid,
+  Snackbar,
 } from "@mui/material";
 import { FileCopy, Delete } from "@mui/icons-material";
+import LinkIcon from "@mui/icons-material/Link";
+import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import copy from "copy-to-clipboard";
 
 const useStyles = makeStyles((theme) => ({
@@ -70,31 +74,46 @@ const VacancyListItem = (props) => {
       </CardContent>
 
       <CardActions>
-        <Button
-          variant="outlined"
-          size="small"
-          onClick={onCopyLink}
-          color="secondary"
-        >
-          <FileCopy />
-          URL
-        </Button>
-        <Link to={`/vacancy/${vacancy.id}/info`}>
-          <Button variant="outlined" size="small" color="secondary">
-            Apply
-          </Button>
-        </Link>
+        <Grid container spacing={1}>
+          <Grid item>
+            <Button
+              variant="outlined"
+              size="small"
+              onClick={onCopyLink}
+              color="info"
+            >
+              <LinkIcon />
+              URL
+            </Button>
+          </Grid>
+          <Grid item>
+            <Link to={`/vacancy/${vacancy.id}/info`}>
+              <Button variant="outlined" size="small" color="success">
+                <CheckCircleOutlineIcon />
+                Apply
+              </Button>
+            </Link>
+          </Grid>
+          <Grid item>
+            <Button
+              variant="outlined"
+              color="error"
+              onClick={onDelete}
+              size="small"
+            >
+              <Delete />
+              Delete
+            </Button>
+          </Grid>
+        </Grid>
         {/* <Link to={`/vacancy/create`}>
           <Button
             variant='outlined'
             size='small'
           >Duplicate</Button>
         </Link> */}
-        <Button variant="outlined" onClick={onDelete} size="small">
-          <Delete />
-          Delete
-        </Button>
       </CardActions>
+      <Snackbar />
     </Card>
   );
 };

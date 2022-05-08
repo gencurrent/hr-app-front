@@ -1,16 +1,15 @@
-import { createStore, combineReducers, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
-import { createBrowserHistory } from 'history';
-import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import { createStore, combineReducers, applyMiddleware } from "redux";
+import thunk from "redux-thunk";
+import { createBrowserHistory } from "history";
+import { syncHistoryWithStore, routerReducer } from "react-router-redux";
 import {
   loadTranslations,
-  setLocale,
   syncTranslationWithStore,
-  i18nReducer
-} from 'react-redux-i18n';
+  i18nReducer,
+} from "react-redux-i18n";
 
-import translactionObject from 'translations';
-import * as additionalReducers from './reducers';
+import translactionObject from "translations";
+import * as additionalReducers from "./reducers";
 
 const store = createStore(
   combineReducers({
@@ -29,5 +28,4 @@ store.dispatch(loadTranslations(translactionObject));
 // store.dispatch(setLocale('en'));
 store.dispatch(additionalReducers.i18nInitialize());
 
-
-export {store, history};
+export { store, history };

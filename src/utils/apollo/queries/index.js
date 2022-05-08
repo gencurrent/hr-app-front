@@ -35,6 +35,7 @@ const QUERIES = {
   VACANCY: gql`
     query vacancy($id: ID!, $forSubmission: Boolean = null) {
       vacancy(id: $id, forSubmission: $forSubmission) {
+        id
         uuid
         submissionUUID
         position

@@ -13,7 +13,7 @@ import {
   Grid,
   Snackbar,
 } from "@mui/material";
-import { FileCopy, Delete } from "@mui/icons-material";
+import { Delete } from "@mui/icons-material";
 import LinkIcon from "@mui/icons-material/Link";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import copy from "copy-to-clipboard";

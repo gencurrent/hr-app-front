@@ -1,8 +1,8 @@
 import { React, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useQuery } from '@apollo/client';
+import { makeStyles } from "@mui/styles";
 import {
-  makeStyles,
   Box,
   Button,
   Card,
@@ -13,7 +13,7 @@ import {
   Select,
   MenuItem,
   Typography
-} from '@material-ui/core';
+} from '@mui/material';
 import PropTypes from 'prop-types';
 
 import { datetimeToString } from 'utils/date';
@@ -89,7 +89,7 @@ function SubmissionItem(props) {
 
   function FieldItemsGrid(props) {
     const {submission} = props;
-    const fileUrlBase = process.env.REACT_APP_CLOUD_STORAGE_URL_BASE;
+    const fileUrlBase = "https://hr-eco-bucket.s3.eu-central-1.amazonaws.com";
     return (
       <Grid container>
         {fieldList.map(field => (

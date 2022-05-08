@@ -7,7 +7,7 @@ import {
   DialogContentText,
   DialogTitle,
   DialogActions
-} from '@material-ui/core';
+} from '@mui/material';
 
 
 function DeleteConfirmationDialog(props) {

@@ -1,10 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {
-    Container,
-    Box,
-    CssBaseline
-} from '@material-ui/core';
+  Container,
+  Box,
+  CssBaseline
+} from "@mui/material";
 import { Mainbar } from 'component';
 
 

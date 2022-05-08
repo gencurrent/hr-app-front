@@ -1,23 +1,24 @@
-import MainStatsPage from './MainStatsPage';
-import AnonymousVacancySubmissionPage from './AnonymousVacancySubmissionPage';
-import VacancyListPage from './VacancyListPage';
-import VacancyCreateEditPage from './VacancyCreateEditPage';
-import VacancyPage from './VacancyPage';
-import AuthenticationPage from './AuthenticationPage';
-import SubmissionListPage from './SubmissionListPage';
-import SubmissionSalutationPage from './SubmissionSalutationPage';
+import MainStatsPage from "./MainStatsPage";
+import VacancySubmissionPage from "./VacancySubmissionPage";
+import VacancyListPage from "./VacancyListPage";
+import VacancyCreateEditPage from "./VacancyCreateEditPage";
+import VacancyPage from "./VacancyPage";
+import AuthenticationPage from "./AuthenticationPage";
+import SubmissionListPage from "./SubmissionListPage";
+import SubmissionSalutationPage from "./SubmissionSalutationPage";
+import VacancyInfoPage from "./VacancyInfoPage";
 
-import AnonymousLandingPage from './AnonymousLandingPage';
+import AnonymousLandingPage from "./AnonymousLandingPage";
 
 export {
   AuthenticationPage,
   MainStatsPage,
-  AnonymousVacancySubmissionPage,
+  VacancySubmissionPage,
   VacancyCreateEditPage,
+  VacancyInfoPage,
   VacancyListPage,
   VacancyPage,
   SubmissionListPage,
   SubmissionSalutationPage,
-
-  AnonymousLandingPage
+  AnonymousLandingPage,
 };

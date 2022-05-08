@@ -5,18 +5,16 @@
 import React from 'react';
 import { useQuery } from '@apollo/client';
 import { Link } from 'react-router-dom';
+import { makeStyles } from "@mui/styles";
 import {
-  makeStyles,
   Button,
   Grid,
   Card,
   Typography,
   CardContent
-} from '@material-ui/core';
+} from '@mui/material';
 import { Translate } from 'react-redux-i18n';
 
-
-import { authApolloClient } from 'utils/apollo';
 import { QUERIES } from 'utils/apollo';
 
 const useStyles = makeStyles(theme => ({

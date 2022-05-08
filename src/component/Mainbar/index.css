@@ -1,0 +1,8 @@
+/* 
+MainBar CSS styles
+*/
+
+#header-toolbar fieldset{
+    border-color: inherit;
+    border-width: 2px;
+}

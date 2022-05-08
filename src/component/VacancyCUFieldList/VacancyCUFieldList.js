@@ -24,7 +24,7 @@ import {
     Checkbox,
     CardContent,
     CardActions
-} from '@material-ui/core';
+} from '@mui/material';
 
 import {
   FIELD_TYPE_VALUE_TO_HELPER_TEXT_MAP,

@@ -1,5 +1,5 @@
-import { React } from 'react';
-import { Router, Route, Switch } from 'react-router';
+import { React } from "react";
+import { Router, Route, Switch } from "react-router";
 import {
   AuthenticationPage,
   MainStatsPage,
@@ -8,65 +8,69 @@ import {
   AnonymousVacancySubmissionPage,
   SubmissionListPage,
   SubmissionSalutationPage,
-  VacancyPage
-} from 'appPage';
-import { history } from 'utils/redux';
-import { Template } from 'component';
-
+  VacancyPage,
+  VacancyInfoPage,
+} from "appPage";
+import { history } from "utils/redux";
+import { Template } from "component";
 
 const AuthenticatedRoutes = () => {
   return (
     <Router history={history}>
       <Template>
         <Switch>
-          <Route exact path='/'>
+          <Route exact path="/">
             <MainStatsPage />
           </Route>
 
-          <Route path='/auth'>
+          <Route path="/auth">
             <AuthenticationPage />
           </Route>
 
           {/* Vacancy create */}
-          <Route exact path='/vacancy/create'>
+          <Route exact path="/vacancy/create">
             <VacancyCreateEditPage />
           </Route>
 
-          <Route exact path='/vacancy/:id([a-f,0-9]+)/edit'>
+          <Route exact path="/vacancy/:id([a-f,0-9]+)/edit">
             <VacancyCreateEditPage edit={true} />
           </Route>
-          
-          <Route path='/vacancy/:id([a-f,0-9]+)/apply'>
+
+          {/* Apply to the Vacancy page */}
+          <Route exact path="/vacancy/:id([a-f,0-9]+)/info">
+            <VacancyInfoPage />
+          </Route>
+
+          {/* Vacancy applicattion process page */}
+          <Route path="/vacancy/:id([a-f,0-9]+)/apply">
             <AnonymousVacancySubmissionPage />
           </Route>
 
-          <Route path='/vacancy/:id([a-f,0-9]+)/applied'>
+          <Route path="/vacancy/:id([a-f,0-9]+)/applied">
             <SubmissionSalutationPage />
           </Route>
 
-
           {/* Vacancy statistics view */}
-          <Route exact path='/vacancy/:id([a-f,0-9]+)'>
+          <Route exact path="/vacancy/:id([a-f,0-9]+)">
             <VacancyPage />
           </Route>
 
-          <Route exact path='/vacancy-list'>
+          <Route exact path="/vacancy-list">
             <VacancyListPage />
           </Route>
 
           {/* Submission */}
-          <Route exact path='/vacancy/:vacancyId([a-f,0-9]+)/submission'>
+          <Route exact path="/vacancy/:vacancyId([a-f,0-9]+)/submission">
             <SubmissionListPage singleVacancySusbmissions={true} />
           </Route>
 
-          <Route exact path='/submission-list'>
+          <Route exact path="/submission-list">
             <SubmissionListPage singleVacancySusbmissions={false} />
           </Route>
-
         </Switch>
       </Template>
     </Router>
-  )
+  );
 };
 
 export default AuthenticatedRoutes;

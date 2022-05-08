@@ -58,7 +58,7 @@ function VacancyInfoPage(props) {
               <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
                 <Link
                   to={{
-                    pathname: `/vacancy/${vacancyId}/apply`,
+                    pathname: `/vacancy/${vacancyId}/application`,
                   }}
                 >
                   <Button variant="contained" styles={{ float: "right" }}>

@@ -12,7 +12,7 @@ const translationObject = {
     allSubmissions: 'All submissions',
     topVacancies: 'Top vacancies',
   },
-  AnonymousVacancySubmissionPage: {
+  VacancySubmissionPage: {
     fullName: 'Full name',
     email: 'Email',
     phone: 'Phone in format +[full number]',

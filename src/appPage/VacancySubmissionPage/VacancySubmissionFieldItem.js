@@ -13,7 +13,7 @@ import { pureApolloClient, MUTATIONS } from 'utils/apollo';
 import FileUploadField from './FileUploadField';
 
 
-const AnonymousVacancySubmissionFieldItem = (props) => {
+const VacancySubmissionFieldItem = (props) => {
     const {field, vacancy} = props;
     
     // File fields
@@ -156,9 +156,9 @@ const AnonymousVacancySubmissionFieldItem = (props) => {
     )
 };
 
-AnonymousVacancySubmissionFieldItem.propTypes = {
+VacancySubmissionFieldItem.propTypes = {
     valueUpdateCallback: PropTypes.func.isRequired,
     vacancy: PropTypes.object.isRequired
 };
 
-export default AnonymousVacancySubmissionFieldItem;
+export default VacancySubmissionFieldItem;

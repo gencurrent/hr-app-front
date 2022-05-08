@@ -1,5 +1,5 @@
 import MainStatsPage from "./MainStatsPage";
-import AnonymousVacancySubmissionPage from "./AnonymousVacancySubmissionPage";
+import VacancySubmissionPage from "./VacancySubmissionPage";
 import VacancyListPage from "./VacancyListPage";
 import VacancyCreateEditPage from "./VacancyCreateEditPage";
 import VacancyPage from "./VacancyPage";
@@ -13,12 +13,12 @@ import AnonymousLandingPage from "./AnonymousLandingPage";
 export {
   AuthenticationPage,
   MainStatsPage,
-  AnonymousVacancySubmissionPage,
+  VacancySubmissionPage,
   VacancyCreateEditPage,
+  VacancyInfoPage,
   VacancyListPage,
   VacancyPage,
   SubmissionListPage,
   SubmissionSalutationPage,
-  VacancyInfoPage,
   AnonymousLandingPage,
 };

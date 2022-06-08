@@ -1,5 +1,5 @@
 /**
- * The created Vacancy page
+ * The single Vacancy details page
  * Functions:
  * + shows all the main info about the Vacancy
  * + contains all the Vacancy actions

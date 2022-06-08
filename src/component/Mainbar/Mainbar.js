@@ -77,7 +77,7 @@ const Mainbar = () => {
           variant="outlined"
         >
           {Object.keys(languageDict).map((key) => (
-            <MenuItem value={languageDict[key].short}>
+            <MenuItem value={languageDict[key].short} key={key}>
               {languageDict[key].full}
             </MenuItem>
           ))}

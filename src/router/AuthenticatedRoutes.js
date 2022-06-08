@@ -14,6 +14,8 @@ import {
 import { history } from "utils/redux";
 import { Template } from "component";
 
+import { GUID_EXPRESSION } from "./utils";
+
 const AuthenticatedRoutes = () => {
   return (
     <Router history={history}>
@@ -32,26 +34,27 @@ const AuthenticatedRoutes = () => {
             <VacancyCreateEditPage />
           </Route>
 
-          <Route exact path="/vacancy/:id([a-f,0-9]+)/edit">
+          {/* 
+          <Route exact path={`/vacancy/:id(${GUID_EXPRESSION})/edit`}>
             <VacancyCreateEditPage edit={true} />
-          </Route>
+          </Route> */}
 
           {/* Vacancy preview (info) page */}
-          <Route exact path="/vacancy/:id([a-f,0-9,\-]+)/info">
+          <Route exact path={`/vacancy/:id(${GUID_EXPRESSION})/info`}>
             <VacancyInfoPage />
           </Route>
 
           {/* Vacancy applicattion process page */}
-          <Route path="/vacancy/:id([a-f,0-9,\-]+)/application">
+          <Route path={`/vacancy/:id(${GUID_EXPRESSION})/application`}>
             <VacancySubmissionPage />
           </Route>
 
-          <Route path="/vacancy/:id([a-f,0-9]+)/applied">
+          <Route path={`/vacancy/:id(${GUID_EXPRESSION})/applied`}>
             <SubmissionSalutationPage />
           </Route>
 
           {/* Vacancy statistics view */}
-          <Route exact path="/vacancy/:id([a-f,0-9]+)">
+          <Route exact path={`/vacancy/:id(${GUID_EXPRESSION})`}>
             <VacancyPage />
           </Route>
 
@@ -59,8 +62,11 @@ const AuthenticatedRoutes = () => {
             <VacancyListPage />
           </Route>
 
-          {/* Submission */}
-          <Route exact path="/vacancy/:vacancyId([a-f,0-9]+)/submission">
+          {/* Submission list related to a Vacancy Id */}
+          <Route
+            exact
+            path={`/vacancy/:vacancyId(${GUID_EXPRESSION})/submission`}
+          >
             <SubmissionListPage singleVacancySusbmissions={true} />
           </Route>
 

@@ -33,11 +33,9 @@ const QUERIES = {
     }
   `,
   VACANCY: gql`
-    query vacancy($id: ID!, $forSubmission: Boolean = null) {
-      vacancy(id: $id, forSubmission: $forSubmission) {
+    query vacancy($id: UUID!) {
+      vacancy(id: $id) {
         id
-        uuid
-        submissionUUID
         position
         company
         text
@@ -47,15 +45,15 @@ const QUERIES = {
     }
   `,
   VACANCY_WITH_SUBMISSION_LIST: gql`
-    query vacancy($id: ID!) {
+    query vacancy($id: UUID!) {
       vacancy(id: $id) {
-        uuid
+        id
         position
         company
         text
         fields
         submissionList {
-          uuid
+          id
           fullname
           email
           phone
@@ -69,9 +67,9 @@ const QUERIES = {
     }
   `,
   SUBMISSION_LIST: gql`
-    query submissionList($vacancyId: ID) {
+    query submissionList($vacancyId: UUID) {
       submissionList(vacancyId: $vacancyId) {
-        uuid
+        id
         fullname
         email
         phone
@@ -82,7 +80,6 @@ const QUERIES = {
         ts
         vacancy {
           id
-          uuid
           fields
           position
           company

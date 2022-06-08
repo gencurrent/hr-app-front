@@ -6,17 +6,9 @@ import { gql } from "@apollo/client";
 
 const MUTATIONS = {
   CREATE_S3_UPLOAD_REQUEST: gql`
-    mutation CreateS3UploadRequest(
-      $filename: String!
-      $vacancyUUID: UUID!
-      $submissionUUID: UUID!
-    ) {
-      createS3UploadRequest(
-        filename: $filename
-        vacancyUUID: $vacancyUUID
-        submissionUUID: $submissionUUID
-      ) {
-        uuid
+    mutation CreateS3UploadRequest($filename: String!, $vacancyId: UUID!) {
+      createS3UploadRequest(filename: $filename, vacancyId: $vacancyId) {
+        id
         signature
         ts
       }
@@ -43,7 +35,7 @@ const MUTATIONS = {
     }
   `,
   DELETE_VACANCY: gql`
-    mutation DeleteVacancy($vacancyId: ID!) {
+    mutation DeleteVacancy($vacancyId: UUID!) {
       deleteVacancy(vacancyId: $vacancyId) {
         deleted
       }
@@ -51,7 +43,7 @@ const MUTATIONS = {
   `,
   CREATE_SUBMISSION: gql`
     mutation CreateSubmission(
-      $vacancyId: ID!
+      $vacancyId: UUID!
       $fullname: String!
       $email: String!
       $phone: String!

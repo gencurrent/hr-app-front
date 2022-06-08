@@ -62,17 +62,9 @@ const VacancyCreateEditPage = (props) => {
     setText(e.currentTarget.value);
   };
 
-  let [createVacancy, { data, loading, error }] = useMutation(
-    MUTATIONS.CREATE_VACANCY
-  );
+  let [createVacancy] = useMutation(MUTATIONS.CREATE_VACANCY);
 
   const save = (e) => {
-    let data = {
-      position: position,
-      company: company,
-      text: text,
-      fields: fields,
-    };
     createVacancy({
       variables: {
         company: company,

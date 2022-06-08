@@ -55,7 +55,7 @@ const AuthenticatedRoutes = () => {
             <VacancyPage />
           </Route>
 
-          <Route exact path="/vacancy-list">
+          <Route exact path="/vacancy">
             <VacancyListPage />
           </Route>
 
@@ -64,7 +64,7 @@ const AuthenticatedRoutes = () => {
             <SubmissionListPage singleVacancySusbmissions={true} />
           </Route>
 
-          <Route exact path="/submission-list">
+          <Route exact path="/submission">
             <SubmissionListPage singleVacancySusbmissions={false} />
           </Route>
         </Switch>

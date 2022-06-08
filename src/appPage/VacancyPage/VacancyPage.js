@@ -1,6 +1,6 @@
 /**
  * The created Vacancy page
- * Funcitons:
+ * Functions:
  * + shows all the main info about the Vacancy
  * + contains all the Vacancy actions
  */
@@ -9,12 +9,13 @@ import { useQuery } from "@apollo/client";
 import { useHistory, useParams, Link } from "react-router-dom";
 import { makeStyles } from "@mui/styles";
 import {
-  Typography,
-  Grid,
-  Card,
-  CardContent,
-  CardActions,
+  Breadcrumbs,
   Button,
+  Card,
+  CardActions,
+  CardContent,
+  Grid,
+  Typography,
 } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import LinkIcon from "@mui/icons-material/Link";
@@ -90,6 +91,12 @@ function VacancyPage(props) {
           <Typography variant="h4" component="h1" gutterBottom>
             {data.vacancy.position}
           </Typography>
+
+          <Breadcrumbs>
+            <Link to="/">Dashboard</Link>
+            <Link to="/vacancy">Vacancies</Link>
+            <Typography>{data.vacancy.position}</Typography>
+          </Breadcrumbs>
           <Card variant="outlined">
             <CardActions>
               <Grid container spacing={1}>

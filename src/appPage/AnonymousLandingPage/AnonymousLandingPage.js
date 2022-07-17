@@ -39,7 +39,7 @@ function AnonymousLandingPage() {
     "👩‍🔬  At least we could try it",
     "👩‍💻  We are close to your expectations",
     "🎉  We meet the most of your demands",
-    "🚀  HR-Eco is exactly what could help you",
+    "🚀  Staffence is exactly what could help you",
   ];
   const [checkedQuestions, setCheckedQuestions] = useState([
     false,
@@ -75,7 +75,7 @@ function AnonymousLandingPage() {
                 color="white"
                 style={{ fontWeight: 400 }}
               >
-                HR-Eco
+                Staffence
               </Typography>
             </Grid>
             <Grid item>

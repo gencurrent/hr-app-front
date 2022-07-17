@@ -209,7 +209,7 @@ function SubmissionListPage(props) {
               <Link className="link-undecorated" to={`/vacancy/${vacancyId}`}>
                 {data.vacancy.position}
               </Link>
-              submissions
+              {" submissions"}
             </Typography>
           )}
           {!singleVacancySusbmissions && (

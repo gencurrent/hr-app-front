@@ -65,7 +65,7 @@ const Mainbar = () => {
       <Toolbar id="header-toolbar">
         <Typography variant="h6" className={classes.title}>
           <Link style={{ textDecoration: "none", color: "white" }} to="/">
-            HR-Eco
+            Staffence
           </Link>
         </Typography>
         <Select

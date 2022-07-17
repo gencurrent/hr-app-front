@@ -40,7 +40,7 @@ const AuthenticatedRoutes = () => {
           </Route> */}
 
           {/* Vacancy preview (info) page */}
-          <Route exact path={`/vacancy/:id(${GUID_EXPRESSION})/info`}>
+          <Route exact path={`/vacancy/:id(${GUID_EXPRESSION})/preview`}>
             <VacancyInfoPage />
           </Route>
 

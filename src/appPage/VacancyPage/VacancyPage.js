@@ -58,7 +58,7 @@ function VacancyPage(props) {
 
   function onCopyLink(e) {
     const loc = window.location;
-    const url = `${loc.protocol}//${loc.host}/vacancy/${data.vacancy.id}/info`;
+    const url = `${loc.protocol}//${loc.host}/vacancy/${data.vacancy.id}/preview`;
     copy(url);
   }
 
@@ -112,7 +112,7 @@ function VacancyPage(props) {
                   </Button>
                 </Grid>
                 <Grid item>
-                  <Link to={`/vacancy/${data.vacancy.id}/info`}>
+                  <Link to={`/vacancy/${data.vacancy.id}/preview`}>
                     <Button variant="outlined" size="small" color="success">
                       <CheckCircleOutlineIcon />
                       Apply

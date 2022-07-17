@@ -15,19 +15,20 @@ import {
   SubmissionSalutationPage,
   VacancyInfoPage,
 } from "appPage";
+import { GUID_EXPRESSION } from "./utils";
 
 function ThemedRoutes() {
   const { path } = useRouteMatch();
   return (
     <Switch>
       <Template>
-        <Route exact path={`${path}/:id([a-f,0-9]+)/info`}>
+        <Route exact path={`${path}/:id(${GUID_EXPRESSION})/preview`}>
           <VacancyInfoPage />
         </Route>
-        <Route exact path={`${path}/:id([a-f,0-9]+)/application`}>
+        <Route exact path={`${path}/:id(${GUID_EXPRESSION})/application`}>
           <VacancySubmissionPage />
         </Route>
-        <Route exact path={`${path}/:id([a-f,0-9]+)/applied`}>
+        <Route exact path={`${path}/:id(${GUID_EXPRESSION})/applied`}>
           <SubmissionSalutationPage />
         </Route>
       </Template>

@@ -1,5 +1,5 @@
 /**
- * Page with main statistics and navigation through HR-Eco.
+ * Page with main statistics and navigation through Staffence.
  * For authorized users only.
  */
 import React from "react";

@@ -1,12 +1,13 @@
 import { React, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import { useQuery } from "@apollo/client";
-import { makeStyles } from "@mui/styles";
+import { makeStyles, styled } from "@mui/styles";
 import {
   Box,
   Button,
   Breadcrumbs,
   Card,
+  Collapse,
   Grid,
   IconButton,
   InputLabel,
@@ -16,6 +17,7 @@ import {
   MenuItem,
   Typography,
 } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PropTypes from "prop-types";
 
 import { datetimeToString } from "utils/date";
@@ -45,6 +47,18 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const ExpandMore = styled((props) => {
+  const { expand, ...other } = props;
+  return <IconButton {...other} />;
+})(({ theme, expand }) => ({
+  transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
+  border: "1px solid black",
+  marginLeft: "auto",
+  transition: theme.transitions.create("transform", {
+    duration: theme.transitions.duration.shortest,
+  }),
+}));
+
 function SubmissionItem(props) {
   const { submission, singleVacancySusbmissions, vacancyId } = props;
   let { vacancyData } = props;
@@ -56,6 +70,11 @@ function SubmissionItem(props) {
   let [decisionClass, setDecisionClass] = useState(
     classes[decision.toLowerCase()]
   );
+  const [expanded, setExpanded] = useState(false);
+
+  const handleExpandClick = () => {
+    setExpanded(!expanded);
+  };
 
   /**
    *
@@ -155,13 +174,24 @@ function SubmissionItem(props) {
       </Grid>
 
       <FieldItemsGrid submission={submission} />
-      {JSON.parse(submission.answers).map((answer) => (
-        <SubmissionListItemAnswer
-          key={answer.q}
-          answer={answer}
-          vacancy={vacancyData}
-        />
-      ))}
+
+      <ExpandMore
+        expand={expanded}
+        onClick={handleExpandClick}
+        aria-expanded={expanded}
+        aria-label="show more"
+      >
+        <ExpandMoreIcon />
+      </ExpandMore>
+      <Collapse in={expanded} timeout="auto" unmountOnExit>
+        {JSON.parse(submission.answers).map((answer) => (
+          <SubmissionListItemAnswer
+            key={answer.q}
+            answer={answer}
+            vacancy={vacancyData}
+          />
+        ))}
+      </Collapse>
     </Card>
   );
 }

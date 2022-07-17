@@ -8,6 +8,7 @@ import {
   Breadcrumbs,
   Card,
   Grid,
+  IconButton,
   InputLabel,
   FormControl,
   Link as MUILink,
@@ -69,19 +70,15 @@ function SubmissionItem(props) {
   const fieldList = [
     {
       field: "fullname",
-      title: "Full Name",
     },
     {
       field: "email",
-      title: "Email",
     },
     {
       field: "phone",
-      title: "Phone",
     },
     {
       field: "resume",
-      title: "Resume",
       type: "field",
     },
   ];
@@ -92,14 +89,7 @@ function SubmissionItem(props) {
     return (
       <Grid container>
         {fieldList.map((field) => (
-          <Grid key={field.field} style={{ margin: "8px 0" }} item xs={12}>
-            <Typography
-              variant="body1"
-              component="p"
-              className={`${classes.inline}`}
-            >
-              {field.title}:{" "}
-            </Typography>
+          <Grid key={field.field} style={{ margin: "0px 0" }} item xs={12}>
             {field.type === "field" ? (
               <MUILink
                 target="_blank"
@@ -107,7 +97,7 @@ function SubmissionItem(props) {
                 href={`${fileUrlBase}/${submission.resume}`}
               >
                 <Button variant="outlined" color="primary">
-                  Download
+                  Resume
                 </Button>
               </MUILink>
             ) : (
@@ -143,7 +133,7 @@ function SubmissionItem(props) {
 
       <Grid container justifyContent="space-between">
         <Grid item>
-          <FormControl style={{ m: 1, minWidth: 200 }}>
+          {/* <FormControl style={{ m: 1, minWidth: 200 }}>
             <InputLabel id={`decision-${submission.uuid}`}>Decision</InputLabel>
             <Select
               labelId={`decision-${submission.uuid}`}
@@ -159,10 +149,11 @@ function SubmissionItem(props) {
                 </MenuItem>
               ))}
             </Select>
-          </FormControl>
+          </FormControl> */}
         </Grid>
         <Grid item>{tsString}</Grid>
       </Grid>
+
       <FieldItemsGrid submission={submission} />
       {JSON.parse(submission.answers).map((answer) => (
         <SubmissionListItemAnswer

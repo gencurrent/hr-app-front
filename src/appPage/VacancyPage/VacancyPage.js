@@ -22,9 +22,10 @@ import LinkIcon from "@mui/icons-material/Link";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import copy from "copy-to-clipboard";
 
-import { DeleteConfirmationDialog } from "component";
-import { datetimeToString } from "utils/date";
 import { authApolloClient, QUERIES, MUTATIONS } from "utils/apollo";
+import { datetimeToString } from "utils/date";
+import { DeleteConfirmationDialog } from "component";
+import RequiredLabel from "./RequiredLabel";
 
 const useStyles = makeStyles((theme) => ({
   questionItem: {
@@ -35,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(1),
   },
   textBold: {
-    fontWeight: 700,
+    fontWeight: "800 !important",
   },
 }));
 
@@ -135,26 +136,23 @@ function VacancyPage(props) {
             <CardContent>
               <Grid container>
                 <Grid item xs={12}>
-                  <Typography component="span">Vacancy: </Typography>
                   <Typography className={classes.textBold} component="span">
                     {data.vacancy.position}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography component="span">Company: </Typography>
+                  <Typography component="span">at </Typography>
                   <Typography className={classes.textBold} component="span">
                     {data.vacancy.company}
                   </Typography>
                 </Grid>
                 <Grid item xs={12}>
-                  <Typography component="span">Created: </Typography>
                   <Typography className={classes.textBold} component="span">
                     {datetimeToString(new Date(data.vacancy.ts))}
                   </Typography>
                 </Grid>
               </Grid>
 
-              <Typography>Fields:</Typography>
               <Grid container>
                 {JSON.parse(data.vacancy.fields).map((field, idx) => {
                   return (
@@ -171,7 +169,7 @@ function VacancyPage(props) {
                             className={classes.textBold}
                             component="span"
                           >
-                            {field.r ? "[Required] " : ""}
+                            {field.r ? <RequiredLabel /> : ""}
                           </Typography>
                           <Typography
                             className={classes.textBold}

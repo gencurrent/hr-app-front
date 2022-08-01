@@ -1,13 +1,19 @@
-# Front End application for the "HR-Eco" project  
+Front End application for the "HR-Eco" project
+
+# Build
+
+To build a docker image  
+`docker build -t hr-app-frontend .`  
+Pushing the image to the registry  
+`docker tag hr-app-front localhost:5050/hr-app-frontend`  
+`docker push localhost:5050/hr-app-frontend`
 
 ## Briefing
 
-
 ## Structure
-src/ — source code  
-    utils — utilities for the whole application 
-    
 
+src/ — source code  
+ utils — utilities for the whole application
 
 # Getting Started with Create React App
 
@@ -55,10 +61,6 @@ You don’t have to ever use `eject`. The curated feature set is suitable for sm
 You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
 
 To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
 
 ### Analyzing the Bundle Size
 

@@ -5,7 +5,7 @@ Front End application for the "HR-Eco" project
 To build a docker image  
 `docker build -t hr-app-frontend .`  
 Pushing the image to the registry  
-`docker tag hr-app-front localhost:5050/hr-app-frontend`  
+`docker tag hr-app-frontend localhost:5050/hr-app-frontend`  
 `docker push localhost:5050/hr-app-frontend`
 
 ## Briefing

@@ -1,5 +1,5 @@
 /**
- * A page to shew the Vacancy preview
+ * A Vacancy preview page to inform the candidate about the position
  * It is an entrypoint page to apply for an anonymous visiter
  */
 

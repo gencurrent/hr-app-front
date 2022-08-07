@@ -12,6 +12,9 @@ import DeleteConfirmationDialog from "./DeleteConfirmationDialog";
 import SubmissionListItemAnswer from "./SubmissionListItemAnswer";
 import RequestDemoForm from "./RequestDemoForm";
 
+import FieldRequiredLabel from "./FieldRequiredLabel";
+import FieldTypeLabel from "./FieldTypeLabel";
+
 export {
   Template,
   Mainbar,
@@ -21,4 +24,6 @@ export {
   DeleteConfirmationDialog,
   SubmissionListItemAnswer,
   RequestDemoForm,
+  FieldRequiredLabel,
+  FieldTypeLabel,
 };

@@ -23,6 +23,7 @@ const translationObject = {
   },
   applicationName: "Стаффенс",
   congratulations: "Поздравляем!",
+
 };
 
 export default translationObject;

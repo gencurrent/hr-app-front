@@ -17,8 +17,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function RequiredLabel() {
+export default function FieldRequiredLabel() {
   const classes = useStyles();
 
-  return <div className={classes.label}>required</div>;
+  return <div className={classes.label}>Required</div>;
 }

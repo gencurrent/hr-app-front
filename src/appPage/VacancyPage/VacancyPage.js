@@ -24,8 +24,7 @@ import copy from "copy-to-clipboard";
 
 import { authApolloClient, QUERIES, MUTATIONS } from "utils/apollo";
 import { datetimeToString } from "utils/date";
-import { DeleteConfirmationDialog } from "component";
-import RequiredLabel from "./RequiredLabel";
+import { DeleteConfirmationDialog, FieldRequiredLabel } from "component";
 
 const useStyles = makeStyles((theme) => ({
   questionItem: {
@@ -169,7 +168,7 @@ function VacancyPage(props) {
                             className={classes.textBold}
                             component="span"
                           >
-                            {field.r ? <RequiredLabel /> : ""}
+                            {field.r ? <FieldRequiredLabel /> : ""}
                           </Typography>
                           <Typography
                             className={classes.textBold}

@@ -24,7 +24,11 @@ import copy from "copy-to-clipboard";
 
 import { authApolloClient, QUERIES, MUTATIONS } from "utils/apollo";
 import { datetimeToString } from "utils/date";
-import { DeleteConfirmationDialog, FieldRequiredLabel } from "component";
+import {
+  DeleteConfirmationDialog,
+  FieldRequiredLabel,
+  FieldTypeLabel,
+} from "component";
 
 const useStyles = makeStyles((theme) => ({
   questionItem: {
@@ -168,6 +172,7 @@ function VacancyPage(props) {
                             className={classes.textBold}
                             component="span"
                           >
+                            {<FieldTypeLabel type={field.t} />}
                             {field.r ? <FieldRequiredLabel /> : ""}
                           </Typography>
                           <Typography
@@ -176,15 +181,6 @@ function VacancyPage(props) {
                           >
                             {field.q}
                           </Typography>
-                          <div>
-                            <Typography component="span">Type:</Typography>
-                            <Typography
-                              component="span"
-                              className={classes.textBold}
-                            >
-                              {field.t.replace(/./, (c) => c.toUpperCase())}
-                            </Typography>
-                          </div>
                         </CardContent>
                       </Card>
                     </Grid>

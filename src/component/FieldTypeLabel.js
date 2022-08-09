@@ -20,8 +20,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const FIELD_TYPE_VALUE_TO_NAME_MAP = {
+  line: "Line",
   text: "Text",
-  line: "Short text",
   number: "Number",
   file: "File",
   // 'date': 'Date'

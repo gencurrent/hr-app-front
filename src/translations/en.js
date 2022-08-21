@@ -4,25 +4,39 @@
 
 const translationObject = {
   mainBar: {
-    profile: 'Profile',
-    logOut: 'Log Out',
+    profile: "Profile",
+    logOut: "Log Out",
+  },
+  breadcrumbs: {
+    dashboard: "Dashboard",
+    submissions: "Submissions",
   },
   mainStatistics: {
-    title: 'Main statistics',
-    allSubmissions: 'All submissions',
-    topVacancies: 'Top vacancies',
+    title: "Main statistics",
+    submissions: "Submissions",
+    newSubmissions: "New submissions",
+    totalSubmissions: "Total submissions",
+    topVacancies: "Top vacancies",
+    allVacancies: "All vacancies",
   },
   VacancySubmissionPage: {
-    fullName: 'Full name',
-    email: 'Email',
-    phone: 'Phone in format +[full number]',
-    resume: 'Resume file',
-    required: 'Required',
-    fieldIsRequired: 'The field is required',
-    submit: 'Submit',
+    fullName: "Full name",
+    email: "Email",
+    phone: "Phone in format +[full number]",
+    resume: "Resume file",
+    required: "Required",
+    fieldIsRequired: "The field is required",
+    submit: "Submit",
   },
-  applicationName: 'Staffence',
-  congratulations: 'Congratulations!'
+  vacancyListPage: {
+    newVacancy: "New vacancy",
+    submissions: "Submissions",
+    URL: "URL",
+    apply: "Apply",
+    delete: "Delete",
+  },
+  applicationName: "Staffence",
+  congratulations: "Congratulations!",
 };
 
 export default translationObject;

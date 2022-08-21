@@ -4,12 +4,12 @@
 
 const languageDict = {
   en: {
-    short: 'en',
-    full: 'English 🇬🇧'
+    short: "en",
+    full: "English 🇬🇧",
   },
   ru: {
-    short: 'ru',
-    full: 'Русский 🇷🇺'
+    short: "ru",
+    full: "Русский ⚪️🔵⚪️",
   },
 };
 

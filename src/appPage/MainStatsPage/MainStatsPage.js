@@ -51,7 +51,9 @@ const MainStatsPage = () => {
         <Translate value="mainStatistics.title" />
       </Typography>
       <Breadcrumbs>
-        <Typography>Dashboard</Typography>
+        <Typography>
+          <Translate value="breadcrumbs.dashboard" />
+        </Typography>
       </Breadcrumbs>
       <Grid
         container
@@ -63,19 +65,23 @@ const MainStatsPage = () => {
           <Card className={classes.cardStyle}>
             <CardContent>
               <Typography component="h5" variant="h5">
-                <Translate value="mainStatistics.allSubmissions" />
+                <Translate value="mainStatistics.submissions" />
               </Typography>
               <Grid container direction="column" spacing={1}>
                 <Grid item>
                   <Link to="/submission?status=new">
                     <Button variant="contained" color="primary">
-                      New submissions: +{submissionCountNew}
+                      <Translate value="mainStatistics.newSubmissions" />: +
+                      {submissionCountNew}
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item>
                   <Link to="/submission">
-                    <Button>Total submissions: {submissionCountTotal}</Button>
+                    <Button>
+                      <Translate value="mainStatistics.totalSubmissions" />:{" "}
+                      {submissionCountTotal}
+                    </Button>
                   </Link>
                 </Grid>
               </Grid>
@@ -92,7 +98,7 @@ const MainStatsPage = () => {
                 <Grid item>
                   <Link to="/vacancy">
                     <Button variant="contained" color="primary">
-                      All vacancies
+                      <Translate value="mainStatistics.allVacancies" />
                     </Button>
                   </Link>
                 </Grid>

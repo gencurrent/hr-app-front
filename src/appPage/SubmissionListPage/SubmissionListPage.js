@@ -24,6 +24,7 @@ import { datetimeToString } from "utils/date";
 import { SubmissionListItemAnswer } from "component";
 import { QUERIES } from "utils/apollo";
 import { DECISION_VALUE_LABEL_MAP } from "./constants";
+import { Translate } from "react-redux-i18n";
 
 const useStyles = makeStyles((theme) => ({
   submissionListItem: {
@@ -240,8 +241,12 @@ function SubmissionListPage(props) {
           )}
 
           <Breadcrumbs>
-            <Link to="/">Dashboard</Link>
-            <Typography>Submissions</Typography>
+            <Link to="/">
+              <Translate value="breadcrumbs.dashboard" />
+            </Link>
+            <Typography>
+              <Translate value="breadcrumbs.submissions" />
+            </Typography>
           </Breadcrumbs>
 
           {submissionList.map((submission) => {

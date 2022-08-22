@@ -35,6 +35,9 @@ const translationObject = {
     apply: "Откликнуться",
     delete: "Удалить",
   },
+  submissionListPage: {
+    allSubmissions: "Все отклики",
+  },
   applicationName: "Стаффенс",
   congratulations: "Поздравляем!",
 };

@@ -19,12 +19,12 @@ import {
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PropTypes from "prop-types";
+import { Translate } from "react-redux-i18n";
 
 import { datetimeToString } from "utils/date";
 import { SubmissionListItemAnswer } from "component";
 import { QUERIES } from "utils/apollo";
 import { DECISION_VALUE_LABEL_MAP } from "./constants";
-import { Translate } from "react-redux-i18n";
 
 const useStyles = makeStyles((theme) => ({
   submissionListItem: {
@@ -236,7 +236,7 @@ function SubmissionListPage(props) {
           )}
           {!singleVacancySusbmissions && (
             <Typography component="h3" variant="h4">
-              All submissions
+              <Translate value="submissionListPage.allSubmissions" />
             </Typography>
           )}
 

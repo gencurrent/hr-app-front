@@ -1,1 +1,0 @@
-An item for the submission list page

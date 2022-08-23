@@ -185,8 +185,9 @@ function SubmissionItem(props) {
         <ExpandMoreIcon />
       </ExpandMore>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
-        {JSON.parse(submission.answers).map((answer) => (
+        {JSON.parse(submission.answers).map((answer, idx) => (
           <SubmissionListItemAnswer
+            idx={idx}
             key={answer.q}
             answer={answer}
             vacancy={vacancyData}

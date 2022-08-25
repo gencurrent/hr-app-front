@@ -15,15 +15,20 @@ import RequestDemoForm from "./RequestDemoForm";
 import FieldRequiredLabel from "./FieldRequiredLabel";
 import FieldTypeLabel from "./FieldTypeLabel";
 
+import DashboardSubmissionStatisticsChart from "./DashboardSubmissionStatisticsChart";
+
 export {
+  // Main GUI
   Template,
   Mainbar,
-  DownBar,
-  VacancyCUFieldList,
-  VacancyListItem,
+  // THe rest components
+  DashboardSubmissionStatisticsChart,
   DeleteConfirmationDialog,
-  SubmissionListItemAnswer,
-  RequestDemoForm,
+  DownBar,
   FieldRequiredLabel,
   FieldTypeLabel,
+  RequestDemoForm,
+  SubmissionListItemAnswer,
+  VacancyCUFieldList,
+  VacancyListItem,
 };

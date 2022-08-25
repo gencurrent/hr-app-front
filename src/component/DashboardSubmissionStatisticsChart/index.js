@@ -1,0 +1,2 @@
+import DashboardSubmissionStatisticsChart from './DashboardSubmissionStatisticsChart';
+export default DashboardSubmissionStatisticsChart;

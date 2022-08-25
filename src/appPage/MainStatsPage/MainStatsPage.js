@@ -16,6 +16,7 @@ import {
 } from "@mui/material";
 import { Translate } from "react-redux-i18n";
 
+import { DashboardSubmissionStatisticsChart } from "component";
 import { QUERIES } from "utils/apollo";
 
 const useStyles = makeStyles((theme) => ({
@@ -68,6 +69,9 @@ const MainStatsPage = () => {
                 <Translate value="mainStatistics.submissions" />
               </Typography>
               <Grid container direction="column" spacing={1}>
+                <Grid item>
+                  <DashboardSubmissionStatisticsChart />
+                </Grid>
                 <Grid item>
                   <Link to="/submission?status=new">
                     <Button variant="contained" color="primary">

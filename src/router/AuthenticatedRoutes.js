@@ -2,7 +2,7 @@ import { React } from "react";
 import { Router, Route, Switch } from "react-router";
 import {
   AuthenticationPage,
-  MainStatsPage,
+  DashboardPage,
   VacancyListPage,
   VacancyCreateEditPage,
   VacancySubmissionPage,
@@ -22,7 +22,7 @@ const AuthenticatedRoutes = () => {
       <Template>
         <Switch>
           <Route exact path="/">
-            <MainStatsPage />
+            <DashboardPage />
           </Route>
 
           <Route path="/auth">

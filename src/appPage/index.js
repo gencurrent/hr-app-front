@@ -1,4 +1,4 @@
-import MainStatsPage from "./MainStatsPage";
+import DashboardPage from "./DashboardPage";
 import VacancySubmissionPage from "./VacancySubmissionPage";
 import VacancyListPage from "./VacancyListPage";
 import VacancyCreateEditPage from "./VacancyCreateEditPage";
@@ -12,7 +12,7 @@ import AnonymousLandingPage from "./AnonymousLandingPage";
 
 export {
   AuthenticationPage,
-  MainStatsPage,
+  DashboardPage,
   VacancySubmissionPage,
   VacancyCreateEditPage,
   VacancyInfoPage,

@@ -88,8 +88,8 @@ const QUERIES = {
     }
   `,
   USER_MAIN_STATS: gql`
-    query userMainStats {
-      userMainStats {
+    query userMainStatistics {
+      userMainStatistics {
         submissionCountTotal
         submissionCountNew
         vacancyStatsList {

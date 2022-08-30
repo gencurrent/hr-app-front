@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MainStatsPage = () => {
+const DashboardPage = () => {
   const classes = useStyles();
   const { data, loading, error } = useQuery(QUERIES.USER_MAIN_STATS, {
     fetchPolicy: "no-cache",
@@ -40,9 +40,9 @@ const MainStatsPage = () => {
   if (error) {
     return <div> Error...</div>;
   }
-  const { userMainStats } = data;
+  const { userMainStatistics } = data;
   const { submissionCountTotal, submissionCountNew, vacancyStatsList } =
-    userMainStats;
+    userMainStatistics;
   vacancyStatsList.sort(
     (a, b) => b.submissionCountTotal - a.submissionCountTotal
   );
@@ -136,4 +136,4 @@ const MainStatsPage = () => {
   );
 };
 
-export default MainStatsPage;
+export default DashboardPage;

@@ -18,9 +18,7 @@ const VacancySubmissionFieldItem = (props) => {
   const fieldRequiredText = I18n.t(
     "AnonymousVacancySubmissionPage.fieldIsRequired"
   );
-  const [fieldError, setFieldError] = useState(
-    field.r ? fieldRequiredText : ""
-  );
+  const [fieldError, setFieldError] = useState(undefined);
 
   const setKey = (e) => {
     const value = e.target.value;
@@ -40,6 +38,7 @@ const VacancySubmissionFieldItem = (props) => {
     } else {
       setFieldError(undefined);
     }
+    console.log(`field error = ${fieldError}`);
     props.valueUpdateCallback(key, value);
   };
 

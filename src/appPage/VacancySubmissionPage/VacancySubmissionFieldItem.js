@@ -20,7 +20,7 @@ const VacancySubmissionFieldItem = (props) => {
   );
   const [fieldError, setFieldError] = useState(undefined);
 
-  const setKey = (e) => {
+  const setValue = (e) => {
     const value = e.target.value;
     drillValue(value);
   };
@@ -30,15 +30,19 @@ const VacancySubmissionFieldItem = (props) => {
    * @param {Object} value The value to pass on
    */
   const drillValue = (value) => {
-    const key = field.q;
-    if (field.r) {
-      if (value === undefined || value === "") {
-        setFieldError(fieldRequiredText);
-      }
+    if (field.r && (value === undefined || value === "")) {
+      setFieldError(fieldRequiredText);
     } else {
       setFieldError(undefined);
     }
-    console.log(`field error = ${fieldError}`);
+    const key = field.q;
+    console.log(
+      `field r, key, value,  error = `,
+      field.r,
+      key,
+      value,
+      fieldError
+    );
     props.valueUpdateCallback(key, value);
   };
 
@@ -94,11 +98,11 @@ const VacancySubmissionFieldItem = (props) => {
       <Grid item sm={12} xs={12}>
         {field.t === "text" && (
           <TextField
-            onChange={setKey}
+            onChange={setValue}
             label={field.q}
             helperText={fieldError}
             required={field.r}
-            error={fieldError !== undefined}
+            error={fieldError}
             margin="normal"
             fullWidth={true}
             multiline
@@ -108,11 +112,11 @@ const VacancySubmissionFieldItem = (props) => {
         )}
         {field.t === "line" && (
           <TextField
-            onChange={setKey}
+            onChange={setValue}
             label={field.q}
             helperText={fieldError}
             required={field.r}
-            error={fieldError !== undefined}
+            error={fieldError}
             margin="normal"
             fullWidth
             key={`field-${field.q}`}
@@ -120,7 +124,7 @@ const VacancySubmissionFieldItem = (props) => {
         )}
         {field.t === "number" && (
           <TextField
-            onChange={setKey}
+            onChange={setValue}
             onKeyPress={(event) => {
               if (!/[0-9]/.test(event.key)) {
                 event.preventDefault();
@@ -129,7 +133,7 @@ const VacancySubmissionFieldItem = (props) => {
             label={field.q}
             helperText={fieldError}
             required={field.r}
-            error={fieldError !== undefined}
+            error={fieldError}
             margin="normal"
             variant="outlined"
             fullWidth
@@ -148,7 +152,7 @@ const VacancySubmissionFieldItem = (props) => {
           </>
         )}
         {/* {field.t === 'date' && <TextField
-                    onChange={setKey}
+                    onChange={setValue}
                     label="Birthday"
                     helperText={fieldError}
                     type="date"

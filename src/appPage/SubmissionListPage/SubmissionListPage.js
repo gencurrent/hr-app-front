@@ -35,7 +35,7 @@ const useStyles = makeStyles((theme) => ({
     display: "inline",
   },
   bold: {
-    fontWeight: 600,
+    fontWeight: "600 !important",
   },
   new: {
     background: theme.palette.primary.main,
@@ -99,7 +99,6 @@ function SubmissionItem(props) {
     },
     {
       field: "resume",
-      type: "field",
     },
   ];
 
@@ -110,7 +109,7 @@ function SubmissionItem(props) {
       <Grid container>
         {fieldList.map((field) => (
           <Grid key={field.field} style={{ margin: "0px 0" }} item xs={12}>
-            {field.type === "field" ? (
+            {field.field === "resume" ? (
               <MUILink
                 target="_blank"
                 download
@@ -124,7 +123,9 @@ function SubmissionItem(props) {
               <Typography
                 variant="body1"
                 component="p"
-                className={`${classes.bold} ${classes.inline}`}
+                className={`${field.field === "fullname" ? classes.bold : ""} ${
+                  classes.inline
+                }`}
               >
                 {submission[field.field]}
               </Typography>
@@ -153,28 +154,12 @@ function SubmissionItem(props) {
 
       <Grid container justifyContent="space-between">
         <Grid item>
-          {/* <FormControl style={{ m: 1, minWidth: 200 }}>
-            <InputLabel id={`decision-${submission.uuid}`}>Decision</InputLabel>
-            <Select
-              labelId={`decision-${submission.uuid}`}
-              value={decision}
-              variant="filled"
-              label="Decision"
-              className={decisionClass}
-              onChange={onDecisionChange}
-            >
-              {Object.keys(DECISION_VALUE_LABEL_MAP).map((key) => (
-                <MenuItem value={key} key={key}>
-                  {DECISION_VALUE_LABEL_MAP[key]}
-                </MenuItem>
-              ))}
-            </Select>
-          </FormControl> */}
+
+        <FieldItemsGrid submission={submission} />
         </Grid>
         <Grid item>{tsString}</Grid>
       </Grid>
 
-      <FieldItemsGrid submission={submission} />
 
       <ExpandMore
         expand={expanded}

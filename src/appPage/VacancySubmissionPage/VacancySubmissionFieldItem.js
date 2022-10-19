@@ -46,53 +46,6 @@ const VacancySubmissionFieldItem = (props) => {
     props.valueUpdateCallback(key, value);
   };
 
-  function removeFile(file) {
-    setStateFiles([]);
-    drillValue(undefined);
-  }
-  function reduceFileName(filename) {
-    let re = /^(?<name>.*?)\.?(?<ext>\w*)$/g;
-    const match = re.exec(filename);
-    const name = match.groups["name"];
-    const ext = match.groups["ext"];
-    const newName =
-      filename < 70 ? filename : `${name.slice(0, 50)}..._.${ext.slice(0, 10)}`;
-    return newName;
-  }
-
-  // Request a file upload presigned-URL to the Back End
-  function fileProcessor(file) {
-    const filename = reduceFileName(file.path);
-    pureApolloClient
-      .mutate({
-        mutation: MUTATIONS.CREATE_S3_UPLOAD_REQUEST,
-        variables: {
-          filename: filename,
-          vacancyId: vacancy.id,
-        },
-      })
-      .then((response) => {
-        let signature = JSON.parse(
-          response.data.createS3UploadRequest.signature
-        );
-        let { url, key } = signature;
-        let formData = new FormData();
-        formData.append("files", file, filename);
-        // Push the validated file to the Cloud Storage
-        fetch(url, {
-          method: "POST",
-          cache: "no-cache",
-          body: formData,
-        })
-          .then((e) => drillValue(key))
-          .then(() => {
-            setStateFiles([file]);
-            setFieldError(undefined);
-          });
-      });
-    return null;
-  }
-
   return (
     <Grid container spacing={6}>
       <Grid item sm={12} xs={12}>

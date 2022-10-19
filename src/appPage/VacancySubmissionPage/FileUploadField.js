@@ -6,8 +6,10 @@ import { useDropzone } from "react-dropzone";
 import { I18n } from "react-redux-i18n";
 
 import { pureApolloClient, MUTATIONS } from "utils/apollo";
+import { GoogleCloudStorageClient } from "utils/cloudStorage";
 
 function FileUploadField(props) {
+  const cloudStorageClient = new GoogleCloudStorageClient();
   const { fieldRequired, callBack, vacancy, fieldText } = props;
 
   const fieldRequiredText = I18n.t(
@@ -19,7 +21,8 @@ function FileUploadField(props) {
   );
   const { acceptedFiles, getRootProps, getInputProps } = useDropzone({
     multiple: false,
-    validator: fileProcessor,
+    // validator: fileProcessor,
+    validator: processFile,
   });
 
   function onFileRemove(e) {
@@ -52,6 +55,22 @@ function FileUploadField(props) {
     const newName =
       filename < 70 ? filename : `${name.slice(0, 50)}..._.${ext.slice(0, 10)}`;
     return newName;
+  }
+
+  function processFile(file) {
+    cloudStorageClient.uploadFile(
+      vacancy.id,
+      file,
+      (key, files) => {
+        valueUpdatedCallBackWrapper(key);
+        setStateFiles(files);
+        setFieldError(undefined);
+      },
+      (errorMessage) => {
+        setStateFiles([]);
+        setFieldError(errorMessage);
+      }
+    );
   }
 
   // Request a file upload presigned-URL to the Back End

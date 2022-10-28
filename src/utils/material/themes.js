@@ -1,6 +1,10 @@
 import { createTheme } from "@mui/material";
 import { deepOrange, grey } from "@mui/material/colors";
 
+const primary = "#7C9DC4";
+const secondary = "#DCE6F1";
+const error = "#CE7D7D";
+
 const lightTheme = createTheme({
   palette: {
     mode: "light",
@@ -10,14 +14,17 @@ const lightTheme = createTheme({
       mainbar: grey[50],
     },
     primary: {
-      main: deepOrange[500],
+      main: primary,
     },
     secondary: {
-      main: grey[800],
+      main: secondary,
       secondary: grey[200],
     },
     background: {
       default: grey[50],
+    },
+    error: {
+      main: error,
     },
   },
 });

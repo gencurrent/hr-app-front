@@ -74,7 +74,7 @@ const DashboardPage = () => {
                 </Grid>
                 <Grid item>
                   <Link to="/submission?status=new">
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="secondary">
                       <Translate value="mainStatistics.newSubmissions" />: +
                       {submissionCountNew}
                     </Button>
@@ -101,7 +101,7 @@ const DashboardPage = () => {
               <Grid container direction="column" spacing={1}>
                 <Grid item>
                   <Link to="/vacancy">
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" color="secondary" >
                       <Translate value="mainStatistics.allVacancies" />
                     </Button>
                   </Link>

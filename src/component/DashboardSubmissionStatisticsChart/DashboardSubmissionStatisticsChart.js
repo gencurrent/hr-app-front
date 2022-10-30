@@ -11,6 +11,7 @@ import {
 } from "chart.js";
 import { Line } from "react-chartjs-2";
 import moment from "moment";
+import { I18n } from "react-redux-i18n";
 
 ChartJS.register(
   CategoryScale,
@@ -28,11 +29,11 @@ const options = {
   aspectRatio: 3,
   plugins: {
     legend: {
-      position: "top",
+      display: false,
     },
     title: {
       display: true,
-      text: "The Title",
+      text: I18n.t("mainStatistics.lastWeekSubmissions"),
     },
   },
   scales: {
@@ -54,17 +55,20 @@ function DashboardSubmissionStatisticsChart(props) {
     });
   labels.reverse();
 
-  const maxValue = submissionData.reduce(
-    (prev, current) =>
-      (current.submissionCountTotal > prev.submissionCountTotal &&
-        current.submissionCountTotal) ||
-      prev.submissionCountTotal
-  );
+  // if (submissionData){
+  //   const maxValue = submissionData.reduce(
+  //     (prev, current) =>
+  //       (current.submissionCountTotal > prev.submissionCountTotal &&
+  //         current.submissionCountTotal) ||
+  //       prev.submissionCountTotal
+  //   );
+  // }
+
   const data = {
     labels,
     datasets: [
       {
-        label: "Total submissions",
+        label: undefined,
         data: labels.map((date) => {
           return (
             submissionData.find((el) => el.date === date)

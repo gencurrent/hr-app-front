@@ -18,6 +18,7 @@ const translationObject = {
     totalSubmissions: "Total submissions",
     topVacancies: "Top vacancies",
     allVacancies: "All vacancies",
+    lastWeekSubmissions: "Last week submissions",
   },
   VacancySubmissionPage: {
     fullName: "Full name",

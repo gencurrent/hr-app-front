@@ -41,8 +41,12 @@ const DashboardPage = () => {
     return <div> Error...</div>;
   }
   const { userMainStatistics } = data;
-  const { submissionCountTotal, submissionCountByDate, submissionCountNew, vacancyStatsList } =
-    userMainStatistics;
+  const {
+    submissionCountTotal,
+    submissionCountByDate,
+    submissionCountNew,
+    vacancyStatsList,
+  } = userMainStatistics;
   vacancyStatsList.sort(
     (a, b) => b.submissionCountTotal - a.submissionCountTotal
   );
@@ -70,7 +74,9 @@ const DashboardPage = () => {
               </Typography>
               <Grid container direction="column" spacing={1}>
                 <Grid item>
-                  <DashboardSubmissionStatisticsChart submissionData={submissionCountByDate} />
+                  <DashboardSubmissionStatisticsChart
+                    submissionData={submissionCountByDate}
+                  />
                 </Grid>
                 <Grid item>
                   <Link to="/submission?status=new">
@@ -101,7 +107,7 @@ const DashboardPage = () => {
               <Grid container direction="column" spacing={1}>
                 <Grid item>
                   <Link to="/vacancy">
-                    <Button variant="contained" color="secondary" >
+                    <Button variant="contained" color="secondary">
                       <Translate value="mainStatistics.allVacancies" />
                     </Button>
                   </Link>
@@ -121,7 +127,8 @@ const DashboardPage = () => {
                       to={`/vacancy/${vacancyStatsItem.id}/submission`}
                     >
                       <Typography variant="body2">
-                        Submissions: {vacancyStatsItem.submissionCountTotal} (+
+                        <Translate value="mainStatistics.lastWeekSubmissions" />
+                        : {vacancyStatsItem.submissionCountTotal} (+
                         {vacancyStatsItem.submissionCountNew})
                       </Typography>
                     </Link>

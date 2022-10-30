@@ -18,6 +18,7 @@ const translationObject = {
     totalSubmissions: "Всего откликов",
     topVacancies: "Топ ваших вакансий",
     allVacancies: "Все вакансии",
+    lastWeekSubmissions: "Откликов за неделю",
   },
   VacancySubmissionPage: {
     fullName: "Полное имя",

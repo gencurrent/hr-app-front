@@ -45,6 +45,13 @@ class AWSS3Client extends CloudStorageClient {
       });
     return null;
   }
+
+  getFileUrl(fileName) {
+    const bucketName = "hr-app";
+    const fileUrlBase = `https://${bucketName}.s3.eu-central-1.amazonaws.com`;
+    const fileUrl = `${fileUrlBase}/${bucketName}/${fileName}`;
+    return fileUrl;
+  }
 }
 
 export default AWSS3Client;

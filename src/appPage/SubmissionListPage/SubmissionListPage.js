@@ -21,9 +21,10 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import PropTypes from "prop-types";
 import { Translate } from "react-redux-i18n";
 
-import { datetimeToString } from "utils/date";
 import { SubmissionListItemAnswer } from "component";
+import { datetimeToString } from "utils/date";
 import { QUERIES } from "utils/apollo";
+import { GoogleCloudStorageClient } from "utils/cloudStorage";
 import { DECISION_VALUE_LABEL_MAP } from "./constants";
 
 const useStyles = makeStyles((theme) => ({
@@ -104,7 +105,7 @@ function SubmissionItem(props) {
 
   function FieldItemsGrid(props) {
     const { submission } = props;
-    const fileUrlBase = "https://hr-eco-bucket.s3.eu-central-1.amazonaws.com";
+    const cloudStorageClient = new GoogleCloudStorageClient();
     return (
       <Grid container>
         {fieldList.map((field) => (
@@ -113,7 +114,7 @@ function SubmissionItem(props) {
               <MUILink
                 target="_blank"
                 download
-                href={`${fileUrlBase}/${submission.resume}`}
+                href={cloudStorageClient.getFileUrl(submission.resume)}
               >
                 <Button variant="outlined" color="primary">
                   Resume
@@ -154,12 +155,10 @@ function SubmissionItem(props) {
 
       <Grid container justifyContent="space-between">
         <Grid item>
-
-        <FieldItemsGrid submission={submission} />
+          <FieldItemsGrid submission={submission} />
         </Grid>
         <Grid item>{tsString}</Grid>
       </Grid>
-
 
       <ExpandMore
         expand={expanded}

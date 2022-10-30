@@ -40,6 +40,13 @@ class GoogleCloudStorageClient extends CloudStorageClient {
       });
     return null;
   }
+
+  getFileUrl(fileName) {
+    const fileUrlBase = "https://storage.googleapis.com";
+    const bucketName = "hr-app";
+    const fileUrl = `${fileUrlBase}/${bucketName}/${fileName}`;
+    return fileUrl;
+  }
 }
 
 export default GoogleCloudStorageClient;

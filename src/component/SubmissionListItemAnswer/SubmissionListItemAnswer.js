@@ -7,6 +7,7 @@ import PropTypes from "prop-types";
 import { makeStyles } from "@mui/styles";
 import { Link, Typography, Box, Card, Button } from "@mui/material";
 import FieldRequiredLabel from "component/FieldRequiredLabel";
+import { GoogleCloudStorageClient } from "utils/cloudStorage";
 
 const useStyles = makeStyles((theme) => ({
   answerContainer: {
@@ -29,12 +30,12 @@ const useStyles = makeStyles((theme) => ({
 }));
 function SubmissionListItemAnswer(props) {
   const classes = useStyles();
+  const cloudStorageClient = new GoogleCloudStorageClient();
   const { idx, answer, vacancy } = props;
   const answerFull = {
     ...JSON.parse(vacancy.fields).find((el) => el.q === answer.q),
     ...answer,
   };
-  const fileUrlBase = "https://hr-eco-bucket.s3.eu-central-1.amazonaws.com";
   return (
     <>
       <Card elevation={0} className={`answer-block ${classes.answerBlock}`}>
@@ -50,7 +51,7 @@ function SubmissionListItemAnswer(props) {
                 <Link
                   target="_blank"
                   download
-                  href={`${fileUrlBase}/${answer.a}`}
+                  href={cloudStorageClient.getFileUrl(answer.a)}
                 >
                   <Button variant="outlined" color="primary">
                     Download

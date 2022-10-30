@@ -41,7 +41,7 @@ const DashboardPage = () => {
     return <div> Error...</div>;
   }
   const { userMainStatistics } = data;
-  const { submissionCountTotal, submissionCountNew, vacancyStatsList } =
+  const { submissionCountTotal, submissionCountByDate, submissionCountNew, vacancyStatsList } =
     userMainStatistics;
   vacancyStatsList.sort(
     (a, b) => b.submissionCountTotal - a.submissionCountTotal
@@ -70,7 +70,7 @@ const DashboardPage = () => {
               </Typography>
               <Grid container direction="column" spacing={1}>
                 <Grid item>
-                  <DashboardSubmissionStatisticsChart />
+                  <DashboardSubmissionStatisticsChart submissionData={submissionCountByDate} />
                 </Grid>
                 <Grid item>
                   <Link to="/submission?status=new">

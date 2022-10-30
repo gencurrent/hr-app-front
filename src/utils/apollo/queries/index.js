@@ -92,6 +92,10 @@ const QUERIES = {
       userMainStatistics {
         submissionCountTotal
         submissionCountNew
+        submissionCountByDate {
+          date
+          submissionCountTotal
+        }
         vacancyStatsList {
           id
           position
